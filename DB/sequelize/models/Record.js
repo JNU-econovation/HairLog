@@ -3,7 +3,7 @@ const { DataTypes, Sequelize } = require('sequelize');
 module.exports = class Record extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      date: {
+      recordDate: {
         type: DataTypes.STRING(40),
         allowNull: false,
         validate : {
@@ -15,26 +15,26 @@ module.exports = class Record extends Sequelize.Model {
             }
         },
       },
-      cost: {
+      recordCost: {
         type: DataTypes.INTEGER(40),
         allowNull: false,
       },
-      time: {
+      recordTime: {
         type: DataTypes.INTEGER(40),
         allowNull: false,
       },
-      category: {
+      recordCategory: {
         type: DataTypes.STRING(40),
         allowNull: false,
         validate : {
           isIn : [['cut', 'perm', 'dyeing']]
         },
       },
-      etc: {
+      recordEtc: {
         type: DataTypes.STRING(300),
         allowNull: true,
       },
-      grade: {
+      recordGrade: {
         type: DataTypes.INTEGER(40),
         allowNull: false,
         validate: {

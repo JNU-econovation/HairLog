@@ -3,7 +3,7 @@ const { DataTypes, Sequelize } = require('sequelize');
 module.exports = class User extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      email: {
+      userEmail: {
         type: DataTypes.STRING(40),
         allowNull: true,
         unique: false,
@@ -16,11 +16,11 @@ module.exports = class User extends Sequelize.Model {
           }
         }
       },
-      password: {
+      userPassword: {
         type: DataTypes.STRING(100),
         allowNull: true,
       },
-      name: {
+      userName: {
         type: DataTypes.STRING(40),
         allowNull: true,
         validate : {
@@ -32,33 +32,30 @@ module.exports = class User extends Sequelize.Model {
             }
         }
       },
-      sex: {
+      userSex: {
         type: DataTypes.STRING(40),
         allowNull: true,
-        set(value) {
-            this.setDataValue("sex", value.toLowerCase())
-        },
         validate : {
             isIn : {
                 args : [[ 'm', 'w' ]],
                 msg : "성별을 다시 지정해 주세요"
             },
-            sex(value) {
-                var isSex = /[^m|w]/;
-                if(isSex.test(value)) {
-                    throw new Error('성별을 다시 지정해 주세요!')
-                } else {
-                    return console.log(value)
-                }
-            }
         }
       },
-      cycle: {
+      userCycle: {
         type: DataTypes.INTEGER(40),
         allowNull: true,
         validate: {
             isInt : true,
         }
+      },
+      userType: {
+        type: DataTypes.STRING(40),
+        allowNull: true,
+        isIn : {
+          args : [[ '긴편', '짧은편' ]],
+          msg : "머리길이를 다시 지정해 주세요"
+      },
       },
     }, {
       sequelize,
