@@ -19,15 +19,15 @@ var Post = {
     },
     
     recordDesigner :  async function(req, category, userInstance) {
-        var {date, cost, time, designerName, etc, grade} = req.body;
+        var {recordDate, recordCost, recordTime, designerName, recordEtc, recordGrade} = req.body;
         if(designerName){
-            var designer = await Designer.findOne({where : { designer : designerName }})
-            var record = await userInstance.createRecord({ date, cost, time, category, etc, grade, DesignerId : designer.id })
+            var designer = await Designer.findOne({where : { designerName }})
+            var record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade, DesignerId : designer.id })
             var image = await record.createImage({ img1 : req.file.filename})
             var result = {record, image}
             return result
         } else {
-            var record = await userInstance.createRecord({ date, cost, time, category, etc, grade })
+            var record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade })
             var image = await record.createImage({ img1 : req.file.filename})
             var result = {record, image}
             return result
@@ -39,23 +39,23 @@ var Post = {
         {
             case "cut" : 
                 var { cutName, cutLength } = req.body
-                var cut = await Cut.create({ name :cutName , length : cutLength , RecordId : record.id})
+                var cut = await Cut.create({ cutName , cutLength , RecordId : record.id})
                 return cut;
             case "perm" : 
                 var { permName, permTime, permHurt } = req.body 
-                var perm = await Perm.create({name : permName, time : permTime, hurt : permHurt, RecordId : record.id})
+                var perm = await Perm.create({ permName, permTime, permHurt, RecordId : record.id})
                 return perm
             case "dyeing" : 
                 var { dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt } = req.body 
-                var dyeing = await Dyeing.create({color : dyeingColor, dyeingDecolorization, time : dyeingTime, hurt : dyeingHurt, RecordId : record.id})
+                var dyeing = await Dyeing.create({ dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt, RecordId : record.id})
                 return dyeing
         }
     },
     
     designer : async function(req, res) {
-        var {designer, salon, fav} = req.body;
+        var {designerName, designerSalon, designerFav} = req.body;
         var user = await User.findOne({wherer : {id : req.user.id}});
-        var designerRecord = await user.createDesigner({designer, salon, fav})
+        var designerRecord = await user.createDesigner({designerName, designerSalon, designerFav})
         res.send(designerRecord)
     },
 

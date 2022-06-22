@@ -3,19 +3,19 @@ const { DataTypes, Sequelize } = require('sequelize');
 module.exports = class Dyeing extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      color: {
+      dyeingColor: {
         type: DataTypes.STRING(40),
         allowNull: false,
       },
-      decolorization: {
+      dyeingDecolorization: {
         type: DataTypes.INTEGER(40),
         allowNull: false,
       },
-      time: {
+      dyeingTime: {
         type: DataTypes.INTEGER(40),
         allowNull: false,
       },
-      hurt: {
+      dyeingHurt: {
         type: DataTypes.INTEGER(40),
         allowNull: false,
         validate: {
