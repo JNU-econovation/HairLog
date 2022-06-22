@@ -3,7 +3,7 @@ const { DataTypes, Sequelize } = require('sequelize');
 module.exports = class Designer extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      designer: {
+      designerName: {
         type: DataTypes.STRING(40),
         allowNull: false,
         validate : {
@@ -15,22 +15,14 @@ module.exports = class Designer extends Sequelize.Model {
             }
         }
       },
-      salon: {
+      designerSalon: {
         type: DataTypes.STRING(40),
         allowNull: true,
-        validate : {
-            salon(value) {
-                var isSalon =  /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-                if(isSalon.test(value) == false){
-                    throw new Error('다시 미용실 이름을 입력해주세요!');
-                }
-            }
-        }
       },
-      fav: {
+      designerFav: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue : true
+        defaultValue : false
       },
     }, {
       sequelize,
