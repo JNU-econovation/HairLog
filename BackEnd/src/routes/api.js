@@ -6,6 +6,7 @@ var passport = require('../middlewares/passport'),
     sign = require('../function/CheckAPIKey'),
     multer = require('../middlewares/multer/multer'),
     recordCtrl = require('../middlewares/record'),
+    designerCtrl = require('../middlewares/designer'),
     test = require('../middlewares/test.js');
 
     
@@ -24,8 +25,11 @@ router.post('/swagger/singleRecord/:category', sign.checkApiKey, passport.isLogg
 router.get('/getRecord', passport.isLoggedIn, recordCtrl.Get.record)
 router.get('/swagger/getRecord', passport.isLoggedIn, recordCtrl.Get.record)
 
-router.post('/designer',passport.isLoggedIn, recordCtrl.Post.designer)
-router.post('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Post.designer)
+router.post('/designer',passport.isLoggedIn, designerCtrl.Post.designer)
+router.post('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Post.designer)
+
+router.get('/designer',passport.isLoggedIn, designerCtrl.Get.designer)
+router.get('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Get.designer)
 
 router.post('/test', function(req, rest) {
     rest.send(req.session.user)

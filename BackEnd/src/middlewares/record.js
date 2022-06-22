@@ -51,17 +51,11 @@ var Post = {
                 return dyeing
         }
     },
-    
-    designer : async function(req, res) {
-        var {designerName, designerSalon, designerFav} = req.body;
-        var user = await User.findOne({wherer : {id : req.user.id}});
-        var designerRecord = await user.createDesigner({designerName, designerSalon, designerFav})
-        res.send(designerRecord)
-    },
 
 }
 
 var Get = {
+
     record : async function(req, res) {
         var user = await User.findOne({wherer : {id : req.user.id}});
         var recordArray = await user.getRecords({raw : true});
