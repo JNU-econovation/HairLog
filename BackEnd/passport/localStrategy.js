@@ -8,14 +8,14 @@ var User = require('../../DB/sequelize/models/User');
 module.exports = () => {
   passport.use(new LocalStrategy(
   {
-    usernameField: 'email',
-    passwordField: 'password',
+    usernameField: 'userEmail',
+    passwordField: 'userPassword',
   }, 
-  async (email, password, done) => {
+  async (userEmail, userPassword, done) => {
     try {
-      const exUser = await User.findOne({ where: { email } });
+      const exUser = await User.findOne({ where: { userEmail : userEmail } });
       if (exUser) {
-        const result = await bcrypt.compare(password, exUser.password);
+        const result = await bcrypt.compare(userPassword, exUser.userPassword);
         if (result) {
           done(null, exUser);
         } else {

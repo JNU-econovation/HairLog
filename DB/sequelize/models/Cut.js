@@ -3,11 +3,11 @@ const { DataTypes, Sequelize } = require('sequelize');
 module.exports = class Cut extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      name: {
+      cutName: {
         type: DataTypes.STRING(40),
         allowNull: false,
       },
-      length: {
+      cutLength: {
         type: DataTypes.INTEGER(40),
         allowNull: false,
       },

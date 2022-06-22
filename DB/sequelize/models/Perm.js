@@ -3,15 +3,15 @@ const { DataTypes, Sequelize } = require('sequelize');
 module.exports = class Perm extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      name: {
+      permName: {
         type: DataTypes.STRING(40),
         allowNull: false,
       },
-      time: {
+      permTime: {
         type: DataTypes.INTEGER(40),
         allowNull: false,
       },
-      hurt: {
+      permHurt: {
         type: DataTypes.INTEGER(40),
         allowNull: false,
         validate: {
