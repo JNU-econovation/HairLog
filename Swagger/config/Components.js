@@ -9,121 +9,102 @@
 *      - sex
 *      type: object
 *      properties:
-*        email:
+*        userEmail:
 *          type: string
 *          example: nanakim@gmail.com
-*        password:
+*        userPassword:
 *          type: string
 *          example: 1234
-*        name:
+*        userName:
 *          type: string
 *          example: 나나김
-*        sex:
+*        userSex:
 *          type: string
 *          example: m
-*        cycle:
+*        userCycle:
 *          type: integer
 *          example: 5
-*    Record_cut:
+*        userType: 
+*          type: string
+*          example: 짧은 
+*    Record:
 *      required:
 *      - date
 *      - grade
 *      type: object
 *      properties:
-*        Image:
-*          type: string
-*          format: base64
-*        date:
+*        recordDate:
 *          type: string
 *          example: 2022-07-29
-*        cost:
+*        recordCost:
 *          type: integer
 *          example: 15000
-*        time:
+*        recordTime:
 *          type: integer
 *          example: 60
-*        category:
+*        recordCategory:
 *          type: string
 *          example: cut
-*        CutName:
+*        recordEtc:
 *          type: string
-*          example: cutName
-*        CutLength:
+*          example: this is test for API
+*        recordGrade:
 *          type: integer
-*          example: 24
+*          example: 5
+*    Image:
+*      type: object
+*      properties:
+*        img1: 
+*          type: string
+*        img2: 
+*          type: string
+*        img3: 
+*          type: string
+*    Designer:
+*      required:
+*      - designerName
+*      type: object
+*      properties:
 *        designerName:
 *          type: string
 *          example: 미라클
-*        etc:
+*        designerSalon:
 *          type: string
-*          example: this is test for API
-*        grade:
-*          type: integer
-*          example: 5
-*    Record_perm:
+*          example: 에코노베이션
+*        fav:
+*          type: boolean
+*          example: false
+*    Cut:
 *      required:
-*      - date
-*      - grade
+*      - cutName
 *      type: object
 *      properties:
-*        Image:
+*        cutName:
 *          type: string
-*          format: base64
-*        date:
-*          type: string
-*          example: 2022-07-29
-*        cost:
+*          example: cut name test
+*        cutLength:
 *          type: integer
-*          example: 15000
-*        time:
-*          type: integer
-*          example: 60
-*        category:
-*          type: string
-*          example: perm
+*          example: 5
+*    Perm:
+*      required: 
+*      - permName
+*      type: object
+*      properties:
 *        permName:
 *          type: string
-*          example: permName
+*          example: cut name test
 *        permTime:
 *          type: integer
 *          example: 2
-*        permHurt:
-*          type: integer
-*          example: 1 
-*        designerName:
-*          type: string
-*          example: 미라클
-*        etc:
-*          type: string
-*          example: this is test for API
-*        grade:
-*          type: integer
-*          example: 5
-*    Record_dyeing:
-*      required:
-*      - date
-*      - grade
+*    Dyeing:
+*      required: 
+*      - dyeingColor
 *      type: object
 *      properties:
-*        Image:
-*          type: string
-*          format: base64
-*        date:
-*          type: string
-*          example: 2022-07-29
-*        cost:
-*          type: integer
-*          example: 15000
-*        time:
-*          type: integer
-*          example: 50
-*        category:
-*          type: string
-*          example: dyeing
 *        dyeingColor:
 *          type: string
-*          example: blue
-*        dyeinDecolorization:
+*          example: cut name test
+*        dyeingDecolorization:
 *          type: integer
 *          example: 2
 *        dyeingTime:
@@ -131,30 +112,7 @@
 *          example: 3
 *        dyeingHurt:
 *          type: integer
-*          example: 1 
-*        designerName:
-*          type: string
-*          example: 미라클
-*        etc:
-*          type: string
-*          example: this is test for API
-*        grade:
-*          type: integer
-*          example: 5
-*    Designer:
-*      required:
-*      - designer
-*      type: object
-*      properties:
-*        designer:
-*          type: string
-*          example: 미라클
-*        salon:
-*          type: string
-*          example: 에코노베이션
-*        fav:
-*          type: boolean
-*          example: ture
+*          example: 2
 *  securitySchemes:
 *    ApiKeyAuth:
 *      type: apiKey
