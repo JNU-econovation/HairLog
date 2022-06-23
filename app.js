@@ -40,7 +40,7 @@ var app = express();
 
 
 // port
-app.set('httpPort', process.env.HTTP_PORT || 3000);
+app.set('httpPort', process.env.PORT || 3000);
 
 
 // view engine setup
