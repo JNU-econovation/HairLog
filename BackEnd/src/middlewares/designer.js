@@ -22,8 +22,8 @@ var Get = {
 
     designer : async function(req, res) {
         var user = await User.findOne({wherer : {id : req.user.id}});
-        var designerRecord = await user.getDesigners({raw : true})
-        res.send(designerRecord)
+        var designerList = await user.getDesigners({raw : true})
+        res.send(designerList)
     },
 
 }
