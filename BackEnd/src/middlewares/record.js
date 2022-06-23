@@ -1,9 +1,13 @@
 var User = require('../../../DB/sequelize/models/User')
 var Designer = require('../../../DB/sequelize/models/Designer')
+var Record = require('../../../DB/sequelize/models/Record')
 var Image = require('../../../DB/sequelize/models/Image')
 var Cut = require('../../../DB/sequelize/models/Cut')
 var Perm = require('../../../DB/sequelize/models/Perm')
 var Dyeing = require('../../../DB/sequelize/models/Dyeing')
+
+const { Op } = require("sequelize");
+var nullCheck = require('../function/nullCheck')
 
 var show = require('@jongjun/console')
 
@@ -51,18 +55,12 @@ var Post = {
                 return dyeing
         }
     },
-    
-    designer : async function(req, res) {
-        var {designerName, designerSalon, designerFav} = req.body;
-        var user = await User.findOne({wherer : {id : req.user.id}});
-        var designerRecord = await user.createDesigner({designerName, designerSalon, designerFav})
-        res.send(designerRecord)
-    },
 
 }
 
 var Get = {
-    record : async function(req, res) {
+
+    main : async function(req, res) {
         var user = await User.findOne({wherer : {id : req.user.id}});
         var recordArray = await user.getRecords({raw : true});
         var recordObj = Object.assign({}, recordArray)
@@ -73,12 +71,84 @@ var Get = {
         }
         var result = {user, record : recordObj, img}
         res.send(result)
+    },
+
+    designerList : async function(req, res) {
+        var fav = await Designer.findAndCountAll({where :{[Op.and ] : [{UserId : req.user.id}, {designerFav : '1'}]},  order : [['updatedAt', 'DESC']],});
+        var designerList = {}
+        for (var i = 0; i < fav.count; i++) {
+            designerList[i] = fav.rows[i]
+        }
+        var result = designerList
+        res.send(result)
+    },
+
+    result : async function(req, res) {
+        var user = await User.findOne({wherer : {id : req.user.id}});
+        var recordArray = await user.getRecords({raw : true, order : [['createdAt', 'DESC']]});
+        var recordLast = recordArray[0]
+        var img= await Image.findOne({where : {RecordId : req.user.id}, raw : true})
+        var result = {user, record : recordLast, img}
+        res.send(result)
+    },
+    
+    classification : async function(req, res) {
+        var standard = req.params.standard
+        show.Hash(standard)
+        if( standard == "latest") {
+            Get.standardFunction.latest(req,res)
+        } if( standard == "designer") {
+            Get.standardFunction.designer(req,res)
+        } else {
+            Get.standardFunction.category(req,res)
+        }
+        
+    },
+
+    standardFunction : {
+        latest : async function(req, res) {
+            var user = await User.findOne({wherer : {id : req.user.id}});
+            var recordArray = await user.getRecords({raw : true, order : [['createdAt', 'DESC']]});
+            var recordObj = Object.assign({}, recordArray)
+            var recordCount = await user.countRecords()
+            var img = {};
+            for (var i = 0; i < recordCount; i++) {
+                img[i] = await Image.findOne({where : {RecordId : recordArray[i].id}, raw : true})
+            }
+            var result = {user, record : recordObj, img}
+            return res.send(result)
+        },
+        designer : async function(req, res) {
+            var user = await User.findOne({wherer : {id : req.user.id}});
+            var recordArray = await user.getRecords({raw : true, group : "DesignerId"});
+            var recordObj = Object.assign({}, recordArray)
+            var recordCount = await user.countRecords()
+            var img = {};
+            for (var i = 0; i < recordCount; i++) {
+                img[i] = await Image.findOne({where : {RecordId : recordArray[i].id}, raw : true})
+            }
+            var result = {user, record : recordObj, img}
+            return res.send(result)
+        },
+        category : async function(req, res) {
+            var user = await User.findOne({wherer : {id : req.user.id}});
+            var recordArray = await Record.findAll({raw : true, where : {[Op.and ] : [{recordCategory : req.params.standard}, {UserId : req.user.id}]}});
+            var recordObj = Object.assign({}, recordArray)
+            var recordCount = await user.countRecords()
+            var img = {};
+            for (var i = 0; i < recordCount; i++) {
+                img[i] = await Image.findOne({where : {RecordId : recordArray[i].id}, raw : true})
+            }
+            var result = {user, record : recordObj, img}
+            return res.send(result)
+        }
     }
+
 }
 
 
 var Update = {
-
+    
 }
 
 module.exports = {Post, Get, Update};
