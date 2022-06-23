@@ -15,8 +15,14 @@
 *        content:
 *          application/json:
 *            schema:
-*              $ref: '#/components/schemas/User'
-*              example : { "email" : "nanakim@gmail.com", "password" : "1234" }
+*              type: object
+*              properties:
+*               userEmail:
+*                 type: string
+*                 example: nanakim@gmail.com
+*               userPassword:
+*                 type: string
+*                 example: 1234
 *              required: true
 *      responses:
 *        "201":
