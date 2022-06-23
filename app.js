@@ -1,11 +1,20 @@
-// npm
+// add npm  
 var createError = require('http-errors'),
     express = require('express'),
     path = require('path'),
-    passport = require('passport'),
-    session = require('express-session'),
+    morgan = require('morgan'),
     cookieParser = require('cookie-parser'),
-    logger = require('morgan');
+    sequelize = require('./DB/sequelize/models').sequelize,
+    session = require('express-session'),
+    redis = require('redis'),
+    RedisStore = require('connect-redis')(session),
+    bodyParser = require('body-parser'),
+    passport = require('passport'),
+    helmet = require('helmet'),
+    hpp = require('hpp');
+
+
+const logger = require('./BackEnd/logger/logger.js');
 
 
 // router
@@ -44,21 +53,36 @@ app.set('view engine', 'jade');
 // });
 
 // add middleware
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '/BackEnd/public')));
-app.use(session({
-  resave : false,
-  saveUninitialized : false,
-  secret : process.env.SESSIONSECRET,
-  cookie : {
-    httpOnly : true,
-    secure : false,
-  },
-}));
+if(process.env.NODE_ENV==='production'){
+  app.use(morgan('combined'));
+  app.use(helmet());
+  app.use(hpp());
+} else {
+  app.use(morgan('dev'));
+}
+app.use(bodyParser.json())
 app.use(cookieParser());
-
+const redisClient = redis.createClient({
+  url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+  password: process.env.REDIS_PASSWORD,
+  legacyMode: true
+});
+redisClient.connect()
+const sessionOption = {
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.SESSION_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+  },
+  store:  new RedisStore({ client: redisClient }),
+};
+if(process.env.NODE_ENV==='production'){
+  sessionOption.proxy=true;
+  // sessionOption.cookie.secure=true;
+}
+app.use(session(sessionOption));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -73,24 +97,29 @@ app.use('/api-docs', apiDocsRouter);
 
 
 
-// catch 404 and forward to error handler
+// catch 404 and forward to error handler  
+app.use((req,res,next) => { 
+  const err = new Error('NotFound');
+  err.status=404;
+  logger.info('hello');
+  logger.error(err.message);
+  next(err);
+});
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// error handler  
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
 
 
-// server start
 app.listen(app.get('httpPort'), () => {
   console.log(app.get('httpPort'), '번 포트에서 대기중');
 });

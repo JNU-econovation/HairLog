@@ -132,11 +132,12 @@ var Get = {
         },
         category : async function(req, res) {
             var user = await User.findOne({wherer : {id : req.user.id}});
-            var recordArray = await Record.findAll({raw : true, where : {[Op.and ] : [{recordCategory : req.params.standard}, {UserId : req.user.id}]}});
+            var recordArray = await Record.findAll({raw : true, where : {[Op.and] : [{recordCategory : req.params.standard}, {UserId : req.user.id}]}});
             var recordObj = Object.assign({}, recordArray)
-            var recordCount = await user.countRecords()
+            var recordCount = await user.countRecords({where : {recordCategory : req.params.standard}})
             var img = {};
             for (var i = 0; i < recordCount; i++) {
+                show.Hash(i)
                 img[i] = await Image.findOne({where : {RecordId : recordArray[i].id}, raw : true})
             }
             var result = {user, record : recordObj, img}

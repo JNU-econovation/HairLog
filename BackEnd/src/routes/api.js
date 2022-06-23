@@ -33,6 +33,9 @@ router.get('/swagger/main/:standard', passport.isLoggedIn, recordCtrl.Get.classi
 router.get('/designer',passport.isLoggedIn, designerCtrl.Get.designer)
 router.get('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Get.designer)
 
+router.get('/record/:standard', passport.isLoggedIn, multer.single("Image"), recordCtrl.Get.classification)
+router.get('/swagger/record/:standard', sign.checkApiKey, passport.isLoggedIn, multer.single("Image"), recordCtrl.Get.classification)
+
 router.get('/result', passport.isLoggedIn, recordCtrl.Get.result);
 router.get('/swagger/result', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Get.result);
 
