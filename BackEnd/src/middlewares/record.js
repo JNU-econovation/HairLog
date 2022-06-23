@@ -94,7 +94,6 @@ var Get = {
     
     classification : async function(req, res) {
         var standard = req.params.standard
-        show.Hash(standard)
         if( standard == "latest") {
             Get.standardFunction.latest(req,res)
         } if( standard == "designer") {
@@ -132,16 +131,15 @@ var Get = {
         },
         category : async function(req, res) {
             var user = await User.findOne({wherer : {id : req.user.id}});
-            var recordArray = await Record.findAll({raw : true, where : {[Op.and] : [{recordCategory : req.params.standard}, {UserId : req.user.id}]}});
-            var recordObj = Object.assign({}, recordArray)
-            var recordCount = await user.countRecords({where : {recordCategory : req.params.standard}})
+            var recordObj = await Record.findAndCountAll({raw : true, where : {[Op.and ] : [{recordCategory : req.params.standard}, {UserId : req.user.id}]}});
+            var recordCount = recordObj.count
             var img = {};
             for (var i = 0; i < recordCount; i++) {
-                show.Hash(i)
-                img[i] = await Image.findOne({where : {RecordId : recordArray[i].id}, raw : true})
+                img[i] = await Image.findOne({where : {RecordId : recordObj.rows[i].id}, raw : true})
             }
             var result = {user, record : recordObj, img}
             return res.send(result)
+            return done
         }
     }
 
