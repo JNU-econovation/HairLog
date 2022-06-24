@@ -21,7 +21,7 @@ const options = {
       }
     ]
   },
-  apis: ["./BackEnd/swagger/config/*.js"]
+  apis: ["./Swagger/config/*.js"]
 }
 const specs = swaggereJsdoc(options)
 

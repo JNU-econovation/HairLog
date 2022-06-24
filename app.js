@@ -37,7 +37,11 @@ app.set('httpPort', process.env.HTTP_PORT || 3000);
 // view engine setup
 app.set('views', path.join(__dirname, '/BackEnd/views'));
 app.set('view engine', 'jade');
-
+// app.set('view engine', 'html');
+// nunjucks.configure(path.join(__dirname, 'html 위치'), {
+//   express: app,
+//   watch: true
+// });
 
 // add middleware
 app.use(logger('dev'));
@@ -58,7 +62,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
-const Swagger = require('./BackEnd/swagger/Swagger');
+const Swagger = require('./Swagger/Swagger');
 
 // add router
 app.use('/', indexRouter);

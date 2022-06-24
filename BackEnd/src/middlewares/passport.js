@@ -6,19 +6,20 @@ var User = require('../../../DB/sequelize/models/User');
 
 
 join = async (req, res, next) => {
-    const { email, password, name, sex, cycle } = req.body;
+    const { userEmail, userPassword, userName, userSex, userCycle, userTpye } = req.body;
     try {
-      const exUser = await User.findOne({ where: { name } });
+      const exUser = await User.findOne({ where: { userEmail } });
       if (exUser) {
         return res.redirect('/join?error=exist');
       }
-      const hash = await bcrypt.hash(password, 12);
+      const hash = await bcrypt.hash(userPassword, 12);
       await User.create({
-        email,
-        password : hash,
-        name,
-        sex,
-        cycle,
+        userEmail,
+        userPassword : hash,
+        userName,
+        userSex,
+        userCycle,
+        userTpye,
       });
       return res.send("Join Success");
     } catch (error) {
