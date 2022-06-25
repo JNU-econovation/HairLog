@@ -14,27 +14,30 @@ var passport = require('../middlewares/passport'),
 router.post('/join', passport.join);
 router.post('/swagger/join', sign.checkApiKey, passport.join);
 
-router.post('/designer',passport.isLoggedIn, designerCtrl.Post.designer)
-router.post('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Post.designer)
-
 router.post('/authenticate', passport.authenticate);
 router.post('/swagger/authenticate', sign.checkApiKey, passport.authenticate);
+
+router.post('/designer',passport.isLoggedIn, designerCtrl.Post.designer)  
+router.post('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Post.designer)
 
 router.post('/record/:category', passport.isLoggedIn, multer.single("Image"), recordCtrl.Post.record)
 router.post('/swagger/record/:category', sign.checkApiKey, passport.isLoggedIn, multer.single("Image"), recordCtrl.Post.record)
 
 //GET
 router.get('/main', passport.isLoggedIn, recordCtrl.Get.main)
-router.get('/swagger/main', passport.isLoggedIn, recordCtrl.Get.main)
+router.get('/swagger/main', passport.isLoggedIn, recordCtrl.Get.main) 
 
-router.get('/main/:standard', passport.isLoggedIn, recordCtrl.Get.classification)
-router.get('/swagger/main/:standard', passport.isLoggedIn, recordCtrl.Get.classification)
+router.get('/main/:category', passport.isLoggedIn, recordCtrl.Get.classification)
+router.get('/swagger/main/:category', passport.isLoggedIn, recordCtrl.Get.classification)
 
-router.get('/designer',passport.isLoggedIn, designerCtrl.Get.designer)
-router.get('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Get.designer)
+router.get('/designer/',passport.isLoggedIn, designerCtrl.Get.designer)
+router.get('/swagger/designer/', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Get.designer)
 
-router.get('/result', passport.isLoggedIn, recordCtrl.Get.result);
-router.get('/swagger/result', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Get.result);
+router.get('/favDesigner/',passport.isLoggedIn, designerCtrl.Get.favDesignerList)
+router.get('/swagger/favDesigner/', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Get.favDesignerList)
+
+router.get('/result/:category', passport.isLoggedIn, recordCtrl.Get.instanceResult);
+router.get('/swagger/result/:category', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Get.instanceResult);
 
 router.get('/privacy/user', passport.isLoggedIn, privacyCrtl.Get.user)
 router.get('/swagger/privacy/user', sign.checkApiKey, passport.isLoggedIn, privacyCrtl.Get.user)
