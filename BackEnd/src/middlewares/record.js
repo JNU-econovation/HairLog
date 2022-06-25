@@ -7,7 +7,8 @@ var Perm = require('../../../DB/sequelize/models/Perm')
 var Dyeing = require('../../../DB/sequelize/models/Dyeing')
 
 const { Op } = require("sequelize");
-var nullCheck = require('../function/nullCheck')
+var ifDesigner = require('../function/ifDesigner')
+var classifyCategory = require('../function/classifyCategory')
 
 var show = require('@jongjun/console')
 
@@ -16,25 +17,18 @@ var Post = {
     record  : async function(req, res) {
         var category = req.params.category
         var user = await User.findOne({where : {id : req.user.id}});
-        var {record, image} = await Post.recordDesigner(req, category, user)
+        var {record, image} = await Post.recordWithDesigner(req, category, user)
         var result = {record, image}
         result[`${category}`] = await Post.recordCategory(req, category, record)
         res.send(result)
     },
     
-    recordDesigner :  async function(req, category, userInstance) {
-        var {recordDate, recordCost, recordTime, designerName, recordEtc, recordGrade} = req.body;
+    recordWithDesigner :  async function(req, category, userInstance) {
+        var { designerName }= req.body;
         if(designerName){
-            var designer = await Designer.findOne({where : { designerName }})
-            var record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade, DesignerId : designer.id })
-            var image = await record.createImage({ img1 : req.file.filename})
-            var result = {record, image}
-            return result
+            return ifDesigner.isDesigner(req,category,userInstance)
         } else {
-            var record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade })
-            var image = await record.createImage({ img1 : req.file.filename})
-            var result = {record, image}
-            return result
+            return ifDesigner.isNotDesigner(req,category,userInstance)
         }
     },
     
@@ -53,6 +47,8 @@ var Post = {
                 var { dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt } = req.body 
                 var dyeing = await Dyeing.create({ dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt, RecordId : record.id})
                 return dyeing
+            default :
+            throw new Error('올바른 목록을 선택해 주세요!');
         }
     },
 
@@ -61,88 +57,27 @@ var Post = {
 var Get = {
 
     main : async function(req, res) {
-        var user = await User.findOne({wherer : {id : req.user.id}});
-        var recordArray = await user.getRecords({raw : true});
-        var recordObj = Object.assign({}, recordArray)
-        var recordCount = await user.countRecords()
-        var img = {};
-        for (var i = 0; i < recordCount; i++) {
-            img[i] = await Image.findOne({where : {RecordId : recordArray[i].id}, raw : true})
-        }
-        var result = {user, record : recordObj, img}
-        res.send(result)
+        return classifyCategory.latest(req, res)
     },
 
-    designerList : async function(req, res) {
-        var fav = await Designer.findAndCountAll({where :{[Op.and ] : [{UserId : req.user.id}, {designerFav : '1'}]},  order : [['updatedAt', 'DESC']],});
-        var designerList = {}
-        for (var i = 0; i < fav.count; i++) {
-            designerList[i] = fav.rows[i]
-        }
-        var result = designerList
-        res.send(result)
+    instanceResult : async function(req, res) {
+        var category = req.params.category
+        return classifyCategory.categoryResult(req, res, category)
     },
 
-    result : async function(req, res) {
-        var user = await User.findOne({wherer : {id : req.user.id}});
-        var recordArray = await user.getRecords({raw : true, order : [['createdAt', 'DESC']]});
-        var recordLast = recordArray[0]
-        var img= await Image.findOne({where : {RecordId : req.user.id}, raw : true})
-        var result = {user, record : recordLast, img}
-        res.send(result)
-    },
-    
     classification : async function(req, res) {
-        var standard = req.params.standard
-        if( standard == "latest") {
-            Get.standardFunction.latest(req,res)
-        } if( standard == "designer") {
-            Get.standardFunction.designer(req,res)
+        var category = req.params.category
+        if( category == "latest") {
+            classifyCategory.latest(req,res)
+        } 
+        else if( category == "designer") {
+            classifyCategory.designer(req,res)
         } else {
-            Get.standardFunction.category(req,res)
-        }
+            classifyCategory.category(req,res,category)
+        } 
         
     },
-
-    standardFunction : {
-        latest : async function(req, res) {
-            var user = await User.findOne({wherer : {id : req.user.id}});
-            var recordArray = await user.getRecords({raw : true, order : [['createdAt', 'DESC']]});
-            var recordObj = Object.assign({}, recordArray)
-            var recordCount = await user.countRecords()
-            var img = {};
-            for (var i = 0; i < recordCount; i++) {
-                img[i] = await Image.findOne({where : {RecordId : recordArray[i].id}, raw : true})
-            }
-            var result = {user, record : recordObj, img}
-            return res.send(result)
-        },
-        designer : async function(req, res) {
-            var user = await User.findOne({wherer : {id : req.user.id}});
-            var recordArray = await user.getRecords({raw : true, group : "DesignerId"});
-            var recordObj = Object.assign({}, recordArray)
-            var recordCount = await user.countRecords()
-            var img = {};
-            for (var i = 0; i < recordCount; i++) {
-                img[i] = await Image.findOne({where : {RecordId : recordArray[i].id}, raw : true})
-            }
-            var result = {user, record : recordObj, img}
-            return res.send(result)
-        },
-        category : async function(req, res) {
-            var user = await User.findOne({wherer : {id : req.user.id}});
-            var recordObj = await Record.findAndCountAll({raw : true, where : {[Op.and ] : [{recordCategory : req.params.standard}, {UserId : req.user.id}]}});
-            var recordCount = recordObj.count
-            var img = {};
-            for (var i = 0; i < recordCount; i++) {
-                img[i] = await Image.findOne({where : {RecordId : recordObj.rows[i].id}, raw : true})
-            }
-            var result = {user, record : recordObj, img}
-            return res.send(result)
-            return done
-        }
-    }
-
+    
 }
 
 

@@ -5,6 +5,9 @@ var Cut = require('../../../DB/sequelize/models/Cut')
 var Perm = require('../../../DB/sequelize/models/Perm')
 var Dyeing = require('../../../DB/sequelize/models/Dyeing')
 
+const { Op } = require("sequelize");
+
+
 var show = require('@jongjun/console')
 
 var Post = {
@@ -25,6 +28,13 @@ var Get = {
         var designerList = await user.getDesigners({raw : true})
         res.send(designerList)
     },
+
+    favDesignerList : async function(req, res) { 
+        var fav = await Designer.findAndCountAll({where :{[Op.and ] : [{UserId : req.user.id}, {designerFav : '1'}]},  order : [['updatedAt', 'DESC']],});
+        const result = fav.rows.map(row => row);
+        res.send(result)
+    },
+
 
 }
 
