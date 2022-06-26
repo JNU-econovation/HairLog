@@ -31,12 +31,8 @@
     "sequelize": "^6.21.0",
     "sequelize-cli": "^6.4.1",
     "swagger-jsdoc": "^6.2.1",
-<<<<<<< HEAD
-    "swagger-ui-express": "^4.4.0"
-=======
     "swagger-ui-express": "^4.4.0",
     "winston": "^3.8.0"
->>>>>>> feature/Distribute
   },
   "devDependencies": {}
 }

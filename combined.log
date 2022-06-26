@@ -1,2 +1,6 @@
 {"level":"info","message":"hello"}
 {"level":"error","message":"NotFound"}
+{"level":"info","message":"hello"}
+{"level":"error","message":"NotFound"}
+{"level":"info","message":"hello"}
+{"level":"error","message":"NotFound"}

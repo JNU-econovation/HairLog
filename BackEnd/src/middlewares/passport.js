@@ -5,13 +5,8 @@ const bcrypt = require('bcrypt');
 const User = require('../../../DB/sequelize/models/User');
 
 
-<<<<<<< HEAD
 join = async (req, res, next) => {
     const { userEmail, userPassword, userName, userSex, userCycle, userType } = req.body;
-=======
-const join = async (req, res, next) => {
-    const { userEmail, userPassword, userName, userSex, userCycle, userTpye } = req.body;
->>>>>>> feature/Distribute
     try {
       const exUser = await User.findOne({ where: { userEmail } });
       if (exUser) {

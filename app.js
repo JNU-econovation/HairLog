@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-// npm
-=======
 // npm  
->>>>>>> feature/Distribute
 const createError = require('http-errors'),
     express = require('express'),
     path = require('path'),
@@ -65,7 +61,6 @@ if(process.env.NODE_ENV==='production'){
 }
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
-<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, '/BackEnd/public')));
 app.use(session({
   resave : false,
@@ -76,8 +71,6 @@ app.use(session({
     secure : false,
   },
 }));
-=======
->>>>>>> feature/Distribute
 app.use(cookieParser());
 const redisClient = redis.createClient({
   url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
