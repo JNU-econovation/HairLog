@@ -1,5 +1,5 @@
 // npm
-var createError = require('http-errors'),
+const createError = require('http-errors'),
     express = require('express'),
     path = require('path'),
     passport = require('passport'),
@@ -9,14 +9,14 @@ var createError = require('http-errors'),
 
 
 // router
-var indexRouter = require('./BackEnd/src/routes/index'),
+const indexRouter = require('./BackEnd/src/routes/index'),
     usersRouter = require('./BackEnd/src/routes/users'),
     apiTest = require('./BackEnd/src/routes/api')
     apiDocsRouter = require('./BackEnd/src/routes/api-docs');
 
 
 // add config 
-var dotenv = require('dotenv'),
+const dotenv = require('dotenv'),
     sequelize = require('./DB/sequelize/models').sequelize,
     passportConfig = require('./BackEnd/passport');
 
@@ -27,7 +27,7 @@ passportConfig();
 
 
 // express start
-var app = express();
+const app = express();
 
 
 // port

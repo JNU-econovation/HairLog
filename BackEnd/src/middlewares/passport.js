@@ -1,8 +1,8 @@
-var passport = require('passport');
+const passport = require('passport');
 const bcrypt = require('bcrypt');
 
 
-var User = require('../../../DB/sequelize/models/User');
+const User = require('../../../DB/sequelize/models/User');
 
 
 join = async (req, res, next) => {
