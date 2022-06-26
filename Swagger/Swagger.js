@@ -12,8 +12,11 @@ const options = {
     },
     servers: [
       {
-        url: "https://hairlogapi.herokuapp.com/", 
+        url: "https://hairlogapi.herokuapp.com/"
       },
+      {
+        url : "http://localhost:3000"
+      }
     ], 
     security : [
       {

@@ -3,13 +3,13 @@
 *paths:
 *  /api/swagger/record/cut :
 *    get:
-*      tags: [Record_Cut]
+*      tags: [Record]
 *      summary: Cut 기록후 페이지
 *      responses:
 *        "200":
 *          description: Cut 기록 페이지 로드 성공
 *    post:
-*      tags: [Record_Cut]
+*      tags: [Record]
 *      summary: Cut 기록 요청
 *      consume: multipart/form-data
 *      produces: application/json
@@ -51,13 +51,13 @@
 *          description: "successful operation"
 *  /api/swagger/record/perm :
 *    get:
-*      tags: [Record_Perm]
+*      tags: [Record]
 *      summary: Perm 기록후 페이지
 *      responses:
 *        "200":
 *          description: Perm 기록 페이지 로드 성공
 *    post:
-*      tags: [Record_Perm]
+*      tags: [Record]
 *      summary: Perm 기록 요청
 *      consume: multipart/form-data
 *      produces: application/json
@@ -102,13 +102,13 @@
 *          description: "successful operation"
 *  /api/swagger/record/dyeing :
 *    get:
-*      tags: [Record_Dyeing]
+*      tags: [Record]
 *      summary: Dyeing 기록후 페이지
 *      responses:
 *        "200":
 *          description: Dyeing 기록 페이지 로드 성공
 *    post:
-*      tags: [Record_Dyeing]
+*      tags: [Record]
 *      summary: Dyeing 기록 요청
 *      consume: multipart/form-data
 *      produces: application/json
