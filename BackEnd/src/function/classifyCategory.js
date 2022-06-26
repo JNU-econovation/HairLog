@@ -14,7 +14,7 @@ var show = require('@jongjun/console')
 var latest = async function(req, res) {
 
     var user = await User.findOne({wherer : {id : req.user.id}});
-    var recordArray = await user.getRecords({raw : true, order : [['createdAt', 'DESC']]});
+    var recordArray = await Record.findAndCountAll({raw : true,where : {UserId : user.id}, order : [['createdAt', 'DESC']]});
     var recordObj = Object.assign({}, recordArray)
     var recordCount = await user.countRecords()
     var img = await imgObj(recordArray, recordCount)

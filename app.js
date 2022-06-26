@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, '/BackEnd/public')));
 app.use(session({
   resave : false,
   saveUninitialized : false,
-  secret : process.env.SESSIONSECRET,
+  secret : process.env.SESSION_SECRET,
   cookie : {
     httpOnly : true,
     secure : false,
