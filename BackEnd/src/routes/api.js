@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const show = require("@jongjun/console")
+const show = require("@jongjun/console");
 
 const passport = require('../middlewares/passport'),
     sign = require('../function/CheckAPIKey'),
     multer = require('../middlewares/multer/multer'),
     recordCtrl = require('../middlewares/record'),
     designerCtrl = require('../middlewares/designer'),
-    privacyCrtl = require('../middlewares/privacy')
+    privacyCrtl = require('../middlewares/privacy'),
     test = require('../middlewares/test.js');
 
 //POST   
