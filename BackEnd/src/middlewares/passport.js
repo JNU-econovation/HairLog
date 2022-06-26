@@ -5,8 +5,13 @@ const bcrypt = require('bcrypt');
 const User = require('../../../DB/sequelize/models/User');
 
 
+<<<<<<< HEAD
 join = async (req, res, next) => {
     const { userEmail, userPassword, userName, userSex, userCycle, userType } = req.body;
+=======
+const join = async (req, res, next) => {
+    const { userEmail, userPassword, userName, userSex, userCycle, userTpye } = req.body;
+>>>>>>> feature/Distribute
     try {
       const exUser = await User.findOne({ where: { userEmail } });
       if (exUser) {
@@ -28,7 +33,7 @@ join = async (req, res, next) => {
     }
   }
 
-authenticate = (req, res, next) => {
+const authenticate = (req, res, next) => {
     passport.authenticate('local', (authError, user) => {
       if (authError) {
         console.error(authError);
@@ -47,7 +52,7 @@ authenticate = (req, res, next) => {
     })(req, res, next);
 };
 
-isLoggedIn = (req, res, next) => {
+const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
       next();
   } else {
@@ -55,7 +60,7 @@ isLoggedIn = (req, res, next) => {
   }
 };
 
-isNotLoggedIn = (req, res, next) => {
+const isNotLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
       next();
   } else {
@@ -64,7 +69,7 @@ isNotLoggedIn = (req, res, next) => {
   }
 };
 
-deleteAPITest = async (req, res, next) => {
+const deleteAPITest = async (req, res, next) => {
     await User.destroy({ where: { name:  "나나김"} });
     res.send("delete")
 };

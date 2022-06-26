@@ -1,15 +1,25 @@
+<<<<<<< HEAD
 const Sequelize = require('sequelize');
 const User = require('./User'),
+=======
+const Sequelize = require('sequelize'),
+      User = require('./User'),
+>>>>>>> feature/Distribute
       Record = require('./Record'),
       Image = require('./Image'),
       Designer = require('./Designer'),
       Cut = require('./Cut'),
       Perm = require('./Perm'),
       Dyeing = require('./Dyeing');
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> feature/Distribute
 
 
 const env = process.env.NODE_ENV || 'development';
-const config = require('../config/config')[env];
+const config = require('../config/config.js')[env];
 
 // connecting to a database
 const sequelize = new Sequelize(
