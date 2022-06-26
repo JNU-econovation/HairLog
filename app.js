@@ -60,6 +60,7 @@ if(process.env.NODE_ENV==='production'){
   app.use(morgan('dev'));
 }
 app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 const redisClient = redis.createClient({
   url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
@@ -85,7 +86,6 @@ app.use(session(sessionOption));
 app.use(passport.initialize());
 app.use(passport.session());
 
-const Swagger = require('./Swagger/Swagger');
 
 // add router
 app.use('/', indexRouter);
