@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var show = require("@jongjun/console")
+const express = require('express');
+const router = express.Router();
+const show = require("@jongjun/console")
 
-var passport = require('../middlewares/passport'),
+const passport = require('../middlewares/passport'),
     sign = require('../function/CheckAPIKey'),
     multer = require('../middlewares/multer/multer'),
     recordCtrl = require('../middlewares/record'),

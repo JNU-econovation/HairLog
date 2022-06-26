@@ -1,7 +1,7 @@
-var passport = require('passport'),
+const passport = require('passport'),
     local = require('./localStrategy');
 
-var User = require('../../DB/sequelize/models/User');
+const User = require('../../DB/sequelize/models/User');
 
 module.exports = () => {
 
