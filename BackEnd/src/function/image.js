@@ -2,8 +2,10 @@ const cloudinary = require('./cloudinary/upload')
 
 const urls = async function (files) {
     let temp = {}
-    for(let i =0; i < 3; i++) {
-        temp[`img${i+1}`] = files[i].path
+    let i = 0
+    for( let file of files) {
+        temp[`img${i+1}`] = file.path
+        i++
     }
     let images = Object.entries(temp)
     let url = await Promise.all(images.map( result => cloudinary.upload(result[1])))
@@ -11,10 +13,11 @@ const urls = async function (files) {
 }
 
 const images = async function(urls) {
-    console.log(urls)
     let images = {}
-    for(let i =0; i < 3; i++) {
-        images[`img${i+1}`] = urls[i]
+    let i = 0;
+    for(let url of urls) {
+        images[`img${i+1}`] = url
+        i++
     }
     return images
 }

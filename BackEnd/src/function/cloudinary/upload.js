@@ -4,7 +4,7 @@ const upload = async function (path){
     
     try{
         var result = await cloudinary.uploader.upload(path, {upload_preset: "hairlog"})
-        return result.url
+        return result.secure_url
     }catch(e){ 
         console.log(e)
     }
