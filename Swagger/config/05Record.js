@@ -2,12 +2,6 @@
  * @swagger
 *paths:
 *  /api/swagger/record/cut :
-*    get:
-*      tags: [Record]
-*      summary: Cut 기록후 페이지
-*      responses:
-*        "200":
-*          description: Cut 기록 페이지 로드 성공
 *    post:
 *      tags: [Record]
 *      summary: Cut 기록 요청
@@ -50,12 +44,6 @@
 *        "200":
 *          description: "successful operation"
 *  /api/swagger/record/perm :
-*    get:
-*      tags: [Record]
-*      summary: Perm 기록후 페이지
-*      responses:
-*        "200":
-*          description: Perm 기록 페이지 로드 성공
 *    post:
 *      tags: [Record]
 *      summary: Perm 기록 요청
@@ -101,12 +89,6 @@
 *        "200":
 *          description: "successful operation"
 *  /api/swagger/record/dyeing :
-*    get:
-*      tags: [Record]
-*      summary: Dyeing 기록후 페이지
-*      responses:
-*        "200":
-*          description: Dyeing 기록 페이지 로드 성공
 *    post:
 *      tags: [Record]
 *      summary: Dyeing 기록 요청

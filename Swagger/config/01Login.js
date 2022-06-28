@@ -2,12 +2,6 @@
 *@swagger
 *paths: 
 *  /api/swagger/authenticate :
-*    get:
-*      tags: [Login]
-*      summary: 로그인 페이지
-*      responses:
-*        "200":
-*          description: 로그인 페이지 로드 성공
 *    post:
 *      tags: [Login]
 *      summary: 로그인 요청
