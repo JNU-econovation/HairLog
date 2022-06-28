@@ -1,22 +1,31 @@
-// npm
-var createError = require('http-errors'),
+// npm  
+const createError = require('http-errors'),
     express = require('express'),
+    nunjucks = require('nunjucks')
     path = require('path'),
-    passport = require('passport'),
-    session = require('express-session'),
+    morgan = require('morgan'),
     cookieParser = require('cookie-parser'),
-    logger = require('morgan');
+    session = require('express-session'),
+    redis = require('redis'),
+    RedisStore = require('connect-redis')(session),
+    bodyParser = require('body-parser'),
+    passport = require('passport'),
+    helmet = require('helmet'),
+    hpp = require('hpp');
+
+
+const logger = require('./BackEnd/logger/logger.js');
 
 
 // router
-var indexRouter = require('./BackEnd/src/routes/index'),
+const indexRouter = require('./BackEnd/src/routes/index'),
     usersRouter = require('./BackEnd/src/routes/users'),
     apiTest = require('./BackEnd/src/routes/api')
     apiDocsRouter = require('./BackEnd/src/routes/api-docs');
 
 
 // add config 
-var dotenv = require('dotenv'),
+const dotenv = require('dotenv'),
     sequelize = require('./DB/sequelize/models').sequelize,
     passportConfig = require('./BackEnd/passport');
 
@@ -27,42 +36,67 @@ passportConfig();
 
 
 // express start
-var app = express();
+const app = express();
 
 
 // port
-app.set('httpPort', process.env.HTTP_PORT || 3000);
+app.set('httpPort', process.env.PORT || 3000);
 
 
 // view engine setup
 app.set('views', path.join(__dirname, '/BackEnd/views'));
 app.set('view engine', 'jade');
 // app.set('view engine', 'html');
-// nunjucks.configure(path.join(__dirname, 'html 위치'), {
+// nunjucks.configure(path.join(__dirname, '/BackEnd/views'), {
 //   express: app,
 //   watch: true
 // });
 
 // add middleware
-app.use(logger('dev'));
-app.use(express.json());
+if(process.env.NODE_ENV==='production'){
+  app.use(morgan('combined'));
+  app.use(helmet());
+  app.use(hpp());
+} else {
+  app.use(morgan('dev'));
+}
+app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/BackEnd/public')));
 app.use(session({
   resave : false,
   saveUninitialized : false,
-  secret : process.env.SESSIONSECRET,
+  secret : process.env.SESSION_SECRET,
   cookie : {
     httpOnly : true,
     secure : false,
   },
 }));
 app.use(cookieParser());
-
+const redisClient = redis.createClient({
+  url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+  password: process.env.REDIS_PASSWORD,
+  legacyMode: true
+});
+redisClient.connect()
+const sessionOption = {
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.SESSION_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+  },
+  store:  new RedisStore({ client: redisClient }),
+};
+if(process.env.NODE_ENV==='production'){
+  sessionOption.proxy=true;
+  // sessionOption.cookie.secure=true;
+}
+app.use(session(sessionOption));
 app.use(passport.initialize());
 app.use(passport.session());
 
-const Swagger = require('./Swagger/Swagger');
 
 // add router
 app.use('/', indexRouter);
@@ -73,24 +107,29 @@ app.use('/api-docs', apiDocsRouter);
 
 
 
-// catch 404 and forward to error handler
+// catch 404 and forward to error handler  
+app.use((req,res,next) => { 
+  const err = new Error('NotFound');
+  err.status=404;
+  logger.info('hello');
+  logger.error(err.message);
+  next(err);
+});
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// error handler  
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
 
 
-// server start
 app.listen(app.get('httpPort'), () => {
   console.log(app.get('httpPort'), '번 포트에서 대기중');
 });

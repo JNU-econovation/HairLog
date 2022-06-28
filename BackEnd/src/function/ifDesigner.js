@@ -1,26 +1,24 @@
-var User = require('../../../DB/sequelize/models/User')
-var Designer = require('../../../DB/sequelize/models/Designer')
-var Record = require('../../../DB/sequelize/models/Record')
-var Image = require('../../../DB/sequelize/models/Image')
-var Cut = require('../../../DB/sequelize/models/Cut')
-var Perm = require('../../../DB/sequelize/models/Perm')
-var Dyeing = require('../../../DB/sequelize/models/Dyeing')
+const User = require('../../../DB/sequelize/models/User'),
+      Designer = require('../../../DB/sequelize/models/Designer'),
+      Record = require('../../../DB/sequelize/models/Record'),
+      Image = require('../../../DB/sequelize/models/Image'),
+      Cut = require('../../../DB/sequelize/models/Cut'),
+      Perm = require('../../../DB/sequelize/models/Perm'),
+      Dyeing = require('../../../DB/sequelize/models/Dyeing');
 
 
-var isDesigner = async function (req, category, userInstance) {
-    var {recordDate, recordCost, recordTime, designerName, recordEtc, recordGrade} = req.body;
-    var designer = await Designer.findOne({where : { designerName }})
-    var record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade, DesignerId : designer.id })
-    var image = await record.createImage({ img1 : req.file.filename})
-    var result = {record, image}
-    return result
+const isDesigner = async function (req, category, userInstance) {
+    let {recordDate, recordCost, recordTime, designerName, recordEtc, recordGrade} = req.body;
+    let designer = await Designer.findOne({where : { designerName }})
+    let record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade, DesignerId : designer.id })
+    let result = record
+    return result 
 }
 
-var isNotDesigner = async function  (req, category, userInstance) {
-    var {recordDate, recordCost, recordTime, recordEtc, recordGrade} = req.body;
-    var record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade })
-    var image = await record.createImage({ img1 : req.file.filename})
-    var result = {record, image}
+const isNotDesigner = async function  (req, category, userInstance) {
+    let {recordDate, recordCost, recordTime, recordEtc, recordGrade} = req.body;
+    let record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade })
+    let result = record
     return result
 }
 

@@ -1,17 +1,15 @@
-const Sequelize = require('sequelize');
-const User = require('./User');
-const Record = require('./Record');
-const Image = require('./Image');
-const Designer = require('./Designer');
-const Cut = require('./Cut');
-const Perm = require('./Perm');
-const Dyeing = require('./Dyeing');
-
-
+const Sequelize = require('sequelize'),
+      User = require('./User'),
+      Record = require('./Record'),
+      Image = require('./Image'),
+      Designer = require('./Designer'),
+      Cut = require('./Cut'),
+      Perm = require('./Perm'),
+      Dyeing = require('./Dyeing');
 
 
 const env = process.env.NODE_ENV || 'development';
-const config = require('../config/config')[env];
+const config = require('../config/config.js')[env];
 
 // connecting to a database
 const sequelize = new Sequelize(

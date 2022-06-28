@@ -2,7 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
-var User = require('../../DB/sequelize/models/User');
+const User = require('../../DB/sequelize/models/User');
 
 
 module.exports = () => {
