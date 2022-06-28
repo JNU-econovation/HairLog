@@ -1,12 +1,12 @@
 const cloudinary = require('./cloudinary/upload')
 
 const urls = async function (files) {
-    let images = {}
+    let temp = {}
     for(let i =0; i < 3; i++) {
-        images[`img${i+1}`] = files[i].path
+        temp[`img${i+1}`] = files[i].path
     }
-    let array = Object.entries(images)
-    let url = await Promise.all(array.map( result => cloudinary.upload(result[1])))
+    let images = Object.entries(temp)
+    let url = await Promise.all(images.map( result => cloudinary.upload(result[1])))
     return url
 }
 
