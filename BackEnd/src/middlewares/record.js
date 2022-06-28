@@ -10,18 +10,20 @@ const { Op } = require("sequelize");
 
 const ifDesigner = require('../function/ifDesigner'),
       classifyCategory = require('../function/classifyCategory'),
+      imageFunction = require('../function/image'),
       cloudinary = require('../function/cloudinary/upload');
 
 const show = require('@jongjun/console')
 
 const Post = {
-    
+
     record  : async function(req, res) {
         let category = req.params.category
         let user = await User.findOne({where : {id : req.user.id}});
         let record = await Post.recordWithDesigner(req, category, user)
-        let imageUrl = await cloudinary.upload(req)
-        let image = await record.createImage({ img1 : imageUrl})
+        let urls = await imageFunction.urls(req)
+        let imagesQuery = await imageFunction.images(record, urls)
+        let image = await record.createImage(imagesQuery)
         let result = {record, image}
         result[`${category}`] = await Post.recordCategory(req, category, record)
         res.send(result)

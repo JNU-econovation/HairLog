@@ -1,9 +1,9 @@
 const cloudinary = require('cloudinary').v2
 
-const upload = async function (req){
+const upload = async function (path){
     
     try{
-        var result = await cloudinary.uploader.upload(req.file.path, {upload_preset: "hairlog"})
+        var result = await cloudinary.uploader.upload(path, {upload_preset: "hairlog"})
         return result.url
     }catch(e){ 
         console.log(e)
