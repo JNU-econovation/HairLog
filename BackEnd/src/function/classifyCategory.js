@@ -27,15 +27,19 @@ const designer = async function(req, res) {
 
     let user = await User.findOne({wherer : {id : req.user.id}});
     let dessignerList = await Designer.findAndCountAll({where : {UserId : req.user.id}})
-    let recordWithDesigner = await Promise.all(dessignerList.rows.map( 
-        rows => Record.findAll({where : {DesignerId : rows.id}})
-    ));
-    
-    let img = await Promise.all(dessignerList.rows.map(
-        rows=> Image.findOne({where : {RecordId : rows.id}, raw : true})
-    ));
-    let result = {user, record : recordWithDesigner, img}
-    return res.send(result)
+    if(dessignerList.count != 0) {
+        let recordWithDesigner = await Promise.all(dessignerList.rows.map( 
+            rows => Record.findAll({where : {DesignerId : rows.id}})
+        ));
+        
+        let img = await Promise.all(dessignerList.rows.map(
+            rows=> Image.findOne({where : {RecordId : rows.id}, raw : true})
+        ));
+        let result = {user, record : recordWithDesigner, img}
+        return res.send(result)
+    }
+    return res.send("등록된 디자이너가 없습니다!")
+
 
 }
 
@@ -43,11 +47,14 @@ const category = async function(req, res, category) {
 
     let user = await User.findOne({wherer : {id : req.user.id}});
     let recordObj = await Record.findAndCountAll({raw : true, order : [['createdAt', 'DESC']], where : {[Op.and] : [{recordCategory : category}, {UserId : req.user.id}]}});
-    let recordCount = recordObj.count
-    let categoryRecord = await classify(category ,recordObj, recordCount)
-    let img = await imgObj(recordObj)
-    let result = {user, record : recordObj, categoryRecord, img}
-    return res.send(result)
+    if(recordObj.count != 0){
+        let categoryRecord = await classify(res, category ,recordObj)
+        let img = await imgObj(recordObj)
+        let result = {user, record : recordObj, categoryRecord, img}
+        return res.send(result)
+    }
+    return res.send(`${category} 기록이 없습니다!`)
+
 
 }
 
@@ -55,35 +62,40 @@ const categoryResult = async function(req, res, category) {
 
     let user = await User.findOne({wherer : {id : req.user.id}});
     let recordObj = await Record.findAndCountAll({raw : true, limit : 1, order : [['createdAt', 'DESC']], where : {[Op.and] : [{recordCategory : category}, {UserId : req.user.id}]}});
-    let categoryRecord = await classify(category ,recordObj, 1)
-    let img = await imgObj(recordObj, 1)
-    let result = {user, record : recordObj, categoryRecord, img}
-    return res.send(result)
+    if(recordObj.count != 0){
+        let categoryRecord = await classify(res, category ,recordObj)
+        let img = await imgObj(recordObj, 1)
+        let result = {user, record : recordObj, categoryRecord, img}
+        return res.send(result)
+    }
+    return res.send(`${category} 기록이 없습니다!`)
 
 }
 
 
 // inner use
-const classify = async function ( category ,recordObj, recordCount) {
+const classify = async function ( res, category ,recordObj) {
+
+    show.Hash(category)
 
     switch(category) {
         case "cut" :
             let categoryRecord = await Promise.all(recordObj.rows.map(
                 rows => Cut.findOne({where : {RecordId : rows.id}})
             ))
-            return categoryRecord
+            return categoryRecord = { count : recordObj.count, rows : categoryRecord }
         case "perm" :
             categoryRecord = await Promise.all(recordObj.rows.map(
                 rows => Perm.findOne({where : {RecordId : rows.id}})
             ))
-            return categoryRecord
+            return categoryRecord = { count : recordObj.count, rows : categoryRecord}
         case "dyeing" :
             categoryRecord = await Promise.all(recordObj.rows.map(
                 rows => Dyeing.findOne({where : {RecordId : rows.id}})
             ))
-            return categoryRecord
+            return categoryRecord = { count : recordObj.count, rows : categoryRecord}
         default :
-            throw new Error('올바른 목록을 선택해 주세요!');
+            return res.send('올바른 목록을 선택해 주세요!');
 
     }
 
@@ -97,7 +109,7 @@ const imgObj = async function(record, recordCount) {
     if(recordCount == 1){
         let img = await Image.findOne({where : {RecordId : record.rows[0].id}, raw : true})
     }
-    return img
+    return img = { count : record.count, rows : img}
     
 }
    

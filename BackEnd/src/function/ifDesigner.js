@@ -11,16 +11,14 @@ const isDesigner = async function (req, category, userInstance) {
     let {recordDate, recordCost, recordTime, designerName, recordEtc, recordGrade} = req.body;
     let designer = await Designer.findOne({where : { designerName }})
     let record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade, DesignerId : designer.id })
-    let image = await record.createImage({ img1 : req.file.filename})
-    let result = {record, image}
-    return result
+    let result = record
+    return result 
 }
 
 const isNotDesigner = async function  (req, category, userInstance) {
     let {recordDate, recordCost, recordTime, recordEtc, recordGrade} = req.body;
     let record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade })
-    let image = await record.createImage({ img1 : req.file.filename})
-    let result = {record, image}
+    let result = record
     return result
 }
 
