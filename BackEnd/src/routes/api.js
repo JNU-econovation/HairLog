@@ -21,7 +21,7 @@ router.post('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, designer
 
 // router.post('/record/:category', passport.isLoggedIn, multer.single("Image"), recordCtrl.Post.record)
 router.post('/record/:category', passport.isLoggedIn, multer.array("Image", 3), recordCtrl.Post.record)
-router.post('/swagger/record/:category', sign.checkApiKey, passport.isLoggedIn, multer.single("Image"), recordCtrl.Post.record)
+router.post('/swagger/record/:category', sign.checkApiKey, passport.isLoggedIn, multer.array("Image", 3), recordCtrl.Post.record)
 
 //GET
 router.get('/main', passport.isLoggedIn, recordCtrl.Get.main)
