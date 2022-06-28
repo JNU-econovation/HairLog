@@ -17,7 +17,8 @@ const Post = {
     record  : async function(req, res) {
         let category = req.params.category
         let user = await User.findOne({where : {id : req.user.id}});
-        let {record, image} = await Post.recordWithDesigner(req, category, user)
+        let record = await Post.recordWithDesigner(req, category, user)
+        let image = await record.createImage({ img1 : req.file.filename})
         let result = {record, image}
         result[`${category}`] = await Post.recordCategory(req, category, record)
         res.send(result)
@@ -62,6 +63,7 @@ const Get = {
 
     instanceResult : async function(req, res) {
         let category = req.params.category
+        show.With('1', category)
         return classifyCategory.categoryResult(req, res, category)
     },
 

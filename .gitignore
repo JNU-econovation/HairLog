@@ -2,5 +2,4 @@
 **/.env
 **/uploads
 **/DB/sequelize/config/config.json
-**/combined.log
-**/error.log
+**/**.log

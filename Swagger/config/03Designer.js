@@ -8,7 +8,6 @@
 *      responses:
 *        "200" :
 *          description: 디자이너 페이지 로드 성공
-*          
 *    post:
 *      tags: [Designer]
 *      summary: 디자이너 등록 요청
