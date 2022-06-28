@@ -27,12 +27,14 @@ const indexRouter = require('./BackEnd/src/routes/index'),
 // add config 
 const dotenv = require('dotenv'),
     sequelize = require('./DB/sequelize/models').sequelize,
-    passportConfig = require('./BackEnd/passport');
+    passportConfig = require('./BackEnd/passport'),
+    cloudinary = require('./BackEnd/src/function/cloudinary/config');
 
 // config
 dotenv.config();
 sequelize.sync();
 passportConfig();
+cloudinary.config();
 
 
 // express start

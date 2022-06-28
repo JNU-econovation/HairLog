@@ -7,8 +7,7 @@ const passport = require('../middlewares/passport'),
     multer = require('../middlewares/multer/multer'),
     recordCtrl = require('../middlewares/record'),
     designerCtrl = require('../middlewares/designer'),
-    privacyCrtl = require('../middlewares/privacy'),
-    test = require('../middlewares/test.js');
+    privacyCrtl = require('../middlewares/privacy');
 
 //POST   
 router.post('/join', passport.join);
