@@ -5,6 +5,7 @@ const show = require("@jongjun/console");
 const passport = require('../middlewares/passport'),
     sign = require('../function/CheckAPIKey'),
     multer = require('../middlewares/multer/multer'),
+    sharp = require('../middlewares/sharp')
     recordCtrl = require('../middlewares/record'),
     designerCtrl = require('../middlewares/designer'),
     privacyCrtl = require('../middlewares/privacy');
@@ -21,6 +22,7 @@ router.post('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, designer
 
 // router.post('/record/:category', passport.isLoggedIn, multer.single("Image"), recordCtrl.Post.record)
 router.post('/record/:category', passport.isLoggedIn, multer.array("Image", 3), recordCtrl.Post.record)
+// router.post('/record/:category', passport.isLoggedIn, multer.array("Image", 3), sharp.sharping, recordCtrl.Post.record)
 router.post('/swagger/record/:category', sign.checkApiKey, passport.isLoggedIn, multer.single("Image"), recordCtrl.Post.record)
 
 //GET

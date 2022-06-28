@@ -21,9 +21,9 @@ const Post = {
         let category = req.params.category
         let user = await User.findOne({where : {id : req.user.id}});
         let record = await Post.recordWithDesigner(req, category, user)
-        let urls = await imageFunction.urls(req)
-        let imagesQuery = await imageFunction.images(record, urls)
-        let image = await record.createImage(imagesQuery)
+        let urls = await imageFunction.urls(req.files)
+        let query = await imageFunction.images(urls)
+        let image = await record.createImage(query)
         let result = {record, image}
         result[`${category}`] = await Post.recordCategory(req, category, record)
         res.send(result)
