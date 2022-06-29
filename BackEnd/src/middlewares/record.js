@@ -10,7 +10,6 @@ const { Op } = require("sequelize");
 
 const ifDesigner = require('../function/ifDesigner'),
       classifyCategory = require('../function/classifyCategory'),
-      sharp = require('../function/sharp')
       imageFunction = require('../function/image');
 
 const show = require('@jongjun/console')
