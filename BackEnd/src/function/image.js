@@ -12,14 +12,14 @@ const urls = async function (files) {
     return url
 }
 
-const images = async function(urls) {
-    let images = {}
+const query = async function(urls) {
+    let imgQeury = {}
     let i = 0;
     for(let url of urls) {
-        images[`img${i+1}`] = url
+        imgQeury[`img${i+1}`] = url
         i++
     }
-    return images
+    return imgQeury
 }
 
-module.exports= {urls, images}
+module.exports= {urls, query}
