@@ -42,15 +42,15 @@ const Post = {
         {
             case "cut" : 
                 let { cutName, cutLength } = req.body
-                let cut = await Cut.create({ cutName , cutLength , RecordId : record.id})
+                let cut = await Cut.create({ cutName , cutLength , RecordId : record.id })
                 return cut;
             case "perm" : 
                 let { permName, permTime, permHurt } = req.body 
-                let perm = await Perm.create({ permName, permTime, permHurt, RecordId : record.id})
+                let perm = await Perm.create({ permName, permTime, permHurt, RecordId : record.id })
                 return perm
             case "dyeing" : 
                 let { dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt } = req.body 
-                let dyeing = await Dyeing.create({ dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt, RecordId : record.id})
+                let dyeing = await Dyeing.create({ dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt, RecordId : record.id })
                 return dyeing
             default :
             throw new Error('올바른 목록을 선택해 주세요!');
