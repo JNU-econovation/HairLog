@@ -5,6 +5,7 @@ const show = require("@jongjun/console");
 const passport = require('../middlewares/passport'),
     sign = require('../function/CheckAPIKey'),
     multer = require('../middlewares/multer/multer'),
+    sharp = require('../middlewares/sharp'),
     recordCtrl = require('../middlewares/record'),
     designerCtrl = require('../middlewares/designer'),
     privacyCrtl = require('../middlewares/privacy');
@@ -19,8 +20,8 @@ router.post('/swagger/authenticate', sign.checkApiKey, passport.authenticate);
 router.post('/designer',passport.isLoggedIn, designerCtrl.Post.designer)  
 router.post('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Post.designer)
 
-router.post('/record/:category', passport.isLoggedIn, multer.single("Image"), recordCtrl.Post.record)
-router.post('/swagger/record/:category', sign.checkApiKey, passport.isLoggedIn, multer.single("Image"), recordCtrl.Post.record)
+router.post('/record/:category', passport.isLoggedIn, multer.array("Image", 3), sharp.sharping, recordCtrl.Post.record)
+router.post('/swagger/record/:category', sign.checkApiKey, passport.isLoggedIn, multer.array("Image", 3), sharp.sharping, recordCtrl.Post.record)
 
 //GET
 router.get('/main', passport.isLoggedIn, recordCtrl.Get.main)
@@ -45,5 +46,8 @@ router.get('/swagger/privacy/user', sign.checkApiKey, passport.isLoggedIn, priva
 router.post('/joinDelete', passport.deleteAPITest);
 router.post('/swagger/joinDelete', sign.checkApiKey, passport.deleteAPITest);
 
+
+
+router.post('/test/:category', passport.isLoggedIn, multer.array("Image", 3), sharp.sharping, recordCtrl.Post.record)
 
 module.exports = router;

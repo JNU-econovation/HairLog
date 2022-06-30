@@ -10,18 +10,19 @@ const { Op } = require("sequelize");
 
 const ifDesigner = require('../function/ifDesigner'),
       classifyCategory = require('../function/classifyCategory'),
-      cloudinary = require('../function/cloudinary/upload');
+      imageFunction = require('../function/image');
 
 const show = require('@jongjun/console')
 
 const Post = {
-    
+
     record  : async function(req, res) {
         let category = req.params.category
         let user = await User.findOne({where : {id : req.user.id}});
         let record = await Post.recordWithDesigner(req, category, user)
-        let imageUrl = await cloudinary.upload(req)
-        let image = await record.createImage({ img1 : imageUrl})
+        let urls = await imageFunction.urls(req.files)
+        let query = await imageFunction.query(urls)
+        let image = await record.createImage(query)
         let result = {record, image}
         result[`${category}`] = await Post.recordCategory(req, category, record)
         res.send(result)
@@ -41,15 +42,15 @@ const Post = {
         {
             case "cut" : 
                 let { cutName, cutLength } = req.body
-                let cut = await Cut.create({ cutName , cutLength , RecordId : record.id})
+                let cut = await Cut.create({ cutName , cutLength , RecordId : record.id })
                 return cut;
             case "perm" : 
                 let { permName, permTime, permHurt } = req.body 
-                let perm = await Perm.create({ permName, permTime, permHurt, RecordId : record.id})
+                let perm = await Perm.create({ permName, permTime, permHurt, RecordId : record.id })
                 return perm
             case "dyeing" : 
                 let { dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt } = req.body 
-                let dyeing = await Dyeing.create({ dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt, RecordId : record.id})
+                let dyeing = await Dyeing.create({ dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt, RecordId : record.id })
                 return dyeing
             default :
             throw new Error('올바른 목록을 선택해 주세요!');

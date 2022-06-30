@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const User = require('../../../DB/sequelize/models/User');
 
 
-join = async (req, res, next) => {
+const join = async (req, res, next) => {
     const { userEmail, userPassword, userName, userSex, userCycle, userType } = req.body;
     try {
       const exUser = await User.findOne({ where: { userEmail } });
