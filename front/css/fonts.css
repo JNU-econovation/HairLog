@@ -1,0 +1,59 @@
+@font-face {
+  src: url("../fonts/Sen-Regular.ttf");   
+  font-family: "Sen";               
+} 
+
+@font-face {
+  src: url("../fonts/Montserrat-Light.ttf");   
+  font-family: "Montserrat_Light";               
+} 
+
+@font-face {
+  src: url("../fonts/Montserrat-Medium.ttf");   
+  font-family: "Montserrat_Medium";               
+} 
+
+@font-face {
+  src: url("../fonts/Montserrat-Bold.ttf");   
+  font-family: "Montserrat_Bold";               
+} 
+
+@font-face {
+  src: url("../fonts/Montserrat-ExtraBold.ttf");   
+  font-family: "Montserrat_ExtraBold";               
+} 
+
+@font-face {
+  src: url("../fonts/Sunflower-Light.ttf");   
+  font-family: "Sunflower_Light";               
+} 
+
+@font-face {
+  src: url("../fonts/Sunflower-Medium.ttf");   
+  font-family: "Sunflower_Medium";               
+} 
+
+@font-face {
+  src: url("../fonts/Sunflower-Bold.ttf");   
+  font-family: "Sunflower_Bold";               
+} 
+
+@font-face {
+  src: url("../fonts/SeoulNamsanCondensed-Light.ttf");   
+  font-family: "SeoulNamsanCed_Light";               
+} 
+
+@font-face {
+  src: url("../fonts/SeoulNamsanCondensed-Medium.ttf");   
+  font-family: "SeoulNamsanCed_Medium";               
+} 
+
+@font-face {
+  src: url("../fonts/SeoulNamsanCondensed-Bold.ttf");   
+  font-family: "SeoulNamsanCed_Bold";               
+} 
+
+@font-face {
+  src: url("../fonts/SeoulNamsanCondensed-ExtraBold.ttf");   
+  font-family: "SeoulNamsanCed_ExtraBold";               
+} 
