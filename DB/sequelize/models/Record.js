@@ -57,6 +57,7 @@ module.exports = class Record extends Sequelize.Model {
     db.Record.belongsTo(db.User)
     db.Record.belongsTo(db.Designer)
     db.Record.hasOne(db.Image, {onDelete: 'CASCADE', hooks: true})
+    db.Record.hasOne(db.CloudImage, {onDelete: 'CASCADE', hooks: true})
     db.Record.hasOne(db.Cut, {onDelete: 'CASCADE', hooks: true})
     db.Record.hasOne(db.Perm, {onDelete: 'CASCADE', hooks: true})
     db.Record.hasOne(db.Dyeing, {onDelete: 'CASCADE', hooks: true})

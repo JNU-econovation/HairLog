@@ -2,6 +2,7 @@ const Sequelize = require('sequelize'),
       User = require('./User'),
       Record = require('./Record'),
       Image = require('./Image'),
+      CloudImage = require('./CloudImage'),
       Designer = require('./Designer'),
       Cut = require('./Cut'),
       Perm = require('./Perm'),
@@ -25,6 +26,7 @@ db.sequelize = sequelize;
 db.User = User;
 db.Record = Record;
 db.Image = Image;
+db.CloudImage = CloudImage;
 db.Designer = Designer;
 db.Cut = Cut;
 db.Perm = Perm;
@@ -37,6 +39,7 @@ db.Dyeing = Dyeing;
 User.init(sequelize);
 Record.init(sequelize);
 Image.init(sequelize);
+CloudImage.init(sequelize);
 Designer.init(sequelize);
 Cut.init(sequelize);
 Perm.init(sequelize);
@@ -48,6 +51,7 @@ Dyeing.init(sequelize);
 User.associate(db);
 Record.associate(db);
 Image.associate(db);
+CloudImage.associate(db);
 Designer.associate(db);
 Cut.associate(db);
 Perm.associate(db);
