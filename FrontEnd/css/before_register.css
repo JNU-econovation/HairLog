@@ -26,6 +26,7 @@
 }
 
 /* sign up */
+
 h1 {
   font-size: 90px;
   text-align: center;
@@ -34,6 +35,7 @@ h1 {
 }
 
 /* 입력 폼 */
+
 .signForm {
   font-size: 50px;
   width: 700px;
@@ -67,4 +69,71 @@ h1 {
   border: none;
   padding: 10px;
   padding-top: 11px;
+}
+
+/* select form */
+.selectForm {
+  width: 700px;
+  display: block;
+	margin-left: auto;
+	margin-right: auto;
+  margin-top: 400px;
+}
+
+.select {
+  width: 580px;
+  height: 100px;
+  border: none;
+  appearance: none;
+  font-size: 40px;
+  background: url('../imgs/select.PNG') no-repeat 95% 30%;
+  font-family: SeoulNamsanCed_Medium;
+  padding: .0em .5em;
+}
+
+.select option {
+  font-size: 15px;
+  padding-right: 100px;
+}
+
+.a {
+  margin-top: 100px;
+  margin-bottom: 0px;
+}
+
+.btn {
+  border: none;
+  width: 700px;
+  height: 120px;
+  margin-top: 80px;
+  font-size: 45px;
+  font-family: Montserrat_ExtraBold;
+  border-radius: 30px;
+  background-color: #57B85F;
+  color: white;
+  margin-bottom: 40%;
+
+}
+
+/* sign in 버튼 */
+
+.signIn {
+  width: 700px;
+  display: block;
+	margin-left: auto;
+	margin-right: auto;
+  margin-top: 450px;
+}
+
+/* 직접입력폼 */
+.select3 input{
+  margin-left: 100px;
+  border: 1px solid black;
+  margin-top: 30px;
+  font-size: 30px;
+  height: 50px;
+}
+
+.hidden {
+  visibility: hidden;
 }
