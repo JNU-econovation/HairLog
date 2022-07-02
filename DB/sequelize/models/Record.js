@@ -56,9 +56,9 @@ module.exports = class Record extends Sequelize.Model {
   static associate(db) {
     db.Record.belongsTo(db.User)
     db.Record.belongsTo(db.Designer)
-    db.Record.hasOne(db.Image)
-    db.Record.hasOne(db.Cut)
-    db.Record.hasOne(db.Perm)
-    db.Record.hasOne(db.Dyeing)
+    db.Record.hasOne(db.Image, {onDelete: 'CASCADE', hooks: true})
+    db.Record.hasOne(db.Cut, {onDelete: 'CASCADE', hooks: true})
+    db.Record.hasOne(db.Perm, {onDelete: 'CASCADE', hooks: true})
+    db.Record.hasOne(db.Dyeing, {onDelete: 'CASCADE', hooks: true})
   }
 };

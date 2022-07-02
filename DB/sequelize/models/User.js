@@ -70,7 +70,7 @@ module.exports = class User extends Sequelize.Model {
   }
   
   static associate(db) {
-    db.User.hasMany(db.Record);
-    db.User.hasMany(db.Designer);
+    db.User.hasMany(db.Record, {onDelete: 'CASCADE', hooks: true});
+    db.User.hasMany(db.Designer, {onDelete: 'CASCADE', hooks: true});
   }
 };
