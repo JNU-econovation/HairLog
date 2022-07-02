@@ -43,8 +43,8 @@ const Update = {
     
     designer : async function(req, res) {
         let {DesignerId, designerName, designerSalon, designerFav} = req.body;
-        await Designer.update({designerName, designerSalon, designerFav}, {where : {id : DesignerId}})
-        return res.send("upadate designer")
+        let upadateDesigner = await Designer.update({designerName, designerSalon, designerFav}, {where : {id : DesignerId}})
+        return res.send(upadateDesigner)
     }
 
 }
@@ -53,8 +53,8 @@ const Delete = {
 
     designer : async function(req, res) {
         let {DesignerId} = req.body
-        await Designer.destroy({where : {id : DesignerId}})
-        return res.send("designer delete")
+        let deleteDesigner = await Designer.destroy({where : {id : DesignerId}})
+        return res.send(deleteDesigner)
     },
 
 }
