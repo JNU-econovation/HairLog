@@ -64,10 +64,4 @@ const isNotLoggedIn = (req, res, next) => {
   }
 };
 
-const deleteAPITest = async (req, res, next) => {
-    await User.destroy({ where: { name:  "나나김"} });
-    res.send("delete")
-};
-
-
 module.exports = { join , authenticate, isLoggedIn, isNotLoggedIn, deleteAPITest}

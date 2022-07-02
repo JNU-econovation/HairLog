@@ -58,7 +58,4 @@ router.post('/designerUpdate', designerCtrl.Update.designer);
 router.post('/swagger/designerUpdate', sign.checkApiKey, designerCtrl.Update.designer);
 
 
-
-router.post('/test', passport.isLoggedIn, recordCtrl.Delete.record)
-
 module.exports = router;

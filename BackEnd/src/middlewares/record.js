@@ -108,8 +108,8 @@ const Delete = {
 
     record  : async function(req, res) {
         let {category, RecordId} = req.body
-        await Delete.recordDelete(category, RecordId)
-        res.send("record delete")
+        let deleteResult = await Delete.recordDelete(category, RecordId)
+        res.send(deleteResult)
     },
 
     // inner function
@@ -126,8 +126,9 @@ const Delete = {
         let imagesId = await CloudImage.findOne({attributes : ["img1", "img2", "img3"], where : {RecordId}, raw : true})
         let idInfo = Object.entries(imagesId)
         let ids = idInfo.map(ids => ids[1])
-        await Promise.all(ids.map(id => cloudinaryDelete.deleteId(id)))
-
+        if(ids[0] != null) {
+            await Promise.all(ids.map(id => cloudinaryDelete.deleteId(id)))
+        }
     },
 
     recordCategory : async function(category, RecordId) {
