@@ -44,18 +44,19 @@ router.get('/privacy/user', passport.isLoggedIn, privacyCrtl.Get.user)
 router.get('/swagger/privacy/user', sign.checkApiKey, passport.isLoggedIn, privacyCrtl.Get.user)
 
 // DELETE
-router.post('/recordDelete', recordCtrl.Delete.record);
-router.post('/swagger/recordDelete', sign.checkApiKey, recordCtrl.Delete.record);
+router.post('/recordDelete', passport.isLoggedIn, recordCtrl.Delete.record);
+router.post('/swagger/recordDelete', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Delete.record);
 
-router.post('/designerDelete', designerCtrl.Delete.designer);
-router.post('/swagger/designerDelete', sign.checkApiKey, designerCtrl.Delete.designer);
+router.post('/designerDelete', passport.isLoggedIn, designerCtrl.Delete.designer);
+router.post('/swagger/designerDelete', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Delete.designer);
 
 // UPDATE
-router.post('/recordUpdate/:category', multer.array("Image", 3), recordCtrl.Update.record);
-router.post('/swagger/recordUpdate/:category', sign.checkApiKey, multer.array("Image", 3), recordCtrl.Update.record);
+router.post('/recordUpdate/:category', passport.isLoggedIn, multer.array("Image", 3), recordCtrl.Update.record);
+router.post('/swagger/recordUpdate/:category', sign.checkApiKey, passport.isLoggedIn, multer.array("Image", 3), recordCtrl.Update.record);
 
-router.post('/designerUpdate', designerCtrl.Update.designer);
-router.post('/swagger/designerUpdate', sign.checkApiKey, designerCtrl.Update.designer);
+router.post('/designerUpdate', passport.isLoggedIn, designerCtrl.Update.designer);
+router.post('/swagger/designerUpdate', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Update.designer);
+
 
 
 module.exports = router;

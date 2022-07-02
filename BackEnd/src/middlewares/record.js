@@ -19,9 +19,13 @@ const show = require('@jongjun/console')
 const Post = {
 
     record  : async function(req, res) {
+
         let category = req.params.category
         let user = await User.findOne({where : {id : req.user.id}});
         let record = await Post.recordWithDesigner(req, category, user)
+        /* 수정 경우 작성
+        req.files가 아니라 req.body로 오면?
+        둘다 같이오면?*/
         let imgInformation = await imageFunction.urls(req.files)
         let {urls, public_id} = imgInformation
         let urlQuery = await imageFunction.query(urls)
