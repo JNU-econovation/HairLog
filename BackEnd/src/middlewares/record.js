@@ -28,6 +28,7 @@ const Post = {
         res.send(result)
     },
     
+    // inner function
     recordWithDesigner :  async function(req, category, userInstance) {
         let { designerName }= req.body;
         if(designerName){
@@ -91,4 +92,34 @@ const Update = {
     
 }
 
-module.exports = {Post, Get, Update};
+const Delete = {
+
+    record  : async function(req, res) {
+        let {RecordId, category} = req.body
+        await Record.destroy({where : {id : RecordId}})
+        await Image.destroy({where : {RecordId}})
+        await Delete.recordCategory(category, RecordId)
+        res.send("record delete")
+    },
+
+    // inner function
+    recordCategory : async function(category, RecordId) {
+        switch (category) 
+        {
+            case "cut" : 
+                let cut = await Cut.destroy({where :{RecordId}})
+                return cut;
+            case "perm" : 
+                let perm = await Perm.destroy({where : {RecordId}})
+                return perm
+            case "dyeing" : 
+                let dyeing = await Dyeing.destroy({RecordId})
+                return dyeing
+            default :
+            throw new Error('올바른 목록을 선택해 주세요!');
+        }
+    },
+
+}
+
+module.exports = {Post, Get, Update, Delete};

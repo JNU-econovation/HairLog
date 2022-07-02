@@ -43,4 +43,13 @@ const Update = {
 
 }
 
-module.exports = {Post, Get, Update};
+const Delete = {
+
+    designer : async function(req, res) {
+        let {DesignerId} = req.body
+        await Designer.destroy({where : {id : DesignerId}})
+        return res.send("designer delete")
+    },
+
+}
+module.exports = {Post, Get, Update, Delete};

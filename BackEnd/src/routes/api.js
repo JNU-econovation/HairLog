@@ -42,12 +42,15 @@ router.get('/swagger/result/:category', sign.checkApiKey, passport.isLoggedIn, r
 router.get('/privacy/user', passport.isLoggedIn, privacyCrtl.Get.user)
 router.get('/swagger/privacy/user', sign.checkApiKey, passport.isLoggedIn, privacyCrtl.Get.user)
 
+// Delete
+router.post('/recordDelete', recordCtrl.Delete.record);
+router.post('/swagger/recordDelete', sign.checkApiKey, recordCtrl.Delete.record);
 
-router.post('/joinDelete', passport.deleteAPITest);
-router.post('/swagger/joinDelete', sign.checkApiKey, passport.deleteAPITest);
+router.post('/designerDelete', designerCtrl.Delete.designer);
+router.post('/swagger/designerDelete', sign.checkApiKey, designerCtrl.Delete.designer);
 
 
 
-router.post('/test/:category', passport.isLoggedIn, multer.array("Image", 3), sharp.sharping, recordCtrl.Post.record)
+router.post('/test', passport.isLoggedIn, recordCtrl.Delete.record)
 
 module.exports = router;
