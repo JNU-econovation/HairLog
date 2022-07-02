@@ -8,8 +8,11 @@ const urls = async function (files) {
         i++
     }
     let images = Object.entries(temp)
-    let url = await Promise.all(images.map(result => cloudinary.upload(result[1])))
-    return url
+    let img = await Promise.all(images.map(result => cloudinary.upload(result[1])))
+    let urls = await Promise.all(img.map(res => res.secure_url))
+    let public_id = await Promise.all(img.map(res => res.public_id))
+    let imgInformation = {urls, public_id}
+    return imgInformation
 }
 
 const query = async function(urls) {
