@@ -14,7 +14,7 @@ const show = require('@jongjun/console')
 const latest = async function(req, res) {
 
     let user = await User.findOne({wherer : {id : req.user.id}});
-    let recordArray = await Record.findAndCountAll({raw : true,where : {UserId : user.id}, order : [['createdAt', 'DESC']]});
+    let recordArray = await Record.findAndCountAll({raw : true,where : {UserId : user.id}, order : [['recordDate', 'DESC']]});
     let recordObj = Object.assign({}, recordArray)
     let recordCount = recordArray.count
     let img = await imgObj(recordArray, recordCount)
@@ -46,7 +46,7 @@ const designer = async function(req, res) {
 const category = async function(req, res, category) {
 
     let user = await User.findOne({wherer : {id : req.user.id}});
-    let recordObj = await Record.findAndCountAll({raw : true, order : [['createdAt', 'DESC']], where : {[Op.and] : [{recordCategory : category}, {UserId : req.user.id}]}});
+    let recordObj = await Record.findAndCountAll({raw : true, order : [['recordDate', 'DESC']], where : {[Op.and] : [{recordCategory : category}, {UserId : req.user.id}]}});
     if(recordObj.count != 0){
         let categoryRecord = await classify(res, category ,recordObj)
         let img = await imgObj(recordObj)
@@ -61,7 +61,7 @@ const category = async function(req, res, category) {
 const categoryResult = async function(req, res, category) {
 
     let user = await User.findOne({wherer : {id : req.user.id}});
-    let recordObj = await Record.findAndCountAll({raw : true, limit : 1, order : [['createdAt', 'DESC']], where : {[Op.and] : [{recordCategory : category}, {UserId : req.user.id}]}});
+    let recordObj = await Record.findAndCountAll({raw : true, limit : 1, order : [['recordDate', 'DESC']], where : {[Op.and] : [{recordCategory : category}, {UserId : req.user.id}]}});
     if(recordObj.count != 0){
         let categoryRecord = await classify(res, category ,recordObj)
         let img = await imgObj(recordObj, 1)

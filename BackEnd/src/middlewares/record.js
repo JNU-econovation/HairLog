@@ -2,6 +2,7 @@ const User = require('../../../DB/sequelize/models/User'),
       Designer = require('../../../DB/sequelize/models/Designer'),
       Record = require('../../../DB/sequelize/models/Record'),
       Image = require('../../../DB/sequelize/models/Image'),
+      CloudImage = require('../../../DB/sequelize/models/CloudImage'),
       Cut = require('../../../DB/sequelize/models/Cut'),
       Perm = require('../../../DB/sequelize/models/Perm'),
       Dyeing = require('../../../DB/sequelize/models/Dyeing');
@@ -10,6 +11,7 @@ const { Op } = require("sequelize");
 
 const ifDesigner = require('../function/ifDesigner'),
       classifyCategory = require('../function/classifyCategory'),
+      cloudinaryDelete = require('../function/cloudinary/delete'),
       imageFunction = require('../function/image');
 
 const show = require('@jongjun/console')
@@ -20,14 +22,18 @@ const Post = {
         let category = req.params.category
         let user = await User.findOne({where : {id : req.user.id}});
         let record = await Post.recordWithDesigner(req, category, user)
-        let urls = await imageFunction.urls(req.files)
-        let query = await imageFunction.query(urls)
-        let image = await record.createImage(query)
+        let imgInformation = await imageFunction.urls(req.files)
+        let {urls, public_id} = imgInformation
+        let urlQuery = await imageFunction.query(urls)
+        let idQuery = await imageFunction.query(public_id)
+        let image = await record.createImage(urlQuery)
+        await record.createCloudImage(idQuery)
         let result = {record, image}
         result[`${category}`] = await Post.recordCategory(req, category, record)
         res.send(result)
     },
     
+    // inner function
     recordWithDesigner :  async function(req, category, userInstance) {
         let { designerName }= req.body;
         if(designerName){
@@ -88,7 +94,61 @@ const Get = {
 
 
 const Update = {
-    
+
+    record : async function(req, res) {
+        let {RecordId} = req.body
+        let category = req.params.category
+        await Delete.recordDelete(category, RecordId)
+        await Post.record(req, res)
+    }
+
 }
 
-module.exports = {Post, Get, Update};
+const Delete = {
+
+    record  : async function(req, res) {
+        let {category, RecordId} = req.body
+        let deleteResult = await Delete.recordDelete(category, RecordId)
+        res.send(deleteResult)
+    },
+
+    // inner function
+    recordDelete : async function(category, RecordId){
+        await Record.destroy({where : {id : RecordId}})
+        await Delete.clouddDelete(RecordId);
+        await CloudImage.destroy({where : {RecordId}})
+        await Image.destroy({where : {RecordId}})
+        await Delete.recordCategory(category, RecordId)
+    },
+
+    clouddDelete : async function(RecordId) {
+
+        let imagesId = await CloudImage.findOne({attributes : ["img1", "img2", "img3"], where : {RecordId}, raw : true})
+        let idInfo = Object.entries(imagesId)
+        let ids = idInfo.map(ids => ids[1])
+        if(ids[0] != null) {
+            await Promise.all(ids.map(id => cloudinaryDelete.deleteId(id)))
+        }
+    },
+
+    recordCategory : async function(category, RecordId) {
+
+        switch (category) 
+        {
+            case "cut" : 
+                let cut = await Cut.destroy({where :{RecordId}})
+                return cut;
+            case "perm" : 
+                let perm = await Perm.destroy({where : {RecordId}})
+                return perm
+            case "dyeing" : 
+                let dyeing = await Dyeing.destroy({RecordId})
+                return dyeing
+            default :
+            throw new Error('올바른 목록을 선택해 주세요!');
+        }
+    },
+
+}
+
+module.exports = {Post, Get, Update, Delete};
