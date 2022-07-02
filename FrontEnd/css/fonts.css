@@ -57,3 +57,8 @@
   src: url("../fonts/SeoulNamsanCondensed-ExtraBold.ttf");   
   font-family: "SeoulNamsanCed_ExtraBold";               
 } 
+
+@font-face {
+  src: url("../fonts/NotoSansKR-Medium.otf");   
+  font-family: "NotoSansKR_Medium";               
+} 
