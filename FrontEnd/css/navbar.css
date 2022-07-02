@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   top: 0;
-  bottom: 20rem;
+  bottom: 22rem;
 }
 
 .navbar {
@@ -14,9 +14,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 20rem;
+  height: 22rem;
 }
 
+/* navbar 요소 정렬 */
 .one {
   width: 150px;
   height: 150px;
@@ -28,33 +29,39 @@
 .two {
   width: 200px;
   height: 200px;
-  background-color: crimson;
+  /* background-color: crimson; */
   float: left;
-  margin-top: 50px;
+  margin-top: 100px;
   margin-left: 100px;
 }
 
 .three {
   width: 200px;
   height: 200px;
-  background-color: rgb(67, 255, 236);
+  /* background-color: rgb(67, 255, 236); */
   margin-left: 678px;
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 .parent {
   position: relative;
 }
 
-.one, .two, .three {
+.one, .two, .three, .four {
   position: absolute;
 }
 
-
-
-/* .wrap {
-  float: left;
+.two, .three {
   text-align: center;
+}
+
+.four {
+  width: 978px;
+  height: 350px;
+  border: 1px solid red;
+  margin-top: 70px;
+  border-radius: 50px;
+  border-bottom: none;
 }
 
 img {
@@ -63,12 +70,8 @@ img {
   margin-bottom: 0px;
 }
 
-.designer{
-  margin-left: 100px;
-  margin-right: 450px;
-}
-
-.child1 p {
+.navbar p {
   margin-top: 0px;
   font-size: 30px;
-} */
+}
+
