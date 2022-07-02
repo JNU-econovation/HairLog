@@ -30,7 +30,7 @@ const Get = {
     },
 
     favDesignerList : async function(req, res) { 
-        let fav = await Designer.findAndCountAll({where :{[Op.and ] : [{UserId : req.user.id}, {designerFav : '1'}]},  order : [['updatedAt', 'DESC']],});
+        let fav = await Designer.findAndCountAll({where :{[Op.and] : [{UserId : req.user.id}, {designerFav : '1'}]}});
         const result = fav.rows.map(row => row);
         res.send(result)
     },
@@ -40,6 +40,12 @@ const Get = {
 
 
 const Update = {
+    
+    designer : async function(req, res) {
+        let {DesignerId, designerName, designerSalon, designerFav} = req.body;
+        await Designer.update({designerName, designerSalon, designerFav}, {where : {id : DesignerId}})
+        return res.send("upadate designer")
+    }
 
 }
 

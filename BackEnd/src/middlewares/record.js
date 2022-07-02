@@ -89,20 +89,32 @@ const Get = {
 
 
 const Update = {
-    
+
+    record : async function(req, res) {
+        console.log(req.body)
+        let {RecordId} = req.body
+        let category = req.params.category
+        await Delete.recordDelete(category, RecordId)
+        await Post.record(req, res)
+    }
+
 }
 
 const Delete = {
 
     record  : async function(req, res) {
-        let {RecordId, category} = req.body
-        await Record.destroy({where : {id : RecordId}})
-        await Image.destroy({where : {RecordId}})
-        await Delete.recordCategory(category, RecordId)
+        let {category, RecordId} = req.body
+        await Delete.recordDelete(category, RecordId)
         res.send("record delete")
     },
 
     // inner function
+    recordDelete : async function(category, RecordId){
+        await Record.destroy({where : {id : RecordId}})
+        await Image.destroy({where : {RecordId}})
+        await Delete.recordCategory(category, RecordId)
+    },
+
     recordCategory : async function(category, RecordId) {
         switch (category) 
         {

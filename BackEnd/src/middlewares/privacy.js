@@ -29,7 +29,7 @@ const Get = {
 
 
 const Update = {
-    
+    // 개인정보 수정 페이지 완성되면 작성
 }
 
 module.exports = {Post, Get, Update};

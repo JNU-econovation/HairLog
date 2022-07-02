@@ -9,6 +9,7 @@ const passport = require('../middlewares/passport'),
     recordCtrl = require('../middlewares/record'),
     designerCtrl = require('../middlewares/designer'),
     privacyCrtl = require('../middlewares/privacy');
+const { designer } = require('../function/classifyCategory');
 
 //POST   
 router.post('/join', passport.join);
@@ -42,12 +43,19 @@ router.get('/swagger/result/:category', sign.checkApiKey, passport.isLoggedIn, r
 router.get('/privacy/user', passport.isLoggedIn, privacyCrtl.Get.user)
 router.get('/swagger/privacy/user', sign.checkApiKey, passport.isLoggedIn, privacyCrtl.Get.user)
 
-// Delete
+// DELETE
 router.post('/recordDelete', recordCtrl.Delete.record);
 router.post('/swagger/recordDelete', sign.checkApiKey, recordCtrl.Delete.record);
 
 router.post('/designerDelete', designerCtrl.Delete.designer);
 router.post('/swagger/designerDelete', sign.checkApiKey, designerCtrl.Delete.designer);
+
+// UPDATE
+router.post('/recordUpdate/:category', multer.array("Image", 3), recordCtrl.Update.record);
+router.post('/swagger/recordUpdate/:category', sign.checkApiKey, multer.array("Image", 3), recordCtrl.Update.record);
+
+router.post('/designerUpdate', designerCtrl.Update.designer);
+router.post('/swagger/designerUpdate', sign.checkApiKey, designerCtrl.Update.designer);
 
 
 
