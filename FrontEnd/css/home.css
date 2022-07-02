@@ -1,0 +1,74 @@
+/* 본문, navbar 분리 */
+
+.content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 20rem;
+}
+
+.navbar {
+  position: fixed;
+  border: 1px solid black;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20rem;
+}
+
+.one {
+  width: 150px;
+  height: 150px;
+  background-color: aquamarine;
+  margin-left: 414px;
+
+}
+
+.two {
+  width: 200px;
+  height: 200px;
+  background-color: crimson;
+  float: left;
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+.three {
+  width: 200px;
+  height: 200px;
+  background-color: rgb(67, 255, 236);
+  margin-left: 678px;
+  margin-top: 50px;
+}
+
+.parent {
+  position: relative;
+}
+
+.one, .two, .three {
+  position: absolute;
+}
+
+
+
+/* .wrap {
+  float: left;
+  text-align: center;
+}
+
+img {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 0px;
+}
+
+.designer{
+  margin-left: 100px;
+  margin-right: 450px;
+}
+
+.child1 p {
+  margin-top: 0px;
+  font-size: 30px;
+} */
