@@ -1,3 +1,4 @@
+/* 캐릭터 */
 .ch {
   display: block;
 	margin-left: auto;
@@ -7,6 +8,7 @@
   height: 700px
 }
 
+/* login */
 h1 {
   font-size: 80px;
   text-align: center;
@@ -15,6 +17,7 @@ h1 {
   margin-bottom: 60px;
 }
 
+/* 로그인폼 */
 .loginForm {
   font-size: 50px;
   width: 700px;
@@ -71,6 +74,7 @@ button:hover {
   background-color: #57B85F;
 }
 
+/* 회원가입 링크 */
 p {
   float: left;
   font-size: 30px;
