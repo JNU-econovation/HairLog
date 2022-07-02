@@ -64,4 +64,4 @@ const isNotLoggedIn = (req, res, next) => {
   }
 };
 
-module.exports = { join , authenticate, isLoggedIn, isNotLoggedIn, deleteAPITest}
+module.exports = { join , authenticate, isLoggedIn, isNotLoggedIn}
