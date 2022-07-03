@@ -26,9 +26,9 @@
       <div class="designer">
         <p>디자이너</p>
         <ul>
-          <li class="A">세글자</li>
-          <li class="B">네에글자</li>
-          <li class="C">다서엇글자</li>
+          <li class="A"></li>
+          <li class="B"></li>
+          <li class="C"></li>
           <li class="addDesigner" onclick="showPopup(false)">+</li>
         </ul>
       </div>
@@ -48,7 +48,71 @@
           <li class="dying">염색</li>
         </ul>
       </div>
+
+      <div class="clear"></div>
+
+      <!-- 컷 세부양식 입력폼 -->
+      <div class="cutForm hidden">
+        <p>컷 종류</p>
+        <input type="text" placeholder="투블럭" required><br>
+
+        <div class="clear"></div>
+
+        <p>컷 길이</p>
+        <input type="text" placeholder="옆머리 3mm, 앞머리 눈썹 위" required><br>
+
+      </div>
       
+      <!-- 펌 세부양식 입력폼 -->
+      <div class="permForm hidden">
+        <p>펌 이름</p>
+        <input class="ch1" type="text" placeholder="c컬펌" required><br>
+
+        <div class="clear"></div>
+
+        <p>소요시간</p>
+        <input class="ch2" type="text" placeholder="3시간" required><br>
+
+        <p>시술 후 상함 정도</p>
+        
+        <div class="clear"></div>
+
+        <ul>
+          <li class="permLV3">상</li>
+          <li class="permLV2">중</li>
+          <li class="permLV1">하</li>
+        </ul>
+
+      </div>
+
+      <!-- 염색 세부양식 입력폼 -->
+      <div class="dyingForm hidden">
+        <p>시술 색</p>
+        <input class="ch1" type="text" placeholder="애쉬그레이" required><br>
+
+        <div class="clear"></div>
+
+        <p>탈색여부</p>
+        <input class="ch2" type="text" placeholder="2번" required><br>
+
+        <div class="clear"></div>
+
+        <p>소요시간</p>
+        <input class="ch3" type="text" placeholder="3시간" required><br>
+
+        <p>시술 후 상함 정도</p>
+        
+        <div class="clear"></div>
+
+        <ul>
+          <li class="dyingLV3">상</li>
+          <li class="dyingLV2">중</li>
+          <li class="dyingLV1">하</li>
+        </ul>
+
+      </div>
+
+
 
     </div>
 
@@ -104,6 +168,7 @@
       </div>
     </div>
 
-    <script src="../js/popUp.js"></script>
+    <script src="../js/addDesigner.js"></script>
+    <script src="../js/SelectHairKind.js"></script>
   </body>
 </html>

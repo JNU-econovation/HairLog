@@ -2,6 +2,9 @@
   clear: both;
 }
 
+.hidden {
+  visibility: hidden;
+}
 
 /* 로고, 버튼 */
 
@@ -55,6 +58,7 @@ h1 {
 
 .A, .B, .C {
   width: 170px;
+  height: 35px;
   border: 1px solid #9C9C9C;
   float: left;
   font-size: 40px;
@@ -92,12 +96,12 @@ h1 {
 
 
 /* 시술 종류 */
-.kind ul {
+.kind ul, .permForm ul, .dyingForm ul {
   list-style:none;
   margin-left: 50px;
 }
 
-.cut, .perm, .dying {
+.cut, .perm, .dying, .permLV1, .permLV2, .permLV3, .dyingLV1, .dyingLV2, .dyingLV3 {
   width: 200px;
   border: 1px solid #9C9C9C;
   float: left;
@@ -108,11 +112,76 @@ h1 {
   padding: 20px 20px;
   margin-right: 35px;
   border-radius: 40px;
+  margin-bottom: 50px;
 }
 
+/* 필터 선택 전, 후 style */
+.selected {
+  color: #57B85F;
+  background-color: #EFFAF0;
+  border: 1px solid #57B85F;
+}
 
+.NotSelected {
+  color: #9C9C9C;
+  border: 1px solid #9C9C9C;
+  background-color: none;
+}
 
+/* 컷, 펌 세부사항 폼 */
+.cutForm, .permForm, .dyingForm {
+  position: absolute;
+}
+.cutForm p, .permForm p, .dyingForm p {
+  font-size: 45px;
+  font-family: SeoulNamsanCed_Bold;
+  margin-left: 90px;
+  margin-top: 25px;
 
+  margin-bottom: 0px;
+  float: left;
+}
 
+.cutForm input, .permForm input, .dyingForm input {
+  font-size: 30px;
+  margin-top: 15px;
+  margin-left: 50px;
+  width: 600px;
 
+  color: #9C9C9C;
+  font-size: 40px;
+  font-family: SeoulNamsanCed_Medium;
+  border: 1px solid #9C9C9C;
+  padding: 15px;
+  border-radius: 30px;
+}
 
+/* 펌 세부사항 - 상한 정도 */
+
+.permForm .ch1 {
+  margin-left: 75px;
+  width: 575px;
+}
+
+.permForm .ch2 {
+  width: 575px;
+  margin-bottom: 30px;
+}
+
+.permLV1, .permLV2, .permLV3, .dyingLV3, .dyingLV2, .dyingLV1 {
+  margin-top: 20px;
+}
+
+/* 염색 세부사항 */
+.dyingForm .ch1 {
+  margin-left: 73px;
+  width: 575px;
+}
+
+.dyingForm .ch2, .dyingForm .ch3 {
+  width: 575px;
+}
+
+.dyingForm .ch3 {
+  margin-bottom: 30px;
+}
