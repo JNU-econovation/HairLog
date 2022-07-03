@@ -1,0 +1,79 @@
+.clear  {
+  clear: both;
+}
+
+
+/* 로고, 버튼 */
+
+h1 {
+  font-size: 70px;
+  font-family: Sunflower_Bold;
+  margin-top: 150px;
+  margin-left: 90px;
+  float: left;
+}
+
+.front {
+  border: none;
+  background-color: #57B85F;
+  border-radius: 50%;
+  color: white;
+  margin-top: 170px;
+  margin-left: 480px;
+  font-size: 40px;
+}
+
+
+
+/* 시술날짜  */
+
+.date p, .designer p {
+  font-size: 45px;
+  font-family: SeoulNamsanCed_Bold;
+  margin-left: 90px;
+}
+
+.date input {
+  width: 700px;
+  font-size: 40px;
+  margin-left: 90px;
+  border: 1px solid #9C9C9C;
+  color: #9C9C9C;
+  padding: 20px;
+  border-radius: 30px;
+}
+
+/* 디자이너 */
+
+.designer p {
+  margin-top: 100px;
+}
+
+.designer ul {
+  list-style:none;
+  margin-left: 50px;
+}
+
+.A, .B, .C {
+  width: 170px;
+  border: 1px solid #9C9C9C;
+  float: left;
+  font-size: 40px;
+  color: #9C9C9C;
+  font-family: SeoulNamsanCed_Medium;
+  text-align: center;
+  padding: 20px 20px;
+  margin-right: 30px;
+  border-radius: 20px;
+}
+
+.addDesigner {
+  width: 30px;
+  border: 1px solid #9C9C9C;
+  color: white;
+  background-color: #CACACA;
+  font-size: 50px;
+  float: left;
+  border-radius: 50%;
+  padding: 3.6px 20px 10px 18px;
+}

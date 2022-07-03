@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <Title>record_1</Title>
+    <link href="../css/fonts.css" rel="stylesheet" />
+    <link href="../css/navbar.css" rel="stylesheet"/>
+    <link href="../css/recording.css" rel="stylesheet"/>
+    <link href="../css/popUp.css" rel="stylesheet"/>
+  </head>
+
+  <body>
+    <div class="content">   
+      <div class="up">
+        <h1>Hair Log</h1>
+        <button class="front" onclick="location.href='register_2.html'">➡</button>
+      </div>
+
+      <div class="clear"></div>
+
+      <div class="date">
+        <p>시술 날짜</p>
+        <input type="date">
+      </div>
+
+      <div class="designer">
+        <p>디자이너</p>
+        <ul>
+          <li class="A">세글자</li>
+          <li class="B">네에글자</li>
+          <li class="C">다서엇글자</li>
+          <li class="addDesigner" onclick="showPopup(false)">+</li>
+        </ul>
+      </div>
+
+
+      
+
+    </div>
+
+
+
+    <div class="navbar">    
+      <div class="parent">
+
+        <div class="zero"></div>
+        <div class="ZERO"></div>
+
+        <div class="one" onclick="location.href='home.html'">
+          <img src="../imgs/home.png">
+        </div>
+        
+        <div class="two">
+          <img src="../imgs/designer.png">
+          <p>디자이너 목록</p>
+        </div>
+
+        <div class="three">
+          <img src="../imgs/mypage.png">
+          <p>마이페이지</p> 
+        </div>
+
+        <div class="four">
+
+        </div>  
+      </div>
+    </div>
+
+
+    <!-- 띄워질 팝업창 -->
+    <div id="popup" class="hide">
+      <div class="popContent">
+        <button class="back" onclick="closePopup()">⬅</button>
+        <button class="complete" onclick="closePopup()">완료</button>
+
+        <div class="clear"></div>
+
+        <div class="inputDesigner">
+          <p>디자이너 :</p>
+          <input type="text" placeholder="이름"><br>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="inputPlace">
+          <p>미용실 :</p>
+          <input type="text" placeholder="이름"><br>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="../js/popUp.js"></script>
+  </body>
+</html>

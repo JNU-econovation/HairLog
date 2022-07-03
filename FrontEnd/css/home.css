@@ -7,20 +7,19 @@ h1 {
 
 .filter p {
   float: left;
-  font-size: 30px;
+  font-size: 35px;
   margin-top: 20px;
-  margin-right: 40px;  
-  padding: 30px;
+  margin-right: 45px;  
+  padding: 20px 30px;
   border-radius: 50px;
-  font-family: NotoSansKR_Medium;
-
+  font-family: SeoulNamsanCed_Medium;
 }
 
 .filter {
-
   margin-left: 90px;
 }
 
+/* 필터 선택 전, 후 style */
 .selected {
   color: #57B85F;
   background-color: #EFFAF0;
