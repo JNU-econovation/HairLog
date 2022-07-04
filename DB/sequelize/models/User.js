@@ -49,14 +49,6 @@ module.exports = class User extends Sequelize.Model {
             isInt : true,
         }
       },
-      userType: {
-        type: DataTypes.STRING(40),
-        allowNull: true,
-        isIn : {
-          args : [[ '긴편', '짧은편' ]],
-          msg : "머리길이를 다시 지정해 주세요"
-      },
-      },
     }, {
       sequelize,
       timestamps: true,
@@ -70,7 +62,7 @@ module.exports = class User extends Sequelize.Model {
   }
   
   static associate(db) {
-    db.User.hasMany(db.Record);
-    db.User.hasMany(db.Designer);
+    db.User.hasMany(db.Record, {onDelete: 'CASCADE', hooks: true});
+    db.User.hasMany(db.Designer, {onDelete: 'CASCADE', hooks: true});
   }
 };

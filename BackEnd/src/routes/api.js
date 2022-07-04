@@ -9,6 +9,7 @@ const passport = require('../middlewares/passport'),
     recordCtrl = require('../middlewares/record'),
     designerCtrl = require('../middlewares/designer'),
     privacyCrtl = require('../middlewares/privacy');
+const { designer } = require('../function/classifyCategory');
 
 //POST   
 router.post('/join', passport.join);
@@ -42,12 +43,20 @@ router.get('/swagger/result/:category', sign.checkApiKey, passport.isLoggedIn, r
 router.get('/privacy/user', passport.isLoggedIn, privacyCrtl.Get.user)
 router.get('/swagger/privacy/user', sign.checkApiKey, passport.isLoggedIn, privacyCrtl.Get.user)
 
+// DELETE
+router.post('/recordDelete', passport.isLoggedIn, recordCtrl.Delete.record);
+router.post('/swagger/recordDelete', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Delete.record);
 
-router.post('/joinDelete', passport.deleteAPITest);
-router.post('/swagger/joinDelete', sign.checkApiKey, passport.deleteAPITest);
+router.post('/designerDelete', passport.isLoggedIn, designerCtrl.Delete.designer);
+router.post('/swagger/designerDelete', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Delete.designer);
+
+// UPDATE
+router.post('/recordUpdate/:category', passport.isLoggedIn, multer.array("Image", 3), recordCtrl.Update.record);
+router.post('/swagger/recordUpdate/:category', sign.checkApiKey, passport.isLoggedIn, multer.array("Image", 3), recordCtrl.Update.record);
+
+router.post('/designerUpdate', passport.isLoggedIn, designerCtrl.Update.designer);
+router.post('/swagger/designerUpdate', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Update.designer);
 
 
-
-router.post('/test/:category', passport.isLoggedIn, multer.array("Image", 3), sharp.sharping, recordCtrl.Post.record)
 
 module.exports = router;
