@@ -24,9 +24,6 @@
 *        userCycle:
 *          type: integer
 *          example: 5
-*        userType: 
-*          type: string
-*          example: 짧은 
 *    Record:
 *      required:
 *      - date

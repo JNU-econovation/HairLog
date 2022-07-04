@@ -49,14 +49,6 @@ module.exports = class User extends Sequelize.Model {
             isInt : true,
         }
       },
-      userType: {
-        type: DataTypes.STRING(40),
-        allowNull: true,
-        isIn : {
-          args : [[ '긴편', '짧은편' ]],
-          msg : "머리길이를 다시 지정해 주세요"
-      },
-      },
     }, {
       sequelize,
       timestamps: true,

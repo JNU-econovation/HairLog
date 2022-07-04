@@ -6,7 +6,7 @@ const User = require('../../../DB/sequelize/models/User');
 
 
 const join = async (req, res, next) => {
-    const { userEmail, userPassword, userName, userSex, userCycle, userType } = req.body;
+    const { userEmail, userPassword, userName, userSex, userCycle } = req.body;
     try {
       const exUser = await User.findOne({ where: { userEmail } });
       if (exUser) {
@@ -19,7 +19,6 @@ const join = async (req, res, next) => {
         userName,
         userSex,
         userCycle,
-        userType,
       });
       return res.send("Join Success");
     } catch (error) {
