@@ -3,6 +3,10 @@
   display: none;
 }
 
+.clear  {
+  clear: both;
+}
+
 /* 앞뒤 버튼 */
 
 .btns {
@@ -57,4 +61,31 @@
   width:650px; height:auto;
   margin:auto;
   top:0; bottom:0; left:0; right:0;
+}
+
+/* 만족도 폼 */
+.ch {
+  font-size: 50px;
+  font-family: SeoulNamsanCed_ExtraBold;
+  text-align: center;
+  margin-top: 200px;
+}
+
+.satisfactionForm input {
+  width: 600px;
+  display: block;
+	margin-left: auto;
+	margin-right: auto;
+  
+  accent-color: #57B85F;
+}
+
+.ch1 {
+  margin-left: 185px;
+}
+
+.satisfactionForm form p {
+  float: left;
+  font-size: 30px;
+  margin-right: 130px;
 }
