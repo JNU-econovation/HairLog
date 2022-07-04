@@ -34,7 +34,29 @@ const Get = {
 
 
 const Update = {
-    // 개인정보 수정 페이지 완성되면 작성
+
+    privacy : async function(req, res) {
+        const { userEmail, userPassword, userName, userSex, userCycle } = req.body;
+        try {
+          const exUser = await User.findOne({ where: { userEmail } });
+          if (exUser) {
+            return res.redirect('/join?error=exist');
+          }
+          const hash = await bcrypt.hash(userPassword, 12);
+          let updatePrivacy = await User.update({
+            userEmail,
+            userPassword : hash,
+            userName,
+            userSex,
+            userCycle,
+          });
+          return res.send(updatePrivacy);
+        } catch (error) {
+          console.error(error);
+          return next(error);
+        }
+    }
+    
 }
 
 module.exports = {Post, Get, Update};

@@ -19,6 +19,7 @@ const show = require('@jongjun/console')
 const Post = {
 
     record  : async function(req, res) {
+
         let category = req.params.category
         let user = await User.findOne({where : {id : req.user.id}});
         let record = await Post.recordWithDesigner(req, category, user)
