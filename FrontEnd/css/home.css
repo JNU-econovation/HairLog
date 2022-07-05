@@ -1,0 +1,33 @@
+h1 {
+  font-size: 70px;
+  font-family: Sunflower_Bold;
+  margin-top: 150px;
+  margin-left: 90px;
+}
+
+.filter p {
+  float: left;
+  font-size: 35px;
+  margin-top: 20px;
+  margin-right: 45px;  
+  padding: 20px 30px;
+  border-radius: 50px;
+  font-family: SeoulNamsanCed_Medium;
+}
+
+.filter {
+  margin-left: 90px;
+}
+
+/* 필터 선택 전, 후 style */
+.selected {
+  color: #57B85F;
+  background-color: #EFFAF0;
+  border: 1px solid #57B85F;
+}
+
+.NotSelected {
+  color: #9C9C9C;
+  border: 1px solid #9C9C9C;
+  background-color: none;
+}
