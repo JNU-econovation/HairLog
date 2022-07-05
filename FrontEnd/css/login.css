@@ -1,0 +1,97 @@
+/* 캐릭터 */
+.ch {
+  display: block;
+	margin-left: auto;
+	margin-right: auto;
+  padding-top: 30%;
+  width: 700px;
+  height: 700px
+}
+
+/* login */
+h1 {
+  font-size: 80px;
+  text-align: center;
+  font-family: Montserrat_ExtraBold;
+  margin-top: 80px;
+  margin-bottom: 60px;
+}
+
+/* 로그인폼 */
+.loginForm {
+  font-size: 50px;
+  width: 700px;
+  display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.wrap {
+  width: 700px;
+  height: 100px;
+  border: 3px solid black;
+  margin-bottom: 40px;
+  border-radius: 30px;
+}
+
+.logo {
+  float: left;
+  width: 60px;
+  height: 60px;
+  padding: 20px;
+
+}
+
+.clear  {
+  clear: both;
+}
+
+.input {
+  width: 550px;
+  height: 79px;
+  font-size: 40px;
+  font-family: Montserrat_Medium;
+  border: none;
+  padding: 10px;
+  padding-top: 11px;
+}
+
+.btn {
+  border: none;
+  width: 700px;
+  height: 120px;
+  margin-top: 80px;
+  font-size: 45px;
+  font-family: Montserrat_ExtraBold;
+  border-radius: 30px;
+  background-color: black;
+  color: white;
+  margin-top: 70px;
+
+}
+
+button:hover {
+  background-color: #57B85F;
+}
+
+/* 회원가입 링크 */
+p {
+  float: left;
+  font-size: 30px;
+  padding-left: 20px;
+  font-family: Montserrat_Medium;
+}
+
+.link {
+  width: 450px;
+  display: block;
+	margin-left: auto;
+	margin-right: auto;
+  margin-top: 60px;
+}
+
+a {
+  text-decoration: none;
+  color: #57B85F;
+  font-family: Montserrat_Bold;
+}

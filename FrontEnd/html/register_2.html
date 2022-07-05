@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <Title>register_2</Title>
+    <link href="../css/fonts.css" rel="stylesheet" />
+    <link href="../css/before_register.css" rel="stylesheet"/>
+  </head>
+
+  <body>
+    <div class="btns">
+      <button class="back" onclick="history.back()">⬅</button>
+    </div>
+
+    <div class="selectForm">
+      <div class="wrap">
+        <img class="logo" src="../imgs/heart.png">
+        <select id="selectSex" class="select" onChange="handleSex(this)">
+          <option class="sex" disabled selected>성별</option>
+          <option value="m">남</option>
+          <option value="f">여</option>
+          <option value="unknown">비공개</option>
+        </select>
+      </div>
+
+      <div class="wrap a">
+        <img class="logo" src="../imgs/calender.png">
+        <select id="selectTime" class="select" onchange="handleTimer(this)">
+          <option class="sex" disabled selected>시술주기</option>
+          <option value="1">3주</option>
+          <option value="2">4주</option>
+          <option class="direct" value="3">직접입력</option>
+        </select>
+      </div>
+
+      <div class="select3 hidden">
+        <input class="input" id="inputDirect" type="text" placeholder="ex) 5주, 13주"><br>
+      </div>
+
+    </div>
+
+    <div class="signIn">
+      <button class="btn">Sign in ></button>
+      <!-- <button class="btn" onclick="location.href='after_register.html'">Sign in ></button> -->
+
+    </div>
+
+    
+    <script src="../js/register2.js"></script>
+  </body>
+</html>
