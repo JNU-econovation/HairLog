@@ -1,11 +1,10 @@
-var express = require('express'),
+const express = require('express'),
     router = express.Router();
 
-const Swagger = require('../modules/Swagger.js');
-const sign = require('../function/CheckAPIKey');
+    
+const Swagger = require('../../../Swagger/Swagger.js');
 
-/* GET home page. */
-router.use('/' , Swagger.Ui.serve, Swagger.Ui.setup(Swagger.specs), sign.checkApiKey);
+router.use('/', Swagger.Ui.serve, Swagger.Ui.setup(Swagger.specs, { explorer : true}));
 
 
 module.exports = router;

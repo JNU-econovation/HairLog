@@ -12,7 +12,10 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3000", 
+        url : "http://localhost:3000"
+      },
+      {
+        url: "https://hairlogapi.herokuapp.com/"
       },
     ], 
     security : [
@@ -21,8 +24,7 @@ const options = {
       }
     ]
   },
-  // swagger 설정한 파일 위치
-  apis: [], 
+  apis: ["./Swagger/config/*.js"]
 }
 const specs = swaggereJsdoc(options)
 
