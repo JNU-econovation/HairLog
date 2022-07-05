@@ -5,10 +5,13 @@
 .hidden {
   visibility: hidden;
 }
+.record1{
+  position: absolute;
+}
 
 /* 로고, 버튼 */
 
-h1 {
+.up h1 {
   font-size: 70px;
   font-family: Sunflower_Bold;
   margin-top: 150px;
@@ -16,7 +19,7 @@ h1 {
   float: left;
 }
 
-.front {
+.up .goToRecord2 {
   border: none;
   background-color: #57B85F;
   border-radius: 50%;

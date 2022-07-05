@@ -1,10 +1,14 @@
+.record3 {
+  position: absolute;
+}
+
 /* 앞뒤 버튼 */
 
 .btns {
   margin-top: 175px;
 }
 
-.back {
+.backRecord2 {
   border: none;
   background-color: white;
   color: #D9D9D9;
@@ -12,15 +16,7 @@
   font-size: 40px;
 }
 
-.front {
-  border: none;
-  background-color: #57B85F;
-  border-radius: 50%;
-  color: white;
-  margin-right: 10%;
-  float: right;
-  font-size: 40px;
-}
+
 
 /* 추가 기록 */
 .addition {
@@ -64,20 +60,15 @@
 }
 
 /* 완료 버튼 */
-.submit {
-  width: 780px;
-  display: block;
-	margin-left: auto;
-	margin-right: auto;
-  margin-top: 570px;
-  position: fixed;
-}
+
 
 .submit button {
   border: none;
+  
   width: 780px;
   height: 120px;
-  margin-top: 30px;
+  margin-left: 90px;
+  margin-top: 80px;
   font-size: 50px;
   font-family: SeoulNamsanCed_Medium;
   border-radius: 30px;

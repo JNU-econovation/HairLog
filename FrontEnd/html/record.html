@@ -2,18 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <Title>record_1</Title>
+    <Title>record</Title>
     <link href="../css/fonts.css" rel="stylesheet" />
     <link href="../css/navbar.css" rel="stylesheet"/>
     <link href="../css/recording1.css" rel="stylesheet"/>
+    <link href="../css/recording2.css" rel="stylesheet"/>
+    <link href="../css/recording3.css" rel="stylesheet"/>
     <link href="../css/popUp.css" rel="stylesheet"/>
   </head>
 
   <body>
-    <div class="content">   
+
+    <!-- record1  -->
+    <div class="record1 ">   
       <div class="up">
         <h1>Hair Log</h1>
-        <button class="front" >➡</button>
+        <button class="goToRecord2" >➡</button>
         <!-- <button class="front" onclick="location.href='record_2.html'">➡</button> -->
 
       </div>
@@ -114,10 +118,57 @@
 
       </div>
 
-
-
     </div>
 
+
+    <!-- record2 -->
+    <div class="record2 hidden ">   
+      
+      <div class="btns">
+        <button class="backRecord1">⬅</button>
+        <button class="goRecord3">➡</button>
+      </div>
+
+      <input class="readAdd hidden" type="file" id="image" accept="image/*" onchange="imgPreview(event);"/>
+
+      <div class="upload">
+        <div class="preview">
+          <img class="imgAdd" src="../imgs/plus2.png">
+        </div>
+      </div>
+
+      <div class="clear"></div>
+
+      <div class="satisfactionForm">
+        <p class="ch">시술 만족도</p>
+        <form>
+          <input class="bar" type="range" min="1" max="5"/>
+          
+          <p class="range5">1</p><p>2</p><p>3</p><p>4</p><p>5</p>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- record3 -->
+    <div class="record3 hidden">   
+      
+      <div class="btns">
+        <button class="backRecord2" onclick="history.back()">⬅</button>
+      </div>
+
+      <div class="addition">
+        <p>추가 기록</p>
+        <p class="line"></p>
+        <div><textarea cols="51" rows="22"></textarea></div>
+        <!-- <input class="additionalRecord" type="text" placeholder="Full Name" ><br> -->
+      </div>
+
+      <div class="submit">
+        <button onclick="location.href='home.html'">완료</button>
+      </div>
+
+    </div>
 
 
     <div class="navbar">    
@@ -170,8 +221,9 @@
       </div>
     </div>
 
-    <script src="../js/record1.js"></script>
+    <script src="../js/record1.js"></script>             
     <script src="../js/addDesigner.js"></script>
     <script src="../js/SelectHairKind.js"></script>
+    <script src="../js/img.js"></script>
   </body>
 </html>

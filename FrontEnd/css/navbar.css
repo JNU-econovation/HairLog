@@ -1,6 +1,6 @@
 /* 본문, navbar 분리 */
 
-.content {
+.content, .record1, .record2, .record3 {
   position: fixed;
   left: 0;
   right: 0;

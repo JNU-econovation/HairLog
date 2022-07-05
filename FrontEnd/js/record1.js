@@ -1,4 +1,48 @@
 
+const record1 = document.querySelector(".record1");
+const record2 = document.querySelector(".record2");
+const record3 = document.querySelector(".record3");
+
+// record1에서 record2 띄우기
+
+
+
+
+
+// record1 -> record2 
+const goToRecord2 = document.querySelector(".goToRecord2");
+function showRecord2() {  
+  record1.classList.add("hidden");
+  record3.classList.add("hidden");
+  record2.classList.remove("hidden");
+}
+goToRecord2.addEventListener("click",showRecord2);
+
+// record2 -> record1
+const backToRecord1 = document.querySelector(".backRecord1");
+function BackRecord1() {
+  record2.classList.add("hidden");
+  record3.classList.add("hidden");
+  record1.classList.remove("hidden");
+  
+}
+backToRecord1.addEventListener("click",BackRecord1);
+
+// record2 -> record3 
+const goToRecord3 = document.querySelector(".goRecord3");
+function showRecord3() {
+  record1.classList.add("hidden");
+  record2.classList.add("hidden");
+  record3.classList.remove("hidden");
+}
+goToRecord3.addEventListener("click",showRecord3);
+
+// record3 -> record2
+const backToRecord3 = document.querySelector(".backRecord2");
+backToRecord3.addEventListener("click",showRecord2);
+
+
+
 
 let date, designer, cost;
 let cutKind, cutLength;
@@ -65,8 +109,8 @@ function whatDying() {
 
 let HairRecord;
 
-// nextBTN 클릭 이벤트
-const btn = document.querySelector(".front");
+
+
 
 function clickBTN() {
   // 날짜 불러오기
@@ -126,4 +170,5 @@ function clickBTN() {
 
 }
 
-btn.addEventListener("click", clickBTN);
+goToRecord2.addEventListener("click", clickBTN);
+
