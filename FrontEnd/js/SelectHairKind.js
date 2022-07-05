@@ -65,9 +65,9 @@ hairDying.addEventListener("click", clickDying);
 
 
 //펌 상함 정도 클릭 이벤트(css 변화)
-const damagePermLV3 = document.querySelector(".permLV3");
-const damagePermLV2 = document.querySelector(".permLV2");
-const damagePermLV1 = document.querySelector(".permLV1");
+const damagePermLV3 = document.querySelector(".cutHurt1");
+const damagePermLV2 = document.querySelector(".cutHurt2");
+const damagePermLV1 = document.querySelector(".cutHurt3");
 
 const damagePermList = [damagePermLV3, damagePermLV2, damagePermLV1];
 
@@ -102,9 +102,9 @@ damagePermLV2.addEventListener("click", clickPermLV2);
 damagePermLV1.addEventListener("click", clickPermLV1);
 
 //염색 상함 정도 클릭 이벤트(css 변화)
-const damageDyingLV3 = document.querySelector(".dyingLV3");
-const damageDyingLV2 = document.querySelector(".dyingLV2");
-const damageDyingLV1 = document.querySelector(".dyingLV1");
+const damageDyingLV3 = document.querySelector(".dyingHurt1");
+const damageDyingLV2 = document.querySelector(".dyingHurt2");
+const damageDyingLV1 = document.querySelector(".dyingHurt3");
 
 const damageDyingList = [damageDyingLV3, damageDyingLV2, damageDyingLV1];
 

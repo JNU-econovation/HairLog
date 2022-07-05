@@ -18,7 +18,7 @@ const designerC = document.querySelector(".C");
 
 const designerList = [designerA, designerB, designerC];
 
-//클릭 이벤트
+//클릭 이벤트 (css 수정)
 function onclick(item) {
   item.classList.remove("NotSelected");
   item.classList.add("selected");

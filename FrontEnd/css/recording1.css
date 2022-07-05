@@ -101,7 +101,7 @@ h1 {
   margin-left: 50px;
 }
 
-.cut, .perm, .dying, .permLV1, .permLV2, .permLV3, .dyingLV1, .dyingLV2, .dyingLV3 {
+.cut, .perm, .dying, .cutHurt1, .cutHurt2, .cutHurt3, .dyingHurt1, .dyingHurt2, .dyingHurt3 {
   width: 200px;
   border: 1px solid #9C9C9C;
   float: left;
@@ -168,7 +168,7 @@ h1 {
   margin-bottom: 30px;
 }
 
-.permLV1, .permLV2, .permLV3, .dyingLV3, .dyingLV2, .dyingLV1 {
+.cutHurt1, .cutHurt2, .cutHurt3, .dyingHurt1, .dyingHurt2, .dyingHurt3 {
   margin-top: 20px;
 }
 
