@@ -34,14 +34,16 @@ const authenticate = (req, res, next) => {
         return next(authError);
       };
       if (!user) {
-        return res.send('NO EXISTING USER');
+        ;
+        return res.status(404).send('NO EXISTING USER');
       };
       return req.login(user, (loginError) => {
         if (loginError) {
           console.error(loginError);
           return next(loginError);
         };
-        return res.send("Login Success")
+        ;
+        return res.status(200).send("Login Success")
       });
     })(req, res, next);
 };
@@ -50,7 +52,7 @@ const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
       next();
   } else {
-      res.status(403).send('로그인 필요');
+      res.status(404).send('로그인 필요');
   }
 };
 
