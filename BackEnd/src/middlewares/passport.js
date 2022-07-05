@@ -35,7 +35,7 @@ const authenticate = (req, res, next) => {
       };
       if (!user) {
         ;
-        return res.status(404).send('NO EXISTING USER');
+        return res.send({code : 404, msg :'NO EXISTING USER'});
       };
       return req.login(user, (loginError) => {
         if (loginError) {
@@ -43,7 +43,7 @@ const authenticate = (req, res, next) => {
           return next(loginError);
         };
         ;
-        return res.status(200).send("Login Success")
+        return res.send({code : 202, msg : "Login Success"})
       });
     })(req, res, next);
 };
@@ -52,7 +52,7 @@ const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
       next();
   } else {
-      res.status(404).send('로그인 필요');
+      res.send({code : 404 , msg : '로그인 필요'});
   }
 };
 
