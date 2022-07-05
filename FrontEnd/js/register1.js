@@ -8,22 +8,17 @@ function nextPage() {
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
 
-  const SignUp = {
-    userEmail: email,
-    userPassword: password,
-    userName: Name,
-  }
+  
+  
+  sessionStorage.setItem('userEmail',email);
+  sessionStorage.setItem('userPassword',password);
+  sessionStorage.setItem('userName',Name);
+
+
 
   console.log(SignUp);
 
-  // 서버로 따로 보내는 버전
-  
-  fetch('/api/swagger/join', {
-    method: 'POST',
-    body: JSON.stringify(SignUp),     //객체 -> JSON
-  }) 
-    .then((response) => response.json())
-    .then((result) => { console.log(result); });
+
 
 }
 

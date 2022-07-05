@@ -37,9 +37,17 @@ function handleTimer(e) {
 }
 
 
+//세션에서 가져올 값
+let email = sessionStorage.getItem("userEmail");
+let password = sessionStorage.getItem("userPassword");
+let Name = sessionStorage.getItem("userName");
+
+console.log(sessionStorage.getItem("userEmail"));
+
 //성별 선택값 저장
 let Sex;
 let SignUp;
+
 
 function handleSex(e) {
   const selectedSex = document.querySelector("#selectSex");
@@ -48,6 +56,7 @@ function handleSex(e) {
   console.log(Sex);
 }
 
+
 // sign up 버튼으로 전달
 
 const signBTN = document.querySelector(".btn");
@@ -55,6 +64,9 @@ const signBTN = document.querySelector(".btn");
 function signBtnClick() {
   if(directTime===0) {  //직접입력아닐때
     SignUp = {
+      userEmail: email,
+      userPassword: password,
+      userName: Name,
       userSex: Sex,
       userCycle: Time,
     }
@@ -62,6 +74,9 @@ function signBtnClick() {
   else {   //직접입력일때
     const temp = document.querySelector("#inputDirect").value;
     SignUp = {
+      userEmail: email,
+      userPassword: password,
+      userName: Name,
       userSex: Sex,
       userCycle: editTime(temp),
     }
@@ -70,12 +85,19 @@ function signBtnClick() {
 
   // 서버로 따로 보내는 버전
   
-  // fetch('/api/swagger/join', {
-  //   method: 'POST',
-  //   body: JSON.stringify( ),     //객체 -> JSON
-  // }) 
-  //   .then((response) => response.json())
-  //   .then((result) => { console.log(result); });
+  fetch('https://hairlogapi.herokuapp.com/api/join', {
+    headers: {
+      'Content-Type': 'application/json'     
+    },
+    method: 'POST',
+    body: JSON.stringify(SignUp),     //객체 -> JSON
+  }) 
+    .then((response) => response.text())
+    .then((result) => { console.log(result); });
+
+    sessionStorage.clear();
+
+    
 
 }
 
