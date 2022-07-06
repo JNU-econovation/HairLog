@@ -36,9 +36,9 @@ const designer = async function(req, res) {
             rows=> Image.findOne({where : {RecordId : rows.id}, raw : true})
         ));
         let result = {user, record : recordWithDesigner, img}
-        return res.send(result)
+        res.send({code : 200, result})
     }
-    return res.send("등록된 디자이너가 없습니다!")
+    return res.send({code : 404, msg : "등록된 디자이너가 없습니다!"})
 
 
 }
@@ -51,9 +51,9 @@ const category = async function(req, res, category) {
         let categoryRecord = await classify(res, category ,recordObj)
         let img = await imgObj(recordObj)
         let result = {user, record : recordObj, categoryRecord, img}
-        return res.send(result)
+        res.send({code : 200, result})
     }
-    return res.send(`${category} 기록이 없습니다!`)
+    res.send({code : 404, msg: `${category} 기록이 없습니다!`})
 
 
 }
@@ -66,17 +66,15 @@ const categoryResult = async function(req, res, category) {
         let categoryRecord = await classify(res, category ,recordObj)
         let img = await imgObj(recordObj, 1)
         let result = {user, record : recordObj, categoryRecord, img}
-        return res.send(result)
+        res.send({code : 200, result})
     }
-    return res.send(`${category} 기록이 없습니다!`)
+    res.send({code : 404, msg : `${category} 기록이 없습니다!`})
 
 }
 
 
 // inner use
 const classify = async function ( res, category ,recordObj) {
-
-    show.Hash(category)
 
     switch(category) {
         case "cut" :
@@ -95,7 +93,7 @@ const classify = async function ( res, category ,recordObj) {
             ))
             return categoryRecord = { count : recordObj.count, rows : categoryRecord}
         default :
-            return res.send('올바른 목록을 선택해 주세요!');
+            return res.send({code : 404, msg: '올바른 목록을 선택해 주세요!'});
 
     }
 
