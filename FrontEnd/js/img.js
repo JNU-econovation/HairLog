@@ -17,7 +17,11 @@ function imgPreview(event) {
     myImg.setAttribute("src", event.target.result);
 
     imgPlace.appendChild(myImg);      //이미지 넣고 style 주기
-    myImg.classList.add("uploadIMG");     
+    myImg.classList.add("uploadIMG");  
+    
+    console.log(myImg);
+    console.log(event.target.result);
+    console.dir(myImg);
   };
 
   reader.readAsDataURL(event.target.files[0]);

@@ -168,11 +168,12 @@ function clickBTN() {
 
   // 추가 기록 불러오기
   extraInput();
-  
+  let url;
 
   for(let i=0;i<hairList.length;i++){
     if(hairList[i].classList.contains("selected")){
       if(i===0){  //컷 선택
+        url='https://hairlogapi.herokuapp.com/api/record/cut';
         whatCut();
         HairRecord = {
           recordDate: date,
@@ -185,6 +186,7 @@ function clickBTN() {
         }
       }
       else if(i===1) { //펌 선택
+        url='https://hairlogapi.herokuapp.com/api/record/perm';
         whatPerm();
         HairRecord = {
           recordDate: date,
@@ -198,6 +200,7 @@ function clickBTN() {
         }
       }
       else if(i===2) {  //염색 선택
+        url='https://hairlogapi.herokuapp.com/api/record/dyeing';
         whatDying();
         HairRecord = {
           recordDate: date,
@@ -215,7 +218,27 @@ function clickBTN() {
   }
 
   console.log(HairRecord);
-  
+
+  const formData = new FormData();        //전송할 객체 
+  for (let key in HairRecord) {  // data 객체 안에 있는 모든 요소를 data 객체의 key value 형태로 적재
+    formData.append(key, HairRecord[key]);
+    // console.log(key);
+  }
+
+  // for (let value of formData.values()) {
+  //   console.log(value);
+  // }
+
+  fetch(url, {
+    headers: {
+      'Content-Type': 'multipart/form-data'     
+    },
+    method: 'POST',
+    body: formData,   
+  }) 
+    .then((response) => response.text())
+    .then((result) => { console.log(result); });
+
 
 }
 
