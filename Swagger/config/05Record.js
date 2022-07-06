@@ -22,9 +22,6 @@
 *                recordDate:
 *                  type: string
 *                  example: 2022-06-23
-*                recordTime:
-*                  type: string
-*                  example: 60
 *                designerName:
 *                  type: string
 *                  example: 미라클
@@ -64,9 +61,6 @@
 *                recordDate:
 *                  type: string
 *                  example: 2022-06-23
-*                recordTime:
-*                  type: string
-*                  example: 60
 *                designerName:
 *                  type: string
 *                  example: 미라클
@@ -109,9 +103,6 @@
 *                recordDate:
 *                  type: string
 *                  example: 2022-06-23
-*                recordTime:
-*                  type: string
-*                  example: 60
 *                designerName:
 *                  type: string
 *                  example: 미라클
@@ -178,9 +169,6 @@
 *                recordDate:
 *                  type: string
 *                  example: 2022-06-23
-*                recordTime:
-*                  type: string
-*                  example: 60
 *                designerName:
 *                  type: string
 *                  example: 미라클
@@ -222,9 +210,6 @@
 *                recordDate:
 *                  type: string
 *                  example: 2022-06-23
-*                recordTime:
-*                  type: string
-*                  example: 60
 *                designerName:
 *                  type: string
 *                  example: 미라클
@@ -269,9 +254,6 @@
 *                recordDate:
 *                  type: string
 *                  example: 2022-06-23
-*                recordTime:
-*                  type: string
-*                  example: 60
 *                designerName:
 *                  type: string
 *                  example: 미라클

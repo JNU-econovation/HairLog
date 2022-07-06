@@ -8,6 +8,7 @@ const User = require('../../../DB/sequelize/models/User'),
 const { Op } = require("sequelize");
 
 const show = require('@jongjun/console')
+const ifDesigner = require("../function/ifDesigner")
 
 
 
@@ -15,10 +16,11 @@ const latest = async function(req, res) {
 
     let user = await User.findOne({wherer : {id : req.user.id}});
     let recordArray = await Record.findAndCountAll({raw : true,where : {UserId : user.id}, order : [['recordDate', 'DESC']]});
+    let designer = await ifDesigner.getDesigner(recordArray.rows)
     let recordObj = Object.assign({}, recordArray)
     let recordCount = recordArray.count
     let img = await imgObj(recordArray, recordCount)
-    let result = {user, record : recordObj, img}
+    let result = {user, record : recordObj, img, designer}
     return res.send(result)
 
 }
@@ -29,14 +31,21 @@ const designer = async function(req, res) {
     let dessignerList = await Designer.findAndCountAll({where : {UserId : req.user.id}})
     if(dessignerList.count != 0) {
         let recordWithDesigner = await Promise.all(dessignerList.rows.map( 
-            rows => Record.findAll({where : {DesignerId : rows.id}})
+            rows => Record.findAndCountAll({where : {DesignerId : rows.id}, raw : true})
         ));
-        
-        let img = await Promise.all(dessignerList.rows.map(
-            rows=> Image.findOne({where : {RecordId : rows.id}, raw : true})
-        ));
-        let result = {user, record : recordWithDesigner, img}
-        res.send({code : 200, result})
+        let designer = await ifDesigner.getDesignerWith(recordWithDesigner)
+        // let img = await Promise.all(dessignerList.rows.map(
+        //     rows=> Image.findOne({where : {RecordId : rows.id}, raw : true})
+        // ));
+        let temp = await Promise.all(recordWithDesigner.map(res => {return res.rows}))
+        let i = 0;
+        let img = {}
+        for ( let imgs of temp) {
+            img[i] = await Promise.all(imgs.map(res => Image.findOne({where : {RecordId : res.id}}) ))
+            i++
+        }
+        let result = {user, record : recordWithDesigner, img, designer}
+        return res.send({code : 200, result})
     }
     return res.send({code : 404, msg : "등록된 디자이너가 없습니다!"})
 
