@@ -10,7 +10,7 @@ const join = async (req, res, next) => {
     try {
       const exUser = await User.findOne({ where: { userEmail } });
       if (exUser) {
-        return res.redirect('/join?error=exist');
+        return res.redirect('/existUser');
       }
       const hash = await bcrypt.hash(userPassword, 12);
       await User.create({
@@ -20,7 +20,7 @@ const join = async (req, res, next) => {
         userSex,
         userCycle,
       });
-      return res.send("Join Success");
+      return res.send({code : 200, msg : "Join Success"});
     } catch (error) {
       console.error(error);
       return next(error);
@@ -34,14 +34,16 @@ const authenticate = (req, res, next) => {
         return next(authError);
       };
       if (!user) {
-        return res.send('NO EXISTING USER');
+        ;
+        return res.send({code : 404, msg :'NO EXISTING USER'});
       };
       return req.login(user, (loginError) => {
         if (loginError) {
           console.error(loginError);
           return next(loginError);
         };
-        return res.send("Login Success")
+        ;
+        return res.send({code : 202, msg : "Login Success"})
       });
     })(req, res, next);
 };
@@ -50,7 +52,7 @@ const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
       next();
   } else {
-      res.status(403).send('로그인 필요');
+      res.send({code : 404 , msg : '로그인 필요'});
   }
 };
 
@@ -59,7 +61,7 @@ const isNotLoggedIn = (req, res, next) => {
       next();
   } else {
       const message = encodeURIComponent('로그인한 상태입니다.');
-      res.redirect(`/?error=${message}`);
+      res.redirect('/mainPage');
   }
 };
 

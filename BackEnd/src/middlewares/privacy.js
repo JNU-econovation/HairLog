@@ -17,6 +17,7 @@ const Post = {
 const Get = {
     
     user : async function(req, res) {
+      try {
         let userName =  req.user.userName;
         let recordDesc = await Record.findOne({ attributes: ['recordDate'], order : [['recordDate', 'DESC']], where : {UserId : req.user.id}})
         let result = {}
@@ -27,7 +28,11 @@ const Get = {
         } else {
             result = { userName }
         }
-        res.send(result)
+        res.send({code :200, result})
+      } catch(e) {
+        res.send({code : 404, msg : e})
+      }
+
     },
 
 }
@@ -40,7 +45,7 @@ const Update = {
         try {
           const exUser = await User.findOne({ where: { userEmail } });
           if (exUser) {
-            return res.redirect('/join?error=exist');
+            return res.send({code : 404, msg : "EXISTING USER"});
           }
           const hash = await bcrypt.hash(userPassword, 12);
           let updatePrivacy = await User.update({
@@ -50,7 +55,7 @@ const Update = {
             userSex,
             userCycle,
           });
-          return res.send(updatePrivacy);
+          return res.send({code : 200, updatePrivacy});
         } catch (error) {
           console.error(error);
           return next(error);

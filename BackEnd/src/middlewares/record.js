@@ -19,19 +19,23 @@ const show = require('@jongjun/console')
 const Post = {
 
     record  : async function(req, res) {
+        try {
+            let category = req.params.category
+            let user = await User.findOne({where : {id : req.user.id}});
+            let record = await Post.recordWithDesigner(req, category, user)
+            let imgInformation = await imageFunction.urls(req.files)
+            let {urls, public_id} = imgInformation
+            let urlQuery = await imageFunction.query(urls)
+            let idQuery = await imageFunction.query(public_id)
+            let image = await record.createImage(urlQuery)
+            await record.createCloudImage(idQuery)
+            let result = {record, image}
+            result[`${category}`] = await Post.recordCategory(req, category, record)
+            res.send({code :200, result})
+        } catch(e) {
+            res.send({code : 404, msg : e})
+        }
 
-        let category = req.params.category
-        let user = await User.findOne({where : {id : req.user.id}});
-        let record = await Post.recordWithDesigner(req, category, user)
-        let imgInformation = await imageFunction.urls(req.files)
-        let {urls, public_id} = imgInformation
-        let urlQuery = await imageFunction.query(urls)
-        let idQuery = await imageFunction.query(public_id)
-        let image = await record.createImage(urlQuery)
-        await record.createCloudImage(idQuery)
-        let result = {record, image}
-        result[`${category}`] = await Post.recordCategory(req, category, record)
-        res.send(result)
     },
     
     // inner function
@@ -108,9 +112,14 @@ const Update = {
 const Delete = {
 
     record  : async function(req, res) {
-        let {category, RecordId} = req.body
-        let deleteResult = await Delete.recordDelete(category, RecordId)
-        res.send(deleteResult)
+        try {
+            let {category, RecordId} = req.body
+            let deleteResult = await Delete.recordDelete(category, RecordId)
+            res.send({code : 200, deleteResult})
+        } catch(e) {
+            res.send({code : 404, msg : e})
+        }
+
     },
 
     // inner function

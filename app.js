@@ -11,6 +11,7 @@ const createError = require('http-errors'),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     helmet = require('helmet'),
+    cors = require('cors')
     hpp = require('hpp');
 
 
@@ -40,6 +41,7 @@ cloudinary.config();
 // express start
 const app = express();
 
+app.use(cors())
 
 // port
 app.set('httpPort', process.env.PORT || 3000);
