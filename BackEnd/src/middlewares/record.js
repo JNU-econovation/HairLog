@@ -72,13 +72,14 @@ const Post = {
 
 const Get = {
 
+    // 디자이너 유무에 따른 디자이너 정보 제공 구현
+
     main : async function(req, res) {
         return classifyCategory.latest(req, res)
     },
 
     instanceResult : async function(req, res) {
         let category = req.params.category
-        show.With('1', category)
         return classifyCategory.categoryResult(req, res, category)
     },
 

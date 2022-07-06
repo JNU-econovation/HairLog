@@ -39,6 +39,9 @@
 *                designerSalon:
 *                  type: string
 *                  example: 에코노베이션
+*                fav:
+*                  type: integer
+*                  example: 0
 *      responses:
 *        '201' :
 *          description : 디자이너 등록 성공
