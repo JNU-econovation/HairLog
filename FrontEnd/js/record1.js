@@ -3,11 +3,7 @@ const record1 = document.querySelector(".record1");
 const record2 = document.querySelector(".record2");
 const record3 = document.querySelector(".record3");
 
-// record1에서 record2 띄우기
-
-
-
-
+// 버튼 누를 때 페이지 변화
 
 // record1 -> record2 
 const goToRecord2 = document.querySelector(".goToRecord2");
@@ -42,12 +38,13 @@ const backToRecord3 = document.querySelector(".backRecord2");
 backToRecord3.addEventListener("click",showRecord2);
 
 
-
+// 입력값 객체로 저장해서 보내자
 
 let date, designer, cost;
 let cutKind, cutLength;
 let permKind, permTime, permHurt;
-let dyingColor, dyingDecolor,dyingTime, dyingHurt;
+let dyingColor, dyingDecolor, dyingTime, dyingHurt;
+let recordEtc;
 
 // 디자이너 선택값 가져오기
 function whoDesign() {
@@ -56,11 +53,29 @@ function whoDesign() {
   const designerC = document.querySelector(".C");
   const designerList = [designerA, designerB, designerC];
 
-  for (let i=0;i<designerList.length;i++){
-    if(designerList[i].classList.contains("selected")){
-      designer = designerList[i].innerHTML;
-    }  
+  const popup = document.querySelector('#popup');     // 직접입력 팝업창
+  const directName = document.querySelector(".D");    //직접 입력한 디자이너 이름
+
+  if(directName.classList.contains("selected")){      // 선호 디자이너 중 선택
+    designer = directName.innerHTML;
   }
+  else {                                               // 직접 입력한 디자이너 선택
+    for (let i=0;i<designerList.length;i++){
+      if(designerList[i].classList.contains("selected")){
+        designer = designerList[i].innerHTML;
+      }  
+    }
+  }
+
+
+
+
+
+  // for (let i=0;i<designerList.length;i++){
+  //   if(designerList[i].classList.contains("selected")){
+  //     designer = designerList[i].innerHTML;
+  //   }  
+  // }
 }
 
 // 컷 세부 입력값 가져오기 
@@ -84,6 +99,12 @@ function whatPerm() {
       permHurt = hurtList[i].innerHTML;
     }  
   }
+
+
+
+
+
+
 }
 
 // 염색 세부 입력값 가져오기
@@ -107,10 +128,26 @@ function whatDying() {
 
 
 
-let HairRecord;
+let HairRecord;  // 보낼 객체
+
+function extraInput() {
+  const txtBox = document.getElementById("inputbox");
+  let lines = txtBox.value.split("\n");
+ 
+  // generate HTML version of text
+  let resultString  = "<p>";
+  for (let i = 0; i < lines.length; i++) {
+    resultString += lines[i] + "<br />";
+  }
+  resultString += "</p>";
+ 
+  recordEtc = resultString;
+}
 
 
+// record1 기록 저장 후 완료 버튼 눌렀을 때 출력
 
+const submitRecord = document.querySelector("#submitRecord");
 
 function clickBTN() {
   // 날짜 불러오기
@@ -127,6 +164,11 @@ function clickBTN() {
   const hairPerm = document.querySelector(".perm");
   const hairDying = document.querySelector(".dying");
   const hairList = [hairCut,hairPerm,hairDying];
+  const satisfact = document.querySelector(".bar").value;
+
+  // 추가 기록 불러오기
+  extraInput();
+  
 
   for(let i=0;i<hairList.length;i++){
     if(hairList[i].classList.contains("selected")){
@@ -138,6 +180,8 @@ function clickBTN() {
           recordCost: cost,
           cutName: cutKind,
           cutLength: cutLength,
+          recordGrade: satisfact,
+          recordEtc: recordEtc,
         }
       }
       else if(i===1) { //펌 선택
@@ -149,6 +193,8 @@ function clickBTN() {
           permName: permKind,
           permTime: permTime,
           permHurt: permHurt,
+          recordGrade: satisfact,
+          recordEtc: recordEtc,
         }
       }
       else if(i===2) {  //염색 선택
@@ -161,14 +207,16 @@ function clickBTN() {
           dyeingDecolorization: dyingDecolor,
           dyeingTime: dyingTime,
           dyeingHurt: dyingHurt,
+          recordGrade: satisfact,
+          recordEtc: recordEtc,
         }
       }
     }
   }
 
   console.log(HairRecord);
+  
 
 }
 
-goToRecord2.addEventListener("click", clickBTN);
-
+submitRecord.addEventListener("click", clickBTN);

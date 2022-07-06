@@ -59,8 +59,8 @@
   margin-left: 50px;
 }
 
-.A, .B, .C {
-  width: 170px;
+.A, .B, .C, .D {
+  width: 130px;
   height: 35px;
   border: 1px solid #9C9C9C;
   float: left;
@@ -69,7 +69,7 @@
   font-family: SeoulNamsanCed_Medium;
   text-align: center;
   padding: 20px 20px;
-  margin-right: 25px;
+  margin-right: 10px;
   border-radius: 40px;
 }
 
