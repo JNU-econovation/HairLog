@@ -8,7 +8,7 @@ module.exports = class Cut extends Sequelize.Model {
         allowNull: false,
       },
       cutLength: {
-        type: DataTypes.INTEGER(40),
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
     }, {

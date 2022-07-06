@@ -19,10 +19,6 @@ module.exports = class Record extends Sequelize.Model {
         type: DataTypes.INTEGER(40),
         allowNull: false,
       },
-      recordTime: {
-        type: DataTypes.INTEGER(40),
-        allowNull: false,
-      },
       recordCategory: {
         type: DataTypes.STRING(40),
         allowNull: false,

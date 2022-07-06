@@ -36,9 +36,6 @@
 *        recordCost:
 *          type: integer
 *          example: 15000
-*        recordTime:
-*          type: integer
-*          example: 60
 *        recordCategory:
 *          type: string
 *          example: cut

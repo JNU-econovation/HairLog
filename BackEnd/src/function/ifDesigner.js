@@ -8,18 +8,33 @@ const User = require('../../../DB/sequelize/models/User'),
 
 
 const isDesigner = async function (req, category, userInstance) {
-    let {recordDate, recordCost, recordTime, designerName, recordEtc, recordGrade} = req.body;
+    let {recordDate, recordCost, designerName, recordEtc, recordGrade} = req.body;
     let designer = await Designer.findOne({where : { designerName }})
-    let record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade, DesignerId : designer.id })
+    let record = await userInstance.createRecord({ recordDate, recordCost, recordCategory : category, recordEtc, recordGrade, DesignerId : designer.id })
     let result = record
     return result 
 }
 
 const isNotDesigner = async function  (req, category, userInstance) {
-    let {recordDate, recordCost, recordTime, recordEtc, recordGrade} = req.body;
-    let record = await userInstance.createRecord({ recordDate, recordCost, recordTime, recordCategory : category, recordEtc, recordGrade })
+    let {recordDate, recordCost, recordEtc, recordGrade} = req.body;
+    let record = await userInstance.createRecord({ recordDate, recordCost, recordCategory : category, recordEtc, recordGrade })
     let result = record
     return result
 }
 
-module.exports = { isDesigner, isNotDesigner}
+const getDesigner = async function (record) {
+    let designer = await Promise.all(record.map(res => Designer.findOne({where : {id :res.DesignerId}, raw : true})))
+    return designer
+}
+
+const getDesignerWith = async function (record) {
+    let temp = await Promise.all(record.map(res => { return res.rows }))
+    let i = 0;
+    let designer = {}
+    for( let record of temp){
+        designer[i] = await Promise.all(record.map(res => Designer.findOne({where : {id :res.DesignerId}, raw : true})))
+        i++
+    }
+    return designer
+}
+module.exports = { isDesigner, isNotDesigner, getDesigner, getDesignerWith}
