@@ -214,7 +214,7 @@ function clickBTN() {
   for(let i=0;i<hairList.length;i++){
     if(hairList[i].classList.contains("selected")){
       if(i===0){  //컷 선택
-        url='https://hairlogapi.herokuapp.com/api/record/cut';
+        url='http://localhost:3000/api/record/cut';
         whatCut();
         HairRecord = {
           // url:url,
@@ -271,7 +271,7 @@ function clickBTN() {
     formData.append(key, HairRecord[key]);
 
   }
-  formData.append("addIMG",fileInput.files[0]);
+  formData.append("Image",fileInput.files[0]);
 
 
   //formData key 값 확인
@@ -284,9 +284,6 @@ function clickBTN() {
   }
 
   fetch(url, {
-    headers: {
-      'Content-Type': 'multipart/form-data'     
-    },
     method: 'POST',
     body: formData,   
   }) 

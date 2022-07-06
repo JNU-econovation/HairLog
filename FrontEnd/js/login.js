@@ -18,7 +18,7 @@ async function getLogin(event) {           //async 써서 해라
 
   //await 써라
 
-let Result = await fetch('https://hairlogapi.herokuapp.com/api/authenticate', {
+let Result = await fetch('http://localhost:3000/api/authenticate', {
     headers: {
       'Content-Type': 'application/json'         //content-type으로 보내야 서버 body에 들어감
     },
@@ -42,7 +42,7 @@ let Result = await fetch('https://hairlogapi.herokuapp.com/api/authenticate', {
     document.querySelector('#password').value ="";
   }
   else{      //성공
-    location.href = '../html/home.html';
+    location.href = '/';
   }
 
 }
