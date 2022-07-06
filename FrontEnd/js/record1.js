@@ -1,31 +1,4 @@
 
-// input 클릭을 div(+버튼)로 옮기기
-const realUpload = document.querySelector('.readAdd');
-const upload = document.querySelector('.imgAdd');
-
-upload.addEventListener('click', () => realUpload.click());
-
-
-// 이미지 업로드 -> 화면에 미리보기 기능
-const imgPlace = document.querySelector(".preview");      //이미지 들어갈 장소
-
-function imgPreview(event) {
-  const reader = new FileReader();
-
-  reader.onload = function(event) {
-    const myImg = document.createElement("img");
-    myImg.setAttribute("src", event.target.result);
-
-    imgPlace.appendChild(myImg);      //이미지 넣고 style 주기
-    myImg.classList.add("uploadIMG");  
-    
-    console.log(myImg);
-    console.log(event.target.result);
-    console.dir(myImg);
-  };
-
-  reader.readAsDataURL(event.target.files[0]);
-}
 
 
 
@@ -158,8 +131,45 @@ function whatDying() {
 }
 
 
+// input 클릭을 div(+버튼)로 옮기기
+const realUpload = document.querySelector('.readAdd');
+const upload = document.querySelector('.imgAdd');
 
-let HairRecord;  // 보낼 객체
+upload.addEventListener('click', () => realUpload.click());
+
+
+let HairRecord;  // 임시저장 객체
+const formData = new FormData();        //전송할 객체 
+
+
+// 이미지 업로드 -> 화면에 미리보기 기능
+const imgPlace = document.querySelector(".preview");      //이미지 들어갈 장소
+const fileInput = document.querySelector("#image");   // file input
+
+
+//이미지 미리보기 기능
+function imgPreview(event) {
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+    const myImg = document.createElement("img");
+    myImg.setAttribute("src", event.target.result);
+
+    imgPlace.appendChild(myImg);      //이미지 넣고 style 주기
+    myImg.classList.add("uploadIMG");  
+    
+
+    console.log(fileInput.files[0]);
+
+
+  };
+
+  reader.readAsDataURL(event.target.files[0]);
+}
+
+
+
+
 
 function extraInput() {
   const txtBox = document.getElementById("inputbox");
@@ -207,6 +217,7 @@ function clickBTN() {
         url='https://hairlogapi.herokuapp.com/api/record/cut';
         whatCut();
         HairRecord = {
+          // url:url,
           recordDate: date,
           designerName: designer,
           recordCost: cost,
@@ -220,6 +231,7 @@ function clickBTN() {
         url='https://hairlogapi.herokuapp.com/api/record/perm';
         whatPerm();
         HairRecord = {
+          // url:url,
           recordDate: date,
           designerName: designer,
           recordCost: cost,
@@ -234,6 +246,7 @@ function clickBTN() {
         url='https://hairlogapi.herokuapp.com/api/record/dyeing';
         whatDying();
         HairRecord = {
+          // url:url,
           recordDate: date,
           designerName: designer,
           recordCost: cost,
@@ -253,13 +266,22 @@ function clickBTN() {
 
   // form 서버로 전송
 
-  const formData = new FormData();        //전송할 객체 
+  
   for (let key in HairRecord) {  // data 객체 안에 있는 모든 요소를 data 객체의 key value 형태로 적재
     formData.append(key, HairRecord[key]);
 
   }
+  formData.append("addIMG",fileInput.files[0]);
 
 
+  //formData key 값 확인
+  for (let key of formData.keys()) {
+    console.log(key);
+  }
+  //formData value값 확인
+  for (let value of formData.values()) {
+    console.log(value);
+  }
 
   fetch(url, {
     headers: {
