@@ -20,7 +20,7 @@ const latest = async function(req, res) {
     let recordObj = Object.assign({}, recordArray)
     let recordCount = recordArray.count
     let img = await imgObj(recordArray, recordCount)
-    let result = {user, record : recordObj, img, designer}
+    let result = {user, designer, record : recordObj, img}
     return res.send(result)
 
 }
@@ -34,17 +34,9 @@ const designer = async function(req, res) {
             rows => Record.findAndCountAll({where : {DesignerId : rows.id}, raw : true})
         ));
         let designer = await ifDesigner.getDesignerWith(recordWithDesigner)
-        // let img = await Promise.all(dessignerList.rows.map(
-        //     rows=> Image.findOne({where : {RecordId : rows.id}, raw : true})
-        // ));
-        let temp = await Promise.all(recordWithDesigner.map(res => {return res.rows}))
-        let i = 0;
-        let img = {}
-        for ( let imgs of temp) {
-            img[i] = await Promise.all(imgs.map(res => Image.findOne({where : {RecordId : res.id}}) ))
-            i++
-        }
-        let result = {user, record : recordWithDesigner, img, designer}
+        let tempImageRecord = await Promise.all(recordWithDesigner.map(res => {return res.rows}))
+        let img = imgDesigner(tempImageRecord)
+        let result = {user, designer, record : recordWithDesigner, img}
         return res.send({code : 200, result})
     }
     return res.send({code : 404, msg : "등록된 디자이너가 없습니다!"})
@@ -58,9 +50,10 @@ const category = async function(req, res, category) {
     let recordObj = await Record.findAndCountAll({raw : true, order : [['recordDate', 'DESC']], where : {[Op.and] : [{recordCategory : category}, {UserId : req.user.id}]}});
     if(recordObj.count != 0){
         let categoryRecord = await classify(res, category ,recordObj)
+        let designer = await ifDesigner.getDesigner(recordObj.rows)
         let img = await imgObj(recordObj)
-        let result = {user, record : recordObj, categoryRecord, img}
-        res.send({code : 200, result})
+        let result = {user, designer, record : recordObj, categoryRecord, img}
+        return res.send({code : 200, result})
     }
     res.send({code : 404, msg: `${category} 기록이 없습니다!`})
 
@@ -73,14 +66,26 @@ const categoryResult = async function(req, res, category) {
     let recordObj = await Record.findAndCountAll({raw : true, limit : 1, order : [['recordDate', 'DESC']], where : {[Op.and] : [{recordCategory : category}, {UserId : req.user.id}]}});
     if(recordObj.count != 0){
         let categoryRecord = await classify(res, category ,recordObj)
+        let designer = await ifDesigner.getDesigner(recordObj.rows)
         let img = await imgObj(recordObj, 1)
-        let result = {user, record : recordObj, categoryRecord, img}
+        let result = {user, designer, record : recordObj, categoryRecord, img}
         res.send({code : 200, result})
     }
     res.send({code : 404, msg : `${category} 기록이 없습니다!`})
 
 }
 
+// const eachResult = async function(req, res, clickRecord) {
+
+//     let user = await User.findOne({wherer : {id : req.user.id}});
+//     let designer = await Designer.findOne({where : {id : clickRecord.DesignerId}})
+//     let record = await Record.findAndCountAll({where : {id : clickRecord.id}})
+//     let categoryRecord = await classify(res, record.rows[0].recordCategory, record)
+//     let image = record.getImage()
+//     let result = {user, designer, record, categoryRecord, image}
+//     res.send({code : 200, result})
+
+// }
 
 // inner use
 const classify = async function ( res, category ,recordObj) {
@@ -119,5 +124,15 @@ const imgObj = async function(record, recordCount) {
     return img = { count : record.count, rows : img}
     
 }
+
+const imgDesigner = async function(record) {
+    let i = 0;
+    let img = {}
+    for ( let imgs of record) {
+        img[i] = await Promise.all(imgs.map(res => Image.findOne({where : {RecordId : res.id}}) ))
+        i++
+    }
+    return img
+}
    
-module.exports = { latest, designer, category, categoryResult}
+module.exports = { latest, designer, category, categoryResult }

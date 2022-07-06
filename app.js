@@ -41,7 +41,6 @@ cloudinary.config();
 // express start
 const app = express();
 
-app.use(cors())
 
 // port
 app.set('httpPort', process.env.PORT || 3000);
@@ -105,7 +104,7 @@ app.use(passport.session());
 // add router
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api', apiTest);
+app.use('/api', cors(), apiTest);
 app.use('/api-docs', apiDocsRouter);
 
 
