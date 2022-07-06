@@ -15,8 +15,9 @@ function closePopup() {
 const designerA = document.querySelector(".A");
 const designerB = document.querySelector(".B");
 const designerC = document.querySelector(".C");
+const designerD = document.querySelector(".D");
 
-const designerList = [designerA, designerB, designerC];
+const designerList = [designerA, designerB, designerC, designerD ];
 
 //클릭 이벤트 (css 수정)
 function onclick(item) {
@@ -48,6 +49,36 @@ function clickC() {
 
 }
 
+function clickD() {
+  if(document.querySelector(".D").innerHTML != ""){
+    onclick(designerD); 
+  }
+  else {
+    console.log("값이 비었습니다");
+  }
+  
+
+}
+
 designerA.addEventListener("click", clickA);
 designerB.addEventListener("click", clickB);
 designerC.addEventListener("click", clickC);
+designerD.addEventListener("click", clickD);
+
+
+// 팝업 -> 완료 눌렀을 때 화면에 표시하고 서버로 보내
+const completeBTN = document.querySelector(".complete");
+function addComplete() {
+  const inputDesignerName = document.querySelector("#inputDesignerName").value;
+  const inputDesignerPlace = document.querySelector("#inputDesignerPlace").value;
+
+  console.log(inputDesignerName, inputDesignerPlace);
+  completeBTN.classList.add("addDirect")
+
+  const plusName = document.querySelector(".D");
+  plusName.innerHTML = inputDesignerName;
+}
+completeBTN.addEventListener("click", addComplete);
+
+
+

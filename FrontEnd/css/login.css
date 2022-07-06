@@ -74,8 +74,24 @@ button:hover {
   background-color: #57B85F;
 }
 
+/* 로그인 실패 */
+.loginForm p {
+  color: red;
+  font-size: 30px;
+  font-family: SeoulNamsanCed_Medium;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  position: absolute;
+  margin-left: 200px;
+
+}
+
+.hidden {
+  display: none;
+}
+
 /* 회원가입 링크 */
-p {
+.link p {
   float: left;
   font-size: 30px;
   padding-left: 20px;
