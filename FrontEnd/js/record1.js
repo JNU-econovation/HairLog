@@ -216,7 +216,9 @@ function clickBTN() {
     if(hairList[i].classList.contains("selected")){
       if(i===0){  //컷 선택
 
+
         url='http://localhost:3000/api/record/cut';
+
 
         whatCut();
         HairRecord = {
