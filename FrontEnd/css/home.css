@@ -1,0 +1,86 @@
+.clear  {
+  clear: both;
+}
+
+
+/* 상단 필터 선택 바 */
+
+h1 {
+  font-size: 70px;
+  font-family: Sunflower_Bold;
+  margin-top: 150px;
+  margin-left: 90px;
+}
+
+.filter p {
+  float: left;
+  font-size: 35px;
+  margin-top: 20px;
+  margin-right: 45px;  
+  padding: 20px 30px;
+  border-radius: 50px;
+  font-family: SeoulNamsanCed_Medium;
+}
+
+.filter {
+  margin-left: 90px;
+}
+
+
+
+/* 필터 선택 전, 후 style */
+
+.selected {
+  color: #57B85F;
+  background-color: #EFFAF0;
+  border: 1px solid #57B85F;
+}
+
+.NotSelected {
+  color: #9C9C9C;
+  border: 1px solid #9C9C9C;
+  background-color: none;
+}
+
+/* 기록 박스들 */
+.boxes {
+  /* border: 1px solid black; */
+  width: 880px;
+  height: 1250px;
+  margin-left: 97px;
+  margin-top: 30px;
+  overflow: auto;
+}
+
+.box {
+  /* background-color: #D9D9D9; */
+  background: rgb(217,217,217);
+  background: linear-gradient(180deg, rgba(217,217,217,1) 35%, rgba(255,255,255,1) 100%);
+  width: 350px;
+  height: 350px;
+  float: left;
+  margin-right: 90px;
+  margin-bottom: 70px;
+  /* border: 1px solid red; */
+  
+}
+
+.box h1{
+  font-size: 40px;
+  margin-top: 20px;
+  margin-left: 280px;
+  color: white;
+}
+
+.box p {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Sen;
+  font-size: 45px;
+  text-align: center;
+  margin-top: 200px;
+  background-color: white;
+  width: 200px;
+}
+
