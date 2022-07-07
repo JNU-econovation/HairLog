@@ -8,8 +8,6 @@ module.exports = () => {
 
     local();
     
-    jwt();
-
     passport.serializeUser((user, done) => {
       done(null, user.id);
     });

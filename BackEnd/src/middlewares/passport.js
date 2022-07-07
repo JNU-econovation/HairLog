@@ -55,25 +55,6 @@ const authenticate = (req, res, next) => {
     })(req, res, next);
 };
 
-const jwtAuthenticate = async function(req, res, next) {
-  passport.authenticate('jwt', (authError, user) => {
-    if (authError) {
-      console.error(authError);
-      return next(authError);
-    };
-    if (!user) {
-      return res.send({code : 404, msg :'NO EXISTING USER'});
-    };
-    return req.login(user, (loginError) => {
-      if (loginError) {
-        console.error(loginError);
-        return next(loginError);
-      };
-      return res.send({code : 200, msg : user})
-    });
-  })(req, res, next)
-}
-
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
       next();
