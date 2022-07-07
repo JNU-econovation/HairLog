@@ -27,14 +27,4 @@ const getDesigner = async function (record) {
     return designer
 }
 
-const getDesignerWith = async function (record) {
-    let temp = await Promise.all(record.map(res => { return res.rows }))
-    let i = 0;
-    let designer = {}
-    for( let record of temp){
-        designer[i] = await Promise.all(record.map(res => Designer.findOne({where : {id :res.DesignerId}, raw : true})))
-        i++
-    }
-    return designer
-}
-module.exports = { isDesigner, isNotDesigner, getDesigner, getDesignerWith}
+module.exports = { isDesigner, isNotDesigner, getDesigner,}
