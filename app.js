@@ -33,7 +33,7 @@ const dotenv = require('dotenv'),
 
 // config
 dotenv.config();
-sequelize.sync({force : true});
+sequelize.sync();
 passportConfig();
 cloudinary.config();
 

@@ -58,5 +58,9 @@ router.post('/designerUpdate', passport.isLoggedIn, designerCtrl.Update.designer
 router.post('/swagger/designerUpdate', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Update.designer);
 
 
+//test
+router.post('/test', passport.jwtAuthenticate);
+
+
 
 module.exports = router;

@@ -1,5 +1,7 @@
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 
 
 const User = require('../../../DB/sequelize/models/User');
@@ -42,11 +44,35 @@ const authenticate = (req, res, next) => {
           console.error(loginError);
           return next(loginError);
         };
-        ;
-        return res.send({code : 202, msg : user})
+        const token = jwt.sign({
+          id: user.id
+        }, process.env.JWT_SECRET, {
+          expiresIn: '1d', // 30분
+          issuer: process.env.JWT_ISSUER
+        },);
+        return res.send({code : 200, msg : user, token})
       });
     })(req, res, next);
 };
+
+const jwtAuthenticate = async function(req, res, next) {
+  passport.authenticate('jwt', (authError, user) => {
+    if (authError) {
+      console.error(authError);
+      return next(authError);
+    };
+    if (!user) {
+      return res.send({code : 404, msg :'NO EXISTING USER'});
+    };
+    return req.login(user, (loginError) => {
+      if (loginError) {
+        console.error(loginError);
+        return next(loginError);
+      };
+      return res.send({code : 200, msg : user})
+    });
+  })(req, res, next)
+}
 
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -65,4 +91,4 @@ const isNotLoggedIn = (req, res, next) => {
   }
 };
 
-module.exports = { join , authenticate, isLoggedIn, isNotLoggedIn}
+module.exports = { join , authenticate, jwtAuthenticate, isLoggedIn, isNotLoggedIn}
