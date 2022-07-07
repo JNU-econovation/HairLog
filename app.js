@@ -1,7 +1,7 @@
 // npm  
 const createError = require('http-errors'),
     express = require('express'),
-    nunjucks = require('nunjucks')
+    nunjucks = require('nunjucks'),
     path = require('path'),
     morgan = require('morgan'),
     cookieParser = require('cookie-parser'),
@@ -21,7 +21,7 @@ const logger = require('./BackEnd/logger/logger.js');
 // router
 const indexRouter = require('./BackEnd/src/routes/index'),
     usersRouter = require('./BackEnd/src/routes/users'),
-    apiTest = require('./BackEnd/src/routes/api')
+    apiRouter = require('./BackEnd/src/routes/api'),
     apiDocsRouter = require('./BackEnd/src/routes/api-docs');
 
 
@@ -76,13 +76,7 @@ app.use(session({
   },
 }));
 app.use(cookieParser());
-const redisClient = redis.createClient({
-  host : process.env.REDIS_HOST,
-  port : process.env.REDIS_PORT,
-  password: process.env.REDIS_PASSWORD,
-  legacyMode: true
-});
-redisClient.connect()
+const redisClient = redis.createClient({url: process.env.REDIS_URL});
 const sessionOption = {
   resave: false,
   saveUninitialized: false,
@@ -105,7 +99,7 @@ app.use(passport.session());
 // add router
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api', cors(), apiTest);
+app.use('/api', cors(), apiRouter);
 app.use('/api-docs', apiDocsRouter);
 
 
