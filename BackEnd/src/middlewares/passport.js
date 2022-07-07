@@ -13,14 +13,14 @@ const join = async (req, res, next) => {
         return res.redirect('/existUser');
       }
       const hash = await bcrypt.hash(userPassword, 12);
-      await User.create({
+      let user = await User.create({
         userEmail,
         userPassword : hash,
         userName,
         userSex,
         userCycle,
       });
-      return res.send({code : 200, msg : "Join Success"});
+      return res.send({code : 200, msg : user});
     } catch (error) {
       console.error(error);
       return next(error);
@@ -43,7 +43,7 @@ const authenticate = (req, res, next) => {
           return next(loginError);
         };
         ;
-        return res.send({code : 202, msg : "Login Success"})
+        return res.send({code : 202, msg : user})
       });
     })(req, res, next);
 };
