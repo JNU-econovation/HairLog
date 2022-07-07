@@ -49,7 +49,7 @@ app.set('httpPort', process.env.PORT || 3000);
 // view engine setup
 app.set('views', path.join(__dirname, '/BackEnd/views'));
 app.set('view engine', 'jade');
-app.set('view engine', 'html');
+// app.set('view engine', 'html');
 // nunjucks.configure(path.join(__dirname, '/FrontEnd/html'), {
 //   express: app,
 //   watch: true
