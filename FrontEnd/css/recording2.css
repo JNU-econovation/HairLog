@@ -1,0 +1,96 @@
+
+.hidden {
+  display: none;
+}
+
+.clear  {
+  clear: both;
+}
+
+.record2 {
+  position: absolute;
+}
+
+/* 앞뒤 버튼 */
+
+.btns {
+  margin-top: 175px;
+}
+
+.backRecord1 {
+  border: none;
+  background-color: white;
+  color: #D9D9D9;
+  margin-left: 10%;
+  font-size: 40px;
+}
+
+.goRecord3 {
+  border: none;
+  background-color: #57B85F;
+  border-radius: 50%;
+  color: white;
+  margin-right: 10%;
+  float: right;
+  font-size: 40px;
+}
+
+
+/* 이미지 미리보기 */
+
+.preview {
+  width: 650px;
+  height: 650px;
+  background-color: #D9D9D9;
+  margin: auto;
+  margin-top: 200px;
+  border-radius: 40px;
+  position:relative;
+}
+
+.imgAdd {
+  width: 100px;
+  border-radius: 30px;
+  margin: 275px;
+  position: absolute;
+  border-radius: 20px;
+}
+
+/* 화면에 표시될 이미지 */
+
+.uploadIMG {
+  /* width: 650px; */
+  position:absolute;
+  max-width:100%; max-height:100%;
+  width:650px; height:auto;
+  margin:auto;
+  top:0; bottom:0; left:0; right:0;
+}
+
+/* 만족도 폼 */
+.ch {
+  font-size: 50px;
+  font-family: SeoulNamsanCed_ExtraBold;
+  text-align: center;
+  margin-top: 200px;
+}
+
+.satisfactionForm input {
+  width: 600px;
+  display: block;
+	margin-left: auto;
+	margin-right: auto;
+  
+  accent-color: #57B85F;
+}
+
+.range5 {
+  margin-left: 185px;
+}
+
+.satisfactionForm form p {
+
+  float: left;
+  font-size: 30px;
+  margin-right: 130px;
+}

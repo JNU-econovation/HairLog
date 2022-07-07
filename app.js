@@ -33,7 +33,7 @@ const dotenv = require('dotenv'),
 
 // config
 dotenv.config();
-sequelize.sync({force : true});
+sequelize.sync();
 passportConfig();
 cloudinary.config();
 
@@ -47,13 +47,13 @@ app.set('httpPort', process.env.PORT || 3000);
 
 
 // view engine setup
-app.set('views', path.join(__dirname, '/BackEnd/views'));
-app.set('view engine', 'jade');
-// app.set('view engine', 'html');
-// nunjucks.configure(path.join(__dirname, '/BackEnd/views'), {
-//   express: app,
-//   watch: true
-// });
+// app.set('views', path.join(__dirname, '/BackEnd/views'));
+// app.set('view engine', 'jade');
+app.set('view engine', 'html');
+nunjucks.configure(path.join(__dirname, '/FrontEnd/html'), {
+  express: app,
+  watch: true
+});
 
 // add middleware
 if(process.env.NODE_ENV==='production'){
@@ -65,7 +65,7 @@ if(process.env.NODE_ENV==='production'){
 }
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '/BackEnd/public')));
+app.use(express.static(path.join(__dirname, '/FrontEnd')));
 app.use(session({
   resave : false,
   saveUninitialized : false,

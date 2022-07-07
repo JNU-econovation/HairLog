@@ -1,5 +1,6 @@
 const passport = require('passport'),
-    local = require('./localStrategy');
+    local = require('./localStrategy'),
+    jwt = require('./jwtStrategy');
 
 const User = require('../../DB/sequelize/models/User');
 
@@ -7,6 +8,8 @@ module.exports = () => {
 
     local();
     
+    jwt();
+
     passport.serializeUser((user, done) => {
       done(null, user.id);
     });
