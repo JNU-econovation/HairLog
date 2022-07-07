@@ -18,50 +18,75 @@ const show = require('@jongjun/console')
 
 const Post = {
 
-    record  : async function(req, res) {
-        try {
-            let category = req.params.category
-            let user = await User.findOne({where : {id : req.user.id}});
-            let record = await Post.recordWithDesigner(req, category, user)
-            let imgInformation = await imageFunction.urls(req.files)
-            let {urls, public_id} = imgInformation
-            let urlQuery = await imageFunction.query(urls)
-            let idQuery = await imageFunction.query(public_id)
-            let image = await record.createImage(urlQuery)
-            await record.createCloudImage(idQuery)
-            let result = {record, image}
-            result[`${category}`] = await Post.recordCategory(req, category, record)
-            res.send({code :200, result})
-        } catch(e) {
-            res.send({code : 404, msg : e})
-        }
+    record : async function(req, res) {
+        let user = await User.findOne({where : {id : req.user.id}});
+        let designer = await Post.designerInstance(req);
+        let record = await Post.recordInstance(req, user, designer);
+        let category = await Post.categoryInstance(req, record);
+        let img = await Post.imgInstance(req, record);
+        let result = {user, designer, record, category, img}
+        return res.send({code : 200, result})
+    },
 
+    designerInstance : async function(req) {
+
+        let { designerName }= req.body;
+        if(designerName){
+            let designer = await Designer.findOne({where : { designerName }})
+            return designer
+        } else {
+            throw new Error("올바른 디저이너를 선택해주세요")
+        }
+    },
+
+    recordInstance : async function(req, userInstance, designerInstance){
+        let category = req.params.category;
+        if(designerInstance) {
+            let {recordDate, recordCost, recordEtc, recordGrade} = req.body;
+            let record = await Record.create({ recordDate, recordCost, recordCategory : category, recordEtc, recordGrade, UserId : userInstance.id, DesignerId : designerInstance.id })
+            return record
+        } else {
+            let {recordDate, recordCost, recordEtc, recordGrade} = req.body;
+            let record = await Record.create({ recordDate, recordCost, recordCategory : category, recordEtc, recordGrade, UserId : userInstance.id })
+            return record
+        }
+    },
+
+    categoryInstance : async function(req, recordInstance) {
+        let type = req.params.category;
+        let info = await Post.recordCategory(req, recordInstance);
+        let category = {type, info}
+        return category
+    },
+
+    imgInstance : async function(req, recordInstance) {
+        let imgInformation = await imageFunction.urls(req.files)
+        let {urls, public_id} = imgInformation
+        let urlQuery = await imageFunction.query(urls)
+        let idQuery = await imageFunction.query(public_id)
+        let url = await recordInstance.createImage(urlQuery)
+        let id = await recordInstance.createCloudImage(idQuery)
+        let img = {url, id}
+        return img
     },
     
     // inner function
-    recordWithDesigner :  async function(req, category, userInstance) {
-        let { designerName }= req.body;
-        if(designerName){
-            return ifDesigner.isDesigner(req,category,userInstance)
-        } else {
-            return ifDesigner.isNotDesigner(req,category,userInstance)
-        }
-    },
     
-    recordCategory : async function(req, category, record) {
+    recordCategory : async function(req, recordInstance) {
+        let category = req.params.category;
         switch (category) 
         {
             case "cut" : 
                 let { cutName, cutLength } = req.body
-                let cut = await Cut.create({ cutName , cutLength , RecordId : record.id })
+                let cut = await Cut.create({ cutName , cutLength , RecordId : recordInstance.id })
                 return cut;
             case "perm" : 
                 let { permName, permTime, permHurt } = req.body 
-                let perm = await Perm.create({ permName, permTime, permHurt, RecordId : record.id })
+                let perm = await Perm.create({ permName, permTime, permHurt, RecordId : recordInstance.id })
                 return perm
             case "dyeing" : 
                 let { dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt } = req.body 
-                let dyeing = await Dyeing.create({ dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt, RecordId : record.id })
+                let dyeing = await Dyeing.create({ dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt, RecordId : recordInstance.id })
                 return dyeing
             default :
             throw new Error('올바른 목록을 선택해 주세요!');
@@ -72,15 +97,12 @@ const Post = {
 
 const Get = {
 
-    // 디자이너 유무에 따른 디자이너 정보 제공 구현
-
     main : async function(req, res) {
         return classifyCategory.latest(req, res)
     },
 
-    instanceResult : async function(req, res) {
-        let category = req.params.category
-        return classifyCategory.categoryResult(req, res, category)
+    instance : async function(req, res) {
+        return classifyCategory.instanceResult(req, res)
     },
 
     classification : async function(req, res) {
