@@ -43,12 +43,6 @@ const authenticate = (req, res, next) => {
           console.error(loginError);
           return next(loginError);
         };
-        const token = jwt.sign({
-          id: user.id
-        }, process.env.JWT_SECRET, {
-          expiresIn: '1d', // 30분
-          issuer: process.env.JWT_ISSUER
-        },);
         return res.send({code : 200, msg : user, token})
       });
     })(req, res, next);
