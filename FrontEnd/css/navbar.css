@@ -1,0 +1,101 @@
+/* 본문, navbar 분리 */
+
+.content, .record1, .record2, .record3 {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 22rem;
+}
+
+.navbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22rem;
+}
+
+/* navbar 요소 정렬 */
+
+.zero {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  /* border: 1px solid black; */
+  margin-left: 389px;
+  border-radius: 50%;
+  box-shadow: 0px -10px 10px 1px #c7c7c7;
+  z-index: 2;
+}
+
+.one {
+  width: 150px;
+  height: 150px;
+  background-color: #57B85F;
+  margin-top: 25px;
+  margin-left: 414px;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.two {
+  width: 200px;
+  height: 200px;
+  /* background-color: crimson; */
+  float: left;
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
+.three {
+  width: 200px;
+  height: 200px;
+  /* background-color: rgb(67, 255, 236); */
+  margin-left: 678px;
+  margin-top: 100px;
+}
+
+.parent {
+  position: relative;
+}
+
+.zero, .one, .two, .three, .four {
+  position: absolute;
+}
+
+.two, .three {
+  text-align: center;
+}
+
+.four {
+  width: 978px;
+  height: 350px;
+  /* border: 1px solid red; */
+  margin-top: 70px;
+  border-radius: 50px;
+  border-bottom: none;
+  box-shadow: 10px 10px 10px 15px #c7c7c7;
+}
+
+.one img {
+  width: 70px;
+  height: 70px;
+  margin-top: 40px;
+  margin-left: 40px;
+
+}
+
+.two img, .three img {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 0px;
+}
+
+.navbar p {
+  margin-top: 0px;
+  font-size: 33px;
+  font-family: NotoSansKR_Medium;
+  color: #737373;
+}
+
