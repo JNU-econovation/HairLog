@@ -83,7 +83,6 @@ const redisClient  = createClient({
   password : process.env.REDIS_PASSWORD,
   legacyMode: true
 });
-redisClient .connect().catch(console.error)
 
 const sessionOption = {
   resave: false,
