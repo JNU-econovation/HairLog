@@ -18,17 +18,18 @@ const Get = {
     
     user : async function(req, res) {
       try {
-        let userName =  req.user.userName;
+        let userId =  req.user.id;
         let recordDesc = await Record.findOne({ attributes: ['recordDate'], order : [['recordDate', 'DESC']], where : {UserId : req.user.id}})
         let result = {}
         if(recordDesc != null) {
             let recentDate = new Date(recordDesc.recordDate)
             let nextDate = new Date( recentDate.getFullYear(), recentDate.getMonth(), recentDate.getDate() + req.user.userCycle)  
-            result = { userName, recentDate, nextDate }
+            result = { userId, recentDate, nextDate }
+            res.send({code :200, result})
         } else {
-            result = { userName }
+            result = { userId }
+            res.send({code :200, result})
         }
-        res.send({code :200, result})
       } catch(e) {
         res.send({code : 404, msg : e})
       }
