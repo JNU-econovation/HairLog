@@ -1,6 +1,5 @@
 const passport = require('passport'),
     local = require('./localStrategy'),
-    jwt = require('./jwtStrategy');
 
 const User = require('../../DB/sequelize/models/User');
 
