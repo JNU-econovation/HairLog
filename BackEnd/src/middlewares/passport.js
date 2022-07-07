@@ -72,4 +72,4 @@ const isNotLoggedIn = (req, res, next) => {
   }
 };
 
-module.exports = { join , authenticate, jwtAuthenticate, isLoggedIn, isNotLoggedIn}
+module.exports = { join , authenticate, isLoggedIn, isNotLoggedIn}
