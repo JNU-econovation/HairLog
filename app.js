@@ -76,7 +76,7 @@ app.use(session({
   },
 }));
 app.use(cookieParser());
-const redisClient = redis.createClient({url: process.env.REDIS_URL});
+const client = redis.createClient({url: process.env.REDIS_URL});
 const sessionOption = {
   resave: false,
   saveUninitialized: false,
@@ -85,7 +85,7 @@ const sessionOption = {
     httpOnly: true,
     secure: false,
   },
-  store:  new RedisStore({ client: redisClient }),
+  store:  new RedisStore({ client }),
 };
 if(process.env.NODE_ENV==='production'){
   sessionOption.proxy=true;
