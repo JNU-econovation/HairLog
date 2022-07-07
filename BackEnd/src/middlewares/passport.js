@@ -43,7 +43,7 @@ const authenticate = (req, res, next) => {
           console.error(loginError);
           return next(loginError);
         };
-        return res.send({code : 200, msg : user, token})
+        return res.send({code : 200, msg : user})
       });
     })(req, res, next);
 };
