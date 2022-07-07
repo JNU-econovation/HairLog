@@ -1,5 +1,5 @@
 const passport = require('passport'),
-    local = require('./localStrategy'),
+    local = require('./localStrategy');
 
 const User = require('../../DB/sequelize/models/User');
 
