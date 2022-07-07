@@ -160,7 +160,7 @@ function imgPreview(event) {
     
 
     console.log(fileInput.files[0]);
-    console.log(type(fileInput.files[0]));
+
 
 
   };
@@ -215,7 +215,9 @@ function clickBTN() {
   for(let i=0;i<hairList.length;i++){
     if(hairList[i].classList.contains("selected")){
       if(i===0){  //컷 선택
-        url='https://hairlogapi.herokuapp.com/api/record/cut';
+
+        url='http://localhost:3000/api/record/cut';
+
         whatCut();
         HairRecord = {
           // url:url,
@@ -229,7 +231,7 @@ function clickBTN() {
         }
       }
       else if(i===1) { //펌 선택
-        url='https://hairlogapi.herokuapp.com/api/record/perm';
+        url='http://localhost:3000/api/record/perm';
         whatPerm();
         HairRecord = {
           // url:url,
@@ -244,7 +246,7 @@ function clickBTN() {
         }
       }
       else if(i===2) {  //염색 선택
-        url='https://hairlogapi.herokuapp.com/api/record/dyeing';
+        url='http://localhost:3000/api/record/dyeing';
         whatDying();
         HairRecord = {
           // url:url,
@@ -267,6 +269,7 @@ function clickBTN() {
 
   // form 서버로 전송
 
+
   for (let key in HairRecord) {  // data 객체 안에 있는 모든 요소를 data 객체의 key value 형태로 적재
     formData.append(key, HairRecord[key]);
 
@@ -284,14 +287,19 @@ function clickBTN() {
   }
 
   fetch(url, {
+
     // headers: {                   
     //   'Content-Type': 'multipart/form-data'     
     // },
+
     method: 'POST',
     body: formData,   
   }) 
     .then((response) => response.text())
-    .then((result) => { console.log(result); });
+    .then((result) => { 
+      console.log(result); 
+      
+    });
 
 
 }
