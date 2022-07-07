@@ -11,6 +11,7 @@ const passport = require('../middlewares/passport'),
     designerCtrl = require('../middlewares/designer'),
     privacyCrtl = require('../middlewares/privacy');
 
+
 //POST   
 router.post('/join', passport.join);
 router.post('/swagger/join', sign.checkApiKey, passport.join);
@@ -56,7 +57,6 @@ router.post('/swagger/recordUpdate/:category', sign.checkApiKey, passport.isLogg
 
 router.post('/designerUpdate', passport.isLoggedIn, designerCtrl.Update.designer);
 router.post('/swagger/designerUpdate', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Update.designer);
-
 
 
 module.exports = router;

@@ -1,7 +1,7 @@
 // npm  
 const createError = require('http-errors'),
     express = require('express'),
-    nunjucks = require('nunjucks')
+    nunjucks = require('nunjucks'),
     path = require('path'),
     morgan = require('morgan'),
     cookieParser = require('cookie-parser'),
@@ -21,7 +21,7 @@ const logger = require('./BackEnd/logger/logger.js');
 // router
 const indexRouter = require('./BackEnd/src/routes/index'),
     usersRouter = require('./BackEnd/src/routes/users'),
-    apiTest = require('./BackEnd/src/routes/api')
+    apiRouter = require('./BackEnd/src/routes/api'),
     apiDocsRouter = require('./BackEnd/src/routes/api-docs');
 
 
@@ -47,13 +47,13 @@ app.set('httpPort', process.env.PORT || 3000);
 
 
 // view engine setup
-// app.set('views', path.join(__dirname, '/BackEnd/views'));
-// app.set('view engine', 'jade');
-app.set('view engine', 'html');
-nunjucks.configure(path.join(__dirname, '/FrontEnd/html'), {
-  express: app,
-  watch: true
-});
+app.set('views', path.join(__dirname, '/BackEnd/views'));
+app.set('view engine', 'jade');
+// app.set('view engine', 'html');
+// nunjucks.configure(path.join(__dirname, '/FrontEnd/html'), {
+//   express: app,
+//   watch: true
+// });
 
 // add middleware
 if(process.env.NODE_ENV==='production'){
@@ -65,7 +65,7 @@ if(process.env.NODE_ENV==='production'){
 }
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '/FrontEnd')));
+app.use(express.static(path.join(__dirname, '/BackEnd')));
 app.use(session({
   resave : false,
   saveUninitialized : false,
@@ -76,12 +76,7 @@ app.use(session({
   },
 }));
 app.use(cookieParser());
-const redisClient = redis.createClient({
-  url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
-  password: process.env.REDIS_PASSWORD,
-  legacyMode: true
-});
-redisClient.connect()
+const redisClient = redis.createClient({url: process.env.REDIS_URL});
 const sessionOption = {
   resave: false,
   saveUninitialized: false,
@@ -102,9 +97,10 @@ app.use(passport.session());
 
 
 // add router
+app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api', cors(), apiTest);
+app.use('/api', apiRouter);
 app.use('/api-docs', apiDocsRouter);
 
 
