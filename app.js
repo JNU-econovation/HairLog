@@ -99,7 +99,7 @@ app.use(passport.session());
 // add router
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api', cors(), apiRouter);
+app.use('/api', apiRouter);
 app.use('/api-docs', apiDocsRouter);
 
 
