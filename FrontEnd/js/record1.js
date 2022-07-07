@@ -160,6 +160,7 @@ function imgPreview(event) {
     
 
     console.log(fileInput.files[0]);
+    console.log(type(fileInput.files[0]));
 
 
   };
@@ -266,12 +267,11 @@ function clickBTN() {
 
   // form 서버로 전송
 
-  
   for (let key in HairRecord) {  // data 객체 안에 있는 모든 요소를 data 객체의 key value 형태로 적재
     formData.append(key, HairRecord[key]);
 
   }
-  formData.append("addIMG",fileInput.files[0]);
+  formData.append("Image",fileInput.files[0]);
 
 
   //formData key 값 확인
@@ -284,9 +284,9 @@ function clickBTN() {
   }
 
   fetch(url, {
-    headers: {
-      'Content-Type': 'multipart/form-data'     
-    },
+    // headers: {                   
+    //   'Content-Type': 'multipart/form-data'     
+    // },
     method: 'POST',
     body: formData,   
   }) 
