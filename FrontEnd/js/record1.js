@@ -216,7 +216,9 @@ function clickBTN() {
     if(hairList[i].classList.contains("selected")){
       if(i===0){  //컷 선택
 
-        url='https://hairlogapi.herokuapp.com/api/record/cut';
+
+        url='http://localhost:3000/api/record/cut';
+
 
         whatCut();
         HairRecord = {
@@ -231,7 +233,7 @@ function clickBTN() {
         }
       }
       else if(i===1) { //펌 선택
-        url='https://hairlogapi.herokuapp.com/api/record/perm';
+        url='http://localhost:3000/api/record/perm';
         whatPerm();
         HairRecord = {
           // url:url,
@@ -246,7 +248,7 @@ function clickBTN() {
         }
       }
       else if(i===2) {  //염색 선택
-        url='https://hairlogapi.herokuapp.com/api/record/dyeing';
+        url='http://localhost:3000/api/record/dyeing';
         whatDying();
         HairRecord = {
           // url:url,
@@ -296,7 +298,10 @@ function clickBTN() {
     body: formData,   
   }) 
     .then((response) => response.text())
-    .then((result) => { console.log(result); });
+    .then((result) => { 
+      console.log(result); 
+      
+    });
 
 
 }
