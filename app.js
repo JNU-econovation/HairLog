@@ -65,7 +65,7 @@ if(process.env.NODE_ENV==='production'){
 }
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '/FrontEnd')));
+app.use(express.static(path.join(__dirname, '/BackEnd')));
 app.use(session({
   resave : false,
   saveUninitialized : false,
