@@ -1,0 +1,79 @@
+.record3 {
+  position: absolute;
+}
+
+/* 앞뒤 버튼 */
+
+.btns {
+  margin-top: 175px;
+}
+
+.backRecord2 {
+  border: none;
+  background-color: white;
+  color: #D9D9D9;
+  margin-left: 10%;
+  font-size: 40px;
+}
+
+
+
+/* 추가 기록 */
+.addition {
+  margin-top: 100px;
+}
+
+.addition p {
+  font-size: 50px;
+  font-family: SeoulNamsanCed_Bold;
+  margin-left: 90px;
+  margin-bottom: 30px;
+}
+
+.line{
+  width: 790px;
+  border-bottom: 5px solid #57B85F;
+  margin-top: 0px;
+}
+
+.additionalRecord {
+  margin-left: 90px;
+  width: 780px;
+  height: 500px;
+  font-size: 50px;
+}
+
+.addition div {
+  width: 700px;
+  margin-left: 90px;
+  margin-top: 80px;
+
+}
+
+.addition textarea {
+  font-size: 30px;
+  font-family: SeoulNamsanCed_Medium;
+  border: 1px solid #737373;
+  padding: 30px;
+  border-radius: 20px;
+  height: 800px;
+}
+
+/* 완료 버튼 */
+
+
+.submit button {
+  border: none;
+  
+  width: 780px;
+  height: 120px;
+  margin-left: 90px;
+  margin-top: 80px;
+  font-size: 50px;
+  font-family: SeoulNamsanCed_Medium;
+  border-radius: 30px;
+  background-color: #57B85F;
+  color: white;
+  margin-bottom: 40%;
+  position: fixed;
+}
