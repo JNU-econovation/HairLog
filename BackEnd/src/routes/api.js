@@ -12,8 +12,6 @@ const passport = require('../middlewares/passport'),
     privacyCrtl = require('../middlewares/privacy');
 
 
-router.use(cors())  
-  
 //POST   
 router.post('/join', passport.join);
 router.post('/swagger/join', sign.checkApiKey, passport.join);
