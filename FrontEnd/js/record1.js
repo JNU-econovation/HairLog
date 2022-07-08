@@ -100,7 +100,7 @@ function whatPerm() {
 
   for (let i=0;i<hurtList.length;i++){
     if(hurtList[i].classList.contains("selected")){
-      permHurt = hurtList[i].innerHTML;
+      permHurt = hurtList[i].value;
     }  
   }
 
@@ -124,7 +124,7 @@ function whatDying() {
 
   for (let i=0;i<hurtList.length;i++){
     if(hurtList[i].classList.contains("selected")){
-      dyingHurt = hurtList[i].innerHTML;
+      dyingHurt = hurtList[i].value;
     }  
   }
   console.log(dyingColor, dyingDecolor,dyingTime, dyingHurt);
