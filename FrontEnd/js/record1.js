@@ -217,7 +217,7 @@ function clickBTN() {
       if(i===0){  //컷 선택
 
 
-        url='http://hairlogapi.herokuapp.com/api/record/cut';
+        url='https://hairlogapi.herokuapp.com/api/record/cut';
 
 
         whatCut();
@@ -233,7 +233,7 @@ function clickBTN() {
         }
       }
       else if(i===1) { //펌 선택
-        url='http://hairlogapi.herokuapp.com/api/record/perm';
+        url='https://hairlogapi.herokuapp.com/api/record/perm';
         whatPerm();
         HairRecord = {
           // url:url,
