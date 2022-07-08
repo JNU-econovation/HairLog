@@ -7,13 +7,13 @@ const createError = require('http-errors'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
     { createClient } = require("redis"),
-    RedisStore = require('connect-redis')(session),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     helmet = require('helmet'),
     cors = require('cors')
     hpp = require('hpp');
 
+let RedisStore = require('connect-redis')(session);
 
 const logger = require('./BackEnd/logger/logger.js');
 
