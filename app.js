@@ -79,8 +79,6 @@ app.use(cookieParser());
 
 const redisClient = redis.createClient({url: process.env.REDIS_URL});
 
-redisClient.connect();
-
 const sessionOption = {
   resave: false,
   saveUninitialized: false,
