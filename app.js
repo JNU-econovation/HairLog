@@ -77,8 +77,8 @@ app.use(session({
 }));
 app.use(cookieParser());
 
-const redisClient = redis.createClient({
-  url: process.env.REDIS_URL,
+const redisClient = redis.createClient(
+  `redis://${process.env.REDIS_URI}`,{
   password : process.env.REDIS_PASSWORD
 });
 
