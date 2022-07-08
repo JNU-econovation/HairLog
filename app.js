@@ -81,6 +81,7 @@ let redisOpt;
  if(process.env.NODE_ENV==='production') {
   redisOpt = {
     url: process.env.REDIS_URL,
+    password : process.env.REDIS_PASSWORD,
     legacyMode : true,
   }
   return redisOpt
