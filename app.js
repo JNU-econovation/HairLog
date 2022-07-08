@@ -78,18 +78,23 @@ app.use(session({
 app.use(cookieParser());
 
 let redisOpt;
- if(process.env.NODE_ENV==='production') {
-  redisOpt = {
-    url: process.env.REDIS_URL,
-    password : process.env.REDIS_PASSWORD,
-    legacyMode : true,
-  }
-  return redisOpt
-}
+//  if(process.env.NODE_ENV==='production') {
+//   redisOpt = {
+//     url: process.env.REDIS_URL,
+//     password : process.env.REDIS_PASSWORD,
+//     legacyMode : true,
+//   }
+//   return redisOpt
+// }
+// redisOpt = {
+//   host: process.env.REDIS_HOST,
+//   port: process.env.REDIS_PORT,
+//   password: process.env.REDIS_PASSWORD,
+//   legacyMode : true,
+// }
 redisOpt = {
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-  password: process.env.REDIS_PASSWORD,
+  url: process.env.REDIS_URL,
+  password : process.env.REDIS_PASSWORD,
   legacyMode : true,
 }
 const client = redis.createClient(redisOpt);
