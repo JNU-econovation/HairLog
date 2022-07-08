@@ -6,12 +6,11 @@ const createError = require('http-errors'),
     morgan = require('morgan'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
-    redis = require('redis'),
-    RedisStore = require('connect-redis')(session),
+    mysqlStore = require('express-mysql-session')(session),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     helmet = require('helmet'),
-    cors = require('cors')
+    cors = require('cors'),
     hpp = require('hpp');
 
 
@@ -76,7 +75,7 @@ app.use(session({
   },
 }));
 app.use(cookieParser());
-const redisClient = redis.createClient({url: process.env.REDIS_URL});
+
 const sessionOption = {
   resave: false,
   saveUninitialized: false,
@@ -85,8 +84,9 @@ const sessionOption = {
     httpOnly: true,
     secure: false,
   },
-  store:  new RedisStore({ client: redisClient }),
 };
+
+
 if(process.env.NODE_ENV==='production'){
   sessionOption.proxy=true;
   // sessionOption.cookie.secure=true;
