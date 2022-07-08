@@ -76,14 +76,12 @@ app.use(session({
   },
 }));
 app.use(cookieParser());
-let redisClient  = createClient({
-  url: process.env.REDIS_URL,
-  host : process.env.REDIS_HOST,
-  port : process.env.REDIS_PORT ,
-  password : process.env.REDIS_PASSWORD,
-  legacyMode: true
-});
-redisClient.connect().catch(console.error)
+
+const redisClient = redis.createClient({url: process.env.REDIS_URL});
+
+redisClient.on('error', (err) => console.log('Redis Client Error', err));
+
+await redisClient.connect();
 
 const sessionOption = {
   resave: false,
