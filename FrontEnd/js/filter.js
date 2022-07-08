@@ -12,7 +12,7 @@ function idToImg(arr, Id) {
   }
 }
 
-//객체 전달받아서 화면에 띄우는 함수
+//객체 전달받아서 화면에 띄우는 함수(최신순,컷,펌,염색)
 function renderBox(exDatas) {
   const boxes = document.querySelector(".boxes");
 
@@ -42,6 +42,60 @@ function renderBox(exDatas) {
     
   }
 }
+
+
+// 디자이너 화면에 띄우는 함수
+function renderDesignerBox(exDatas) {
+  const boxes = document.querySelector(".boxes");
+  // console.log(exDatas.result.designerList.count);
+  // console.log(exDatas.result.img[0]);
+
+  for(let i=0;i<exDatas.result.designerList.count;i++) {                    // 디자이너 이름 p에 저장
+    let name = exDatas.result.designerList.rows[i].designerName;
+
+    const newBigBox = document.createElement('div');    
+    newBigBox.classList.add("bigBox");      
+
+    const newDesigner = document.createElement('p');
+    newDesigner.innerHTML = name;
+    newBigBox.appendChild(newDesigner);
+
+    boxes.appendChild(newBigBox);
+
+    
+    // 여기
+    const designerTemp = exDatas.result.recordByDesigner[i];    
+
+    for(let j=0;j<designerTemp.count;j++){
+      const temp = designerTemp.rows[j];
+
+      const newBox = document.createElement('div');   // 사각형 만들고 html에 넣기
+      newBox.classList.add("box");
+      const boxID = temp.id;        // box에 id값 줘서 나중에 구분
+
+      newBox.id = boxID;    
+
+      boxes.appendChild(newBox);
+      
+      
+      const myURL = idToImg(exDatas.result.img[i].rows , boxID);
+      newBox.style.backgroundImage = `url(${myURL})`;
+
+      const newX = document.createElement('h1');     // x 표시 만들기
+      newX.innerText = "✖";
+      newBox.appendChild(newX);
+
+      let rcDate = temp.recordDate.replaceAll('-','.').slice(2);
+      const newDate = document.createElement('p');
+      newDate.innerText = rcDate;
+      newBox.appendChild(newDate);
+    }
+
+  }
+
+}
+
+
 
 const latestURL = 'http://localhost:3000/api/main/latest';
 const cutURL = 'http://localhost:3000/api/main/cut';
@@ -132,14 +186,37 @@ function selectF4() {
   goFetch(dyeingURL);
 }
 
+
+
 //디자이너별
 function selectF5() {
   onclick(filter_designer);
 
   // 디자이너 화면 렌더링
-  goFetch(designerURL);
+  // goFetch(designerURL);
+
+  // 화면 초기화
+  const Reset = document.querySelector(".boxes");
+  Reset.innerHTML = '';
+
+
+  let Datas;
+
+  fetch(designerURL) 
+  .then((response) => response.text())
+  .then((result) => { 
+    Datas = JSON.parse(result);
+    console.log(Datas); 
+    // console.log(Datas.result.designerList.count);
+
+    if(Datas.code === 200){
+      renderDesignerBox(Datas);
+    }
+    
+  });
 
 }
+
 
 filter_date.addEventListener("click", selectF1);
 filter_cut.addEventListener("click", selectF2);
