@@ -77,18 +77,23 @@ app.use(session({
 }));
 app.use(cookieParser());
 
-const client = redis.createClient({
+let redisOpt;
+ if(process.env.NODE_ENV==='production') {
+  redisOpt = {
+    url: process.env.REDIS_URL,
+    legacyMode : true,
+  }
+  return redisOpt
+}
+redisOpt = {
   host: process.env.REDIS_HOST,
   port: process.env.REDIS_PORT,
   password: process.env.REDIS_PASSWORD,
   legacyMode : true,
-});
+}
+const client = redis.createClient(redisOpt);
 
 client.connect()
-
-client.on("error", (err) =>{
-  console.log(err);
-})
 
 const sessionOption = {
   resave: false,
