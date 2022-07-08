@@ -10,8 +10,7 @@ const createError = require('http-errors'),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     helmet = require('helmet'),
-    cors = require('cors');
-const { cli } = require('winston/lib/winston/config/index.js');
+    cors = require('cors'),
     hpp = require('hpp');
 
 let RedisStore = require('connect-redis')(session);
