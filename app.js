@@ -77,9 +77,9 @@ app.use(session({
 }));
 app.use(cookieParser());
 const redisClient  = createClient({
-  url: process.env.REDIS_URL,
-  // host : process.env.REDIS_HOST,
-  // port : process.env.REDIS_PORT ,
+  // url: process.env.REDIS_URL,
+  host : process.env.REDIS_HOST,
+  port : process.env.REDIS_PORT ,
   password : process.env.REDIS_PASSWORD,
   legacyMode: true
 });
