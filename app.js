@@ -6,14 +6,13 @@ const createError = require('http-errors'),
     morgan = require('morgan'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
-    redis = require("redis"),
+    mysqlStore = require('express-mysql-session')(session),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     helmet = require('helmet'),
     cors = require('cors'),
     hpp = require('hpp');
 
-let RedisStore = require('connect-redis')(session);
 
 const logger = require('./BackEnd/logger/logger.js');
 
@@ -58,8 +57,8 @@ app.set('view engine', 'jade');
 // add middleware
 if(process.env.NODE_ENV==='production'){
   app.use(morgan('combined'));
-  // app.use(helmet());
-  // app.use(hpp());
+  app.use(helmet());
+  app.use(hpp());
 } else {
   app.use(morgan('dev'));
 }
@@ -77,29 +76,14 @@ app.use(session({
 }));
 app.use(cookieParser());
 
-let redisOpt;
-//  if(process.env.NODE_ENV==='production') {
-//   redisOpt = {
-//     url: process.env.REDIS_URL,
-//     password : process.env.REDIS_PASSWORD,
-//     legacyMode : true,
-//   }
-//   return redisOpt
-// }
-// redisOpt = {
-//   host: process.env.REDIS_HOST,
-//   port: process.env.REDIS_PORT,
-//   password: process.env.REDIS_PASSWORD,
-//   legacyMode : true,
-// }
-redisOpt = {
-  url: process.env.REDIS_URL,
-  password : process.env.REDIS_PASSWORD,
-  legacyMode : true,
+let mysqlSessionOpt = {
+  host : process.env.SEQUELIZE_PRODUCTION_HOST,
+  user : process.env.SEQUELIZE_PRODUCTION_ID,
+  password : process.env.SEQUELIZE_PRODUCTION_PASSWORD,
+  database : process.env.SEQUELIZE_PRODUCTION_DBNAME
 }
-const client = redis.createClient(redisOpt);
 
-client.connect()
+let sessionStore = new mysqlStore(mysqlSessionOpt)
 
 const sessionOption = {
   resave: false,
@@ -109,8 +93,10 @@ const sessionOption = {
     httpOnly: true,
     secure: false,
   },
-  store:  new RedisStore({ client }),
+  store:  sessionStore
 };
+
+
 if(process.env.NODE_ENV==='production'){
   sessionOption.proxy=true;
   // sessionOption.cookie.secure=true;
