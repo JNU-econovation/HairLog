@@ -10,7 +10,8 @@ const createError = require('http-errors'),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     helmet = require('helmet'),
-    cors = require('cors')
+    cors = require('cors');
+const { cli } = require('winston/lib/winston/config/index.js');
     hpp = require('hpp');
 
 let RedisStore = require('connect-redis')(session);
@@ -80,8 +81,13 @@ app.use(cookieParser());
 const client = redis.createClient({
   host: process.env.REDIS_HOST,
   port: process.env.REDIS_PORT,
-  password: process.env.REDIS_PASSWORD
+  password: process.env.REDIS_PASSWORD,
+  legacyMode : true,
 });
+
+client.on("error", (err) =>{
+  console.log(err);
+})
 
 const sessionOption = {
   resave: false,
