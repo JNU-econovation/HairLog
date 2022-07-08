@@ -76,15 +76,6 @@ app.use(session({
 }));
 app.use(cookieParser());
 
-let mysqlSessionOpt = {
-  host : process.env.SEQUELIZE_PRODUCTION_HOST,
-  user : process.env.SEQUELIZE_PRODUCTION_ID,
-  password : process.env.SEQUELIZE_PRODUCTION_PASSWORD,
-  database : process.env.SEQUELIZE_PRODUCTION_DBNAME
-}
-
-let sessionStore = new mysqlStore(mysqlSessionOpt)
-
 const sessionOption = {
   resave: false,
   saveUninitialized: false,
@@ -93,7 +84,6 @@ const sessionOption = {
     httpOnly: true,
     secure: false,
   },
-  store:  sessionStore
 };
 
 
