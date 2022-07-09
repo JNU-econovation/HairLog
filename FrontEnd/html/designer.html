@@ -13,9 +13,9 @@
     <div class="content">   
       
       <div class="upBar">
-        <h1>Hair Log</h1>
+        <h1 class="test">Hair Log</h1>
         <p class="p">디자이너 목록</p>
-        <img src="../imgs/plus.png" onclick="showPopup(false)">
+        <img src="../imgs/plus.png" onclick="showPopup(1)">    <!-- 추가 버튼 -->
         <p class="p1"></p>
       </div>
 
@@ -69,8 +69,9 @@
     <!-- 띄워질 팝업창 -->
     <div id="popup" class="hide">
       <div class="popContent">
-        <button class="back" onclick="closePopup(false)">⬅</button>
-        <button class="complete" onclick="closePopup(true)">추가</button>
+        <button class="back" onclick="closePopup(0)">⬅</button>
+        <button id="add" class="hidden complete" onclick="closePopup(1)">완료</button>
+        <button id="edit" class="hidden complete">수정</button>
 
         <div class="clear"></div>
 

@@ -88,6 +88,7 @@
 .box .deleteBtn {
   margin-top: 20px;
   font-size: 35px;
+  float: left;
 }
 
 /* 선호 디자이너 */

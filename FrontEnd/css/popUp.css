@@ -1,4 +1,7 @@
 
+.hidden {
+  display: none;
+}
 /* 디자이너 추가 팝업 */
 
 .popContent button {
@@ -45,9 +48,10 @@
 
 .popContent .complete {
   border: none;
+  position: absolute;
   background-color: #EFFAF0;
   font-size: 38px;
-  margin-left: 450px;
+  margin-left: 500px;
   font-family: SeoulNamsanCed_ExtraBold;
   padding: 10px;
 
