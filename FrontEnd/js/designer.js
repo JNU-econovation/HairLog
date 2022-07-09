@@ -6,8 +6,6 @@ function showPopup() {
 }
 
 // 디자이너 삭제 함수
-const whatDelete = document.querySelector(".editBtn");
-
 function deleteDesigner(id) {
   const DesignerId = Number(id.slice(1));
   const ID = {DesignerId};
@@ -19,15 +17,13 @@ function deleteDesigner(id) {
   method: 'POST',
   body: JSON.stringify(ID), 
   }) 
-.then((response) => response.text())
-.then((result) => { 
-  Datas = JSON.parse(result);
-  // console.log(Datas); 
-  showDesigners();
+  .then((response) => response.text())
+  .then((result) => { 
+    Datas = JSON.parse(result);
+    // console.log(Datas); 
+    showDesigners();
   });
-
 }
-
 
 
 // 디자이너 추가
@@ -67,15 +63,61 @@ function closePopup(isSave) {
   }
 }
 
+// 디자이너 수정 (별 눌러서 선호도 수정) 
+function editFav(id) {
+  const DesignerId = Number(id.slice(1));
+  // console.log(DesignerId);
+
+  let temp,designerName,designerSalon,designerFav;
+
+  for(let i=0;i<dArray.length;i++){     // id에 맞는 디자이너,미용실 이름 가져오기
+    if(DesignerId === dArray[i].id){
+      temp = dArray[i];
+      designerName = temp.designerName;
+      designerSalon = temp.designerSalon;
+    }
+  }
+
+  if(temp.designerFav===1){   // 선호 디자이너인 경우
+    designerFav = 0;
+  }
+  else{
+    designerFav = 1;
+  }
+
+  const editData = {DesignerId,designerName,designerSalon,designerFav};  // 보낼 객체
+
+  fetch('http://localhost:3000/api/designerUpdate', {        // 서버로 보내고 결과 출력
+  headers: {
+    'Content-Type': 'application/json'       
+  },
+  method: 'POST',
+  body: JSON.stringify(editData), 
+  }) 
+  .then((response) => response.text())
+  .then((result) => { 
+    Datas = JSON.parse(result);
+    // console.log(result);
+    // console.log(Datas); 
+    showDesigners();
+  });
+
+}
+
+// 임시 배열 (매번 초기화)
+let dArray = [];
+
 // 배열 전달 받아서 box 만드는 함수
 function mkBoxes(exDatas) {
   // console.log(exDatas.designerList);
 
   const Boxes = document.querySelector(".boxes");
   Boxes.innerHTML = "";   //초기화
+  dArray = [];
 
   for(let i=0;i<exDatas.designerList.length;i++){
     let temp = exDatas.designerList[i];
+    dArray.push(temp);
 
     const newBox = document.createElement('div');          //box 만들기
     newBox.classList.add("box");
@@ -84,10 +126,12 @@ function mkBoxes(exDatas) {
     const newStar = document.createElement('p');           // box에 별 넣기
     newStar.innerHTML = '☆';
     newStar.classList.add('star');
+    newStar.id = `s${temp.id}`;
     if(temp.designerFav){                 // 선호 디자이너 -> 별 노랑색
       newStar.classList.add('fav');
     }
     newBox.appendChild(newStar);
+    newStar.addEventListener("click", event => editFav(`${newStar.id}`));       // fav 수정 이벤트 등록
 
     const newDesigner = document.createElement('p');         // box에 디자이너 넣기
     newDesigner.innerHTML = `${temp.designerName} 디자이너`;
@@ -112,8 +156,9 @@ function mkBoxes(exDatas) {
     newBox.appendChild(newDeleteBtn);
     newDeleteBtn.addEventListener("click", event => deleteDesigner(`${newDeleteBtn.id}`));       // 삭제 이벤트 등록 (함수 파라미터 가져오기)
 
-
+    
   }
+  // console.log(dArray);
 }
 
 // 디자이너 전달받아서 목록 시각화 함수
