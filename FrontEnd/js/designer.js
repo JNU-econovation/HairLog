@@ -5,6 +5,30 @@ function showPopup() {
   popup.classList.remove('hide');
 }
 
+// 디자이너 삭제 함수
+const whatDelete = document.querySelector(".editBtn");
+
+function deleteDesigner(id) {
+  const DesignerId = Number(id.slice(1));
+  const ID = {DesignerId};
+
+  fetch('http://localhost:3000/api/designerDelete', {        // 서버로 보내고 결과 출력
+  headers: {
+    'Content-Type': 'application/json'       
+  },
+  method: 'POST',
+  body: JSON.stringify(ID), 
+  }) 
+.then((response) => response.text())
+.then((result) => { 
+  Datas = JSON.parse(result);
+  // console.log(Datas); 
+  showDesigners();
+  });
+
+}
+
+
 
 // 디자이너 추가
 // 나중에 팝업 취소하고 닫기, 저장하고 닫기 두개로 나누기
@@ -77,13 +101,16 @@ function mkBoxes(exDatas) {
 
     const newEditBtn = document.createElement('p');        // box에 편집버튼 넣기
     newEditBtn.innerHTML = '✂';
+    newEditBtn.id = `e${temp.id}`;
     newEditBtn.classList.add("editBtn");
     newBox.appendChild(newEditBtn);
 
     const newDeleteBtn = document.createElement('p');      // box에 삭제버튼 넣기 
     newDeleteBtn.innerHTML = '✖';
+    newDeleteBtn.id = `d${temp.id}`;
     newDeleteBtn.classList.add('deleteBtn');
     newBox.appendChild(newDeleteBtn);
+    newDeleteBtn.addEventListener("click", event => deleteDesigner(`${newDeleteBtn.id}`));       // 삭제 이벤트 등록 (함수 파라미터 가져오기)
 
 
   }
@@ -100,12 +127,9 @@ function showDesigners() {
 
       if(Datas.code===200){
         mkBoxes(Datas);
-      }
-
-  
+      }  
     });
 }
 
 showDesigners();
-
 
