@@ -1,4 +1,25 @@
 
+// 유저별 디자이너 보여주기
+const designer_A = document.querySelector(".A");
+const designer_B = document.querySelector(".B");
+const designer_C = document.querySelector(".C");
+const designer_List = [designer_A, designer_B, designer_C];
+
+let Datas;
+fetch('http://localhost:3000/api/main/designer') 
+  .then((response) => response.text())
+  .then((result) => { 
+    Datas = JSON.parse(result);
+    console.log(Datas); 
+    console.log(Datas.result.designerList.rows);
+
+    for(let i=0;i<Datas.result.designerList.count;i++){
+      designerList[i].innerHTML = Datas.result.designerList.rows[i].designerName;
+      console.log(designerList[i].innerHTML);
+    }
+
+    
+  });
 
 
 
@@ -52,10 +73,6 @@ let recordEtc;
 
 // 디자이너 선택값 가져오기
 function whoDesign() {
-  const designerA = document.querySelector(".A");
-  const designerB = document.querySelector(".B");
-  const designerC = document.querySelector(".C");
-  const designerList = [designerA, designerB, designerC];
 
   const popup = document.querySelector('#popup');     // 직접입력 팝업창
   const directName = document.querySelector(".D");    //직접 입력한 디자이너 이름
@@ -64,9 +81,9 @@ function whoDesign() {
     designer = directName.innerHTML;
   }
   else {                                               // 직접 입력한 디자이너 선택
-    for (let i=0;i<designerList.length;i++){
-      if(designerList[i].classList.contains("selected")){
-        designer = designerList[i].innerHTML;
+    for (let i=0;i<designer_List.length;i++){
+      if(designer_List[i].classList.contains("selected")){
+        designer = designer_List[i].innerHTML;
       }  
     }
   }
