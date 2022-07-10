@@ -28,4 +28,7 @@ router.get('/register_2', passport.isLoggedIn, function(req, res, next) {
   res.render('register_2');
 });
 
+router.get("/designer", passport.isLoggedIn, function(req, res, next) {
+  res.render('designer');
+})
 module.exports = router;
