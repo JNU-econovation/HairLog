@@ -11,7 +11,8 @@ const createError = require('http-errors'),
     passport = require('passport'),
     helmet = require('helmet'),
     cors = require('cors'),
-    hpp = require('hpp');
+    hpp = require('hpp'),
+    csp = require('helmet-csp');
 
 
 const logger = require('./BackEnd/logger/logger.js');
@@ -59,6 +60,15 @@ if(process.env.NODE_ENV==='production'){
   app.use(morgan('combined'));
   app.use(helmet());
   app.use(hpp());
+  app.use(
+    csp({
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+      },
+    })
+  );
 } else {
   app.use(morgan('dev'));
 }
