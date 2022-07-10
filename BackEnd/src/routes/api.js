@@ -58,5 +58,8 @@ router.post('/swagger/recordUpdate/:category', sign.checkApiKey, passport.isLogg
 router.post('/designerUpdate', passport.isLoggedIn, designerCtrl.Update.designer);
 router.post('/swagger/designerUpdate', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Update.designer);
 
+router.post('/privacyUpdate/user', passport.isLoggedIn, privacyCrtl.Update.privacy)
+router.post('/swagger/privacyUpdate/user', sign.checkApiKey, passport.isLoggedIn, privacyCrtl.Update.privacy)
+
 
 module.exports = router;
