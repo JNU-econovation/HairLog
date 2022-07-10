@@ -1,9 +1,13 @@
-.clear  {
+.Clear  {
   clear: both;
   width: 800px;
   border-bottom: 5px solid #57B85F;
   margin-left: 100px;
   margin-bottom: 200px;
+}
+
+.clear  {
+  clear: both;
 }
 
 /* up */

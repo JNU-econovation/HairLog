@@ -6,6 +6,7 @@
     <link href="../css/fonts.css" rel="stylesheet" />
     <link href="../css/navbar.css" rel="stylesheet"/>
     <link href="../css/mypage.css" rel="stylesheet"/>
+    <link href="../css/popUp.css" rel="stylesheet"/>
   </head>
 
   <body>
@@ -14,9 +15,9 @@
         <h1 class="test">Hair Log</h1>
         <img src="../imgs/ch_blue.png">
         <div class="pBox"></div>
-        <p class="editBtn"   onclick="location.href='../html/editProfile.html'">✂</p>
+        <p class="editBtn"  onclick="showPopup()">✂</p>
   
-        <div class="clear"></div>
+        <div class="Clear"></div>
       </div>  
       
       <div class="Date">
@@ -60,6 +61,28 @@
         </div>  
       </div>
     </div>
+
+
+
+    <!-- 띄워질 팝업창 -->
+    <div id="popup" class="hide">
+      <div class="popContent">
+        <button class="back" onclick="closePopup(0)">⬅</button>
+        <button class="complete" onclick="closePopup(1)">완료</button>
+
+        <div class="clear"></div>
+
+        <div class="inputPW">
+          <p>현재 비밀번호 :</p>
+          <input id="inputPW" type="text" placeholder=""><br>
+        </div>
+
+        <div class="clear"></div>
+
+
+      </div>
+    </div>
+
 
     <script src="../js/mypage.js"></script>
   </body>
