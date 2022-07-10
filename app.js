@@ -60,18 +60,18 @@ if(process.env.NODE_ENV==='production'){
   app.use(morgan('combined'));
   app.use(helmet());
   app.use(hpp());
-  helmet.contentSecurityPolicy({
-    directives: {
-        "default-src":[ "'self'" ],
-        "base-uri":[ "'self'" ],
-        "font-src":[ "'self'", "https:", "data:" ],
-        "frame-ancestors":[ "'self'" ],
-        "img-src":[ "'self'", "data:", "http://res.cloudinary.com"],
-        "script-src":[ "'self'" ],
-        "script-src-attr":[ "'none'" ],
-        "style-src":[ "'self'", "https:", "'unsafe-inline'" ],
-    }
-});
+  // helmet.contentSecurityPolicy({
+  //   directives: {
+  //       "default-src":[ "'self'" ],
+  //       "base-uri":[ "'self'" ],
+  //       "font-src":[ "'self'", "https:", "data:" ],
+  //       "frame-ancestors":[ "'self'" ],
+  //       "img-src":[ "'self'", "data:", "http://res.cloudinary.com"],
+  //       "script-src":[ "'self'" ],
+  //       "script-src-attr":[ "'none'" ],
+  //       "style-src":[ "'self'", "https:", "'unsafe-inline'" ],
+  //   }
+  // });
   // app.use(
   //   csp({
   //     directives: {
