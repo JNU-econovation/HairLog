@@ -58,7 +58,20 @@ function closePopup(num) {
   else{
     console.log("취소");
   }
-
-
-
 }
+
+
+
+fetch('http://localhost:3000/api/result')  
+    .then((response) => response.text())
+    .then((result) => { 
+      Datas = JSON.parse(result);
+      // console.log(result);
+      console.log(Datas); 
+
+      // if(Datas.code===200){
+      //   showUser(Datas);
+      // }
+
+
+    });
