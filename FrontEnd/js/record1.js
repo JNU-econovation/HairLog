@@ -6,7 +6,7 @@ const designer_C = document.querySelector(".C");
 const designer_List = [designer_A, designer_B, designer_C];
 
 let Datas;
-fetch('http://localhost:3000/api/main/designer') 
+fetch('https://hairlogapi.herokuapp.com/api/main/designer') 
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);

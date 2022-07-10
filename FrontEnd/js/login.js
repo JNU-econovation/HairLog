@@ -20,7 +20,7 @@ async function getLogin(event) {           //async 써서 해라
 
 
 
-let Result = await fetch('http://localhost:3000/api/authenticate', {
+let Result = await fetch('https://hairlogapi.herokuapp.com/api/authenticate', {
 
 // let Result = await fetch('https://hairlogapi.herokuapp.com/api/authenticate', {
 
