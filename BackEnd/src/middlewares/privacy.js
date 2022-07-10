@@ -7,7 +7,7 @@ const User = require('../../../DB/sequelize/models/User'),
       Dyeing = require('../../../DB/sequelize/models/Dyeing');
 
 const { Op } = require("sequelize");
-
+const bcrypt = require('bcrypt');
 const show = require('@jongjun/console')
 
 const Post = {
@@ -41,22 +41,23 @@ const Get = {
 
 const Update = {
 
-    privacy : async function(req, res) {
+    privacy : async function(req, res,next) {
         const { userEmail, userPassword, userName, userSex, userCycle } = req.body;
         try {
           const exUser = await User.findOne({ where: { userEmail } });
           if (exUser) {
-            return res.send({code : 404, msg : "EXISTING USER"});
+            const hash = await bcrypt.hash(userPassword, 12);
+            let updatePrivacy = await User.update({
+              userEmail,
+              userPassword : hash,
+              userName,
+              userSex,
+              userCycle,
+            },
+            {where : {id : req.user.id}});
+            return res.send({code : 200, updatePrivacy});
           }
-          const hash = await bcrypt.hash(userPassword, 12);
-          let updatePrivacy = await User.update({
-            userEmail,
-            userPassword : hash,
-            userName,
-            userSex,
-            userCycle,
-          });
-          return res.send({code : 200, updatePrivacy});
+          return res.send({code: 404, msg : "No Existing User"})
         } catch (error) {
           console.error(error);
           return next(error);
