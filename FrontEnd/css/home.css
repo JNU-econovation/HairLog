@@ -84,3 +84,11 @@ h1 {
   width: 200px;
 }
 
+
+/* 디자이너별 표시 */
+.bigBox p{
+  font-size: 50px;
+  font-family: SeoulNamsanCed_Bold;
+  clear: both;
+
+}

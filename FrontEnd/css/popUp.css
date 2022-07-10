@@ -1,4 +1,7 @@
 
+.hidden {
+  display: none;
+}
 /* 디자이너 추가 팝업 */
 
 .popContent button {
@@ -25,7 +28,7 @@
 
 #popup .popContent {
   width: 80%;
-  height: 30%;
+  height: 20%;
   padding: 20px;
   border: 3px solid black;
   background: white;
@@ -38,16 +41,17 @@
   background-color: white;
   color: #9C9C9C;
   margin-left: 10%;
-  margin-top: 80px;
+  margin-top: 20px;
   font-size: 40px;
   margin-bottom: 30px;
 }
 
 .popContent .complete {
   border: none;
+  position: absolute;
   background-color: #EFFAF0;
   font-size: 38px;
-  margin-left: 450px;
+  margin-left: 500px;
   font-family: SeoulNamsanCed_ExtraBold;
   padding: 10px;
 
@@ -59,6 +63,7 @@
   font-family: SeoulNamsanCed_Bold;
   margin-left: 10%;
   float: left;
+  margin-top: 20px;
 }
 
 .inputDesigner input, .inputPlace input {
@@ -66,7 +71,7 @@
   font-family: SeoulNamsanCed_ExtraBold;
   color: #9C9C9C;
   font-size: 45px;
-  margin-top: 45px;
+  margin-top: 20px;
   margin-left: 30px;
   padding-bottom: 10px;
   border-bottom: 1px solid #9C9C9C;
