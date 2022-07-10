@@ -29,6 +29,7 @@ function renderBox(exDatas) {
     
     const myURL = idToImg(exDatas.result.img.rows , boxID);
     newBox.style.backgroundImage = `url(${myURL})`;
+    newBox.style.backgroundSize ="350px";
 
     const newX = document.createElement('h1');     // x 표시 만들기
     newX.innerText = "✖";
