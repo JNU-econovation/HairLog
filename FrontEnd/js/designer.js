@@ -31,7 +31,7 @@ function deleteDesigner(id) {
   const DesignerId = Number(id.slice(1));
   const ID = {DesignerId};
 
-  fetch('http://localhost:3000/api/designerDelete', {        // 서버로 보내고 결과 출력
+  fetch('https://hairlogapi.herokuapp.com/api/designerDelete', {        // 서버로 보내고 결과 출력
   headers: {
     'Content-Type': 'application/json'       
   },
@@ -60,7 +60,7 @@ function closePopup(isSave) {
     const designerData = { designerName, designerSalon, fav };          // 전송할 객체
     // console.log(designerData);
 
-    fetch('http://localhost:3000/api/designer', {        // 서버로 보내고 결과 출력
+    fetch('https://hairlogapi.herokuapp.com/api/designer', {        // 서버로 보내고 결과 출력
       headers: {
         'Content-Type': 'application/json'       
       },
@@ -113,7 +113,7 @@ function editAll(id) {
 
   const editData = {DesignerId,designerName,designerSalon,designerFav};  // 보낼 객체
 
-  fetch('http://localhost:3000/api/designerUpdate', {        // 서버로 보내고 결과 출력
+  fetch('https://hairlogapi.herokuapp.com/api/designerUpdate', {        // 서버로 보내고 결과 출력
   headers: {
     'Content-Type': 'application/json'       
   },
@@ -157,7 +157,7 @@ function editFav(id) {
 
   const editData = {DesignerId,designerName,designerSalon,designerFav};  // 보낼 객체
 
-  fetch('http://localhost:3000/api/designerUpdate', {        // 서버로 보내고 결과 출력
+  fetch('https://hairlogapi.herokuapp.com/api/designerUpdate', {        // 서버로 보내고 결과 출력
   headers: {
     'Content-Type': 'application/json'       
   },
@@ -236,7 +236,7 @@ function mkBoxes(exDatas) {
 
 // 디자이너 전달받아서 목록 시각화 함수
 function showDesigners() {
-  fetch('http://localhost:3000/api/designer')  
+  fetch('https://hairlogapi.herokuapp.com/api/designer')  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);

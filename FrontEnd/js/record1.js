@@ -6,7 +6,11 @@ const designer_C = document.querySelector(".C");
 const designer_List = [designer_A, designer_B, designer_C];
 
 let Datas;
+
 fetch('http://localhost:3000/api/favDesigner') 
+
+// fetch('https://hairlogapi.herokuapp.com/api/main/designer') 
+
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
@@ -232,7 +236,9 @@ function clickBTN() {
     if(hairList[i].classList.contains("selected")){
       if(i===0){  //컷 선택
 
-        url='http://localhost:3000/api/record/cut';
+
+        url='https://hairlogapi.herokuapp.com/api/record/cut';
+
 
         whatCut();
         HairRecord = {
@@ -247,7 +253,7 @@ function clickBTN() {
         }
       }
       else if(i===1) { //펌 선택
-        url='http://localhost:3000/api/record/perm';
+        url='https://hairlogapi.herokuapp.com/api/record/perm';
         whatPerm();
         HairRecord = {
           // url:url,
@@ -262,7 +268,7 @@ function clickBTN() {
         }
       }
       else if(i===2) {  //염색 선택
-        url='http://localhost:3000/api/record/dyeing';
+        url='https://hairlogapi.herokuapp.com/api/record/dyeing';
         whatDying();
         HairRecord = {
           // url:url,
