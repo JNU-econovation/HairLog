@@ -6,15 +6,18 @@ const designer_C = document.querySelector(".C");
 const designer_List = [designer_A, designer_B, designer_C];
 
 let Datas;
-fetch('https://hairlogapi.herokuapp.com/api/main/designer') 
+
+fetch('http://localhost:3000/api/favDesigner') 
+
+// fetch('https://hairlogapi.herokuapp.com/api/main/designer') 
+
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
     console.log(Datas); 
-    console.log(Datas.result.designerList.rows);
 
-    for(let i=0;i<Datas.result.designerList.count;i++){
-      designerList[i].innerHTML = Datas.result.designerList.rows[i].designerName;
+    for(let i=0;i<Datas.result.length;i++){
+      designerList[i].innerHTML = Datas.result[i].designerName;
       console.log(designerList[i].innerHTML);
     }
 
