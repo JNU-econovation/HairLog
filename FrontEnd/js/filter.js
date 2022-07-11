@@ -39,9 +39,6 @@ function renderBox(exDatas) {
     newDate.innerText = rcDate;
     newBox.appendChild(newDate);
 
-    const yunseong = document.createElement('img');
-    yunseong.src = 'https://res.cloudinary.com/jongjun/image/upload/v1657433870/hairlog_record/4_nanakim1657433864300_lqtcdi.png';
-    newBox.appendChild(yunseong);
   }
 }
 
@@ -118,7 +115,6 @@ function goFetch(url){
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    // console.log(result);
     console.log(Datas); 
 
     if(Datas.code === 200){
