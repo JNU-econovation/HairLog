@@ -26,10 +26,10 @@ const Post = {
 }
 
 const Get = {
-
+ 
     designer : async function(req, res) {
         try {
-            let user = await User.findOne({wherer : {id : req.user.id}});
+            let user = await User.findOne({where : {id : req.user.id}});
             let designerList = await user.getDesigners({raw : true})
             res.send({code : 200, designerList})
         } catch(e) {
