@@ -71,17 +71,20 @@ const designer = async function(req, res) {
 }
 
 
-// const eachResult = async function(req, res, clickRecord) {
+const eachResult = async function(req, res) {
 
-//     let user = await User.findOne({wherer : {id : req.user.id}});
-//     let designer = await Designer.findOne({where : {id : clickRecord.DesignerId}}) 다시 작성
-//     let record = await Record.findAndCountAll({where : {id : clickRecord.id}})
-//     let categoryRecord = await classify(res, record.rows[0].recordCategory, record)
-//     let image = record.getImage()
-//     let result = {user, designer, record, categoryRecord, image}
-//     res.send({code : 200, result})
+    let user = await User.findOne({wherer : {id : req.user.id}});
+    let record = await Record.findAndCountAll({raw : true, limit : 1, where : {id : req.query.id}, order : [['recordDate', 'DESC']]});
+    let designer = await ifDesigner.getDesigner(record.rows);
+    if(record.count != 0){
+        let category = await classify(record.rows[0].id, record.rows[0].recordCategory)
+        let img = await getImg(record, 1);
+        let result = {user, designer, record, category, img}
+        return res.send({code : 200, result})
+    }
+    res.send({code : 404, msg : `${category} 기록이 없습니다!`})
 
-// }
+}
 
 // inner use
 
@@ -128,4 +131,4 @@ const getImg = async function(recordInstance, recordCount) {
     
 }
    
-module.exports = { latest, designer, category, instanceResult}
+module.exports = { latest, designer, category, instanceResult, eachResult}
