@@ -60,18 +60,13 @@ if(process.env.NODE_ENV==='production'){
   app.use(morgan('combined'));
   app.use(helmet());
   app.use(hpp());
-  app.use(
-    csp({
-      useDefaults: true,
-      directives: {
-        defaultSrc: ["'self'", "*"],
-        scriptSrc: ["'self'", "*"],
-        objectSrc: ["'none'"],
-        upgradeInsecureRequests: [],
-      },
-      reportOnly: false,
-    })
-  );
+  app.use(csp({
+    directives: {
+      defaultSrc: ["https://hairlogapi.herokuapp.com/"],
+      scriptSrc: ["https://hairlogapi.herokuapp.com/"],
+      imgSrc: ["https://hairlogapi.herokuapp.com/", 'https://res.cloudinary.com/jongjun/image/upload/*'],
+    }
+  }))
 } else {
   app.use(morgan('dev'));
 }
