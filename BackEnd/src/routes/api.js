@@ -19,6 +19,9 @@ router.post('/swagger/join', sign.checkApiKey, passport.join);
 router.post('/authenticate', passport.authenticate);
 router.post('/swagger/authenticate', sign.checkApiKey, passport.authenticate);
 
+router.post('/checkPassword', passport.checkPassword);
+router.post('/swagger/checkPassword', sign.checkApiKey, passport.checkPassword);
+
 router.post('/designer', passport.isLoggedIn, designerCtrl.Post.designer)  
 router.post('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Post.designer)
 

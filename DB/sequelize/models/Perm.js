@@ -8,15 +8,12 @@ module.exports = class Perm extends Sequelize.Model {
         allowNull: false,
       },
       permTime: {
-        type: DataTypes.INTEGER(40),
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
       permHurt: {
-        type: DataTypes.INTEGER(40),
+        type: DataTypes.STRING(100),
         allowNull: false,
-        validate: {
-            max : 3,
-        },
       },
     }, {
       sequelize,

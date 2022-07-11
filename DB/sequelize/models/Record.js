@@ -16,7 +16,7 @@ module.exports = class Record extends Sequelize.Model {
         },
       },
       recordCost: {
-        type: DataTypes.INTEGER(40),
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
       recordCategory: {

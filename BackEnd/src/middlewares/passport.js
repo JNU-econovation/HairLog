@@ -1,5 +1,7 @@
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+const { Op } = require("sequelize");
+
 
 
 
@@ -65,4 +67,11 @@ const isNotLoggedIn = (req, res, next) => {
   }
 };
 
-module.exports = { join , authenticate, isLoggedIn, isNotLoggedIn}
+const checkPassword = async (req, res, next) => {
+  const { userPassword } = req.body;
+  const hash = await bcrypt.hash(userPassword, 12);
+  let check = User.findOne({where : {[Op.and] : [{UserId : req.user.id}, {userPassword : hash}]}})
+
+}
+
+module.exports = { join , authenticate, isLoggedIn, isNotLoggedIn, checkPassword}
