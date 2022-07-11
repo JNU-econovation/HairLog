@@ -1,0 +1,65 @@
+.Clear  {
+  clear: both;
+  width: 800px;
+  border-bottom: 5px solid #57B85F;
+  margin-left: 100px;
+  margin-bottom: 200px;
+}
+
+.clear  {
+  clear: both;
+}
+
+/* up */
+
+h1 {
+  font-size: 70px;
+  font-family: Sunflower_Bold;
+  margin-top: 150px;
+  margin-left: 90px;
+}
+
+.up img {
+  width: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+
+.pBox {
+  /* border: 1px solid red; */
+  font-size: 70px;
+  font-family: SeoulNamsanCed_ExtraBold;
+  text-align: center;
+  width: 500px;
+  height: 69.6px;
+  margin-left: 250px;
+  margin-top: 80px;
+  margin-bottom: 30px;
+  float: left;
+}
+
+.editBtn {
+  float: left;
+  font-size: 35px;
+  margin-left: 90px;
+  margin-top: 110px;
+  margin-bottom: 0px;
+}
+
+/* Date */
+.Date .p {
+  font-size: 45px;
+  font-family: SeoulNamsanCed_ExtraBold;  
+  text-align: center;
+  margin-top: 150px;
+}
+
+#recent, #next {
+  font-size: 75px;
+  font-family: SeoulNamsanCed_ExtraBold;  
+  text-align: center;
+  margin-top: 0px;
+  height: 74.4px;
+}

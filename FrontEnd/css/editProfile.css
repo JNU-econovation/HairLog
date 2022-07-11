@@ -1,0 +1,72 @@
+
+.clear  {
+  clear: both;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 앞뒤 버튼 */
+
+.btns {
+  margin-top: 175px;
+}
+
+.back {
+  border: none;
+  background-color: white;
+  color: #D9D9D9;
+  margin-left: 10%;
+  font-size: 40px;
+}
+
+.complete {
+  border: none;
+  background-color: #EFFAF0;
+  border-radius: 10px;
+  margin-right: 10%;
+  float: right;
+  font-size: 40px;
+  padding: 10px;
+  font-family: SeoulNamsanCed_ExtraBold;
+}
+
+
+.btns img {
+  width: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 70px;
+}
+
+/* 이름, 시술주기 */
+.userName p, .userCycle p, .password p{
+  font-family: SeoulNamsanCed_Bold;
+  font-size: 45px;
+  margin-left: 90px;
+  margin-bottom: 40px;
+}
+
+.userName input,.userCycle input, #newPW {
+  width: 750px;
+  margin-left: 90px;
+  color: #9C9C9C;
+  font-size: 40px;
+  font-family: SeoulNamsanCed_Medium;
+  border: 1px solid #9C9C9C;
+  padding: 25px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+
+/* 비밀번호 설정 */
+
+
+.password p {
+  margin-bottom: 20px;
+}
+
+
+

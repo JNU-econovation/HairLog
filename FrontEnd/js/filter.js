@@ -26,9 +26,17 @@ function renderBox(exDatas) {
     newBox.id = boxID;    
     boxes.appendChild(newBox);
 
-    
-    const myURL = idToImg(exDatas.result.img.rows , boxID);
+
+    // 배경이미지 넣기
+    let myURL;
+    if(exDatas.result.img.count===1){     // 이미지가 기록 개수가 하나일 때
+      myURL = exDatas.result.img.rows.img1;
+    }
+    else {
+      myURL = idToImg(exDatas.result.img.rows , boxID);   
+    }
     newBox.style.backgroundImage = `url(${myURL})`;
+    newBox.style.backgroundSize ="350px";
 
     const newX = document.createElement('h1');     // x 표시 만들기
     newX.innerText = "✖";
@@ -67,6 +75,7 @@ function renderDesignerBox(exDatas) {
 
     for(let j=0;j<designerTemp.count;j++){
       const temp = designerTemp.rows[j];
+      // console.log(temp);
 
       const newBox = document.createElement('div');   // 사각형 만들고 html에 넣기
       newBox.classList.add("box");
@@ -76,9 +85,22 @@ function renderDesignerBox(exDatas) {
 
       boxes.appendChild(newBox);
       
-      
-      const myURL = idToImg(exDatas.result.img[i].rows , boxID);
+      // 배경이미지 넣기
+      // console.log(exDatas.result.recordByDesigner[i].count, boxID, i);
+
+      let myURL;
+      if(exDatas.result.recordByDesigner[i].count===1){     // 이미지가 기록 개수가 하나일 때
+        myURL = exDatas.result.img[i].rows.img1;
+      }
+      else {
+        myURL = idToImg(exDatas.result.img[i].rows , boxID);
+      }
       newBox.style.backgroundImage = `url(${myURL})`;
+
+      
+
+      newBox.style.backgroundImage = `url(${myURL})`;
+      newBox.style.backgroundSize ="350px";
 
       const newX = document.createElement('h1');     // x 표시 만들기
       newX.innerText = "✖";

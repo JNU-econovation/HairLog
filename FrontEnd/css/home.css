@@ -55,6 +55,7 @@ h1 {
 .box {
   /* background-color: #D9D9D9; */
   background: rgb(217,217,217);
+  background-size: 350px 350px;
   background: linear-gradient(180deg, rgba(217,217,217,1) 35%, rgba(255,255,255,1) 100%);
   width: 350px;
   height: 350px;
