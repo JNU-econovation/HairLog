@@ -8,19 +8,16 @@ module.exports = class Dyeing extends Sequelize.Model {
         allowNull: false,
       },
       dyeingDecolorization: {
-        type: DataTypes.INTEGER(40),
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
       dyeingTime: {
-        type: DataTypes.INTEGER(40),
+        type: DataTypes.STRING(100),
         allowNull: false,
       },
       dyeingHurt: {
-        type: DataTypes.INTEGER(40),
+        type: DataTypes.STRING(100),
         allowNull: false,
-        validate: {
-            max : 3,
-        },
       },
     }, {
       sequelize,

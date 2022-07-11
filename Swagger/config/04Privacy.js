@@ -21,4 +21,17 @@
 *      responses:
 *        '201' :
 *          description : 개인정보 수정 성공
+*  /api/swagger/checkPassword :
+*    post:
+*      tags: [Privacy]
+*      summary: 비밀번호 수정 요청
+*      requestBody:
+*        required : true
+*        content:
+*          application/json:
+*            schema:
+*              $ref : '#/components/schemas/User'
+*      responses:
+*        '201' :
+*          description : 비밀번호 수정 성공
 */
