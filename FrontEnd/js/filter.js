@@ -38,8 +38,10 @@ function renderBox(exDatas) {
     const newDate = document.createElement('p');
     newDate.innerText = rcDate;
     newBox.appendChild(newDate);
-    
-    
+
+    const yunseong = document.createElement('img');
+    yunseong.src = 'https://res.cloudinary.com/jongjun/image/upload/v1657433870/hairlog_record/4_nanakim1657433864300_lqtcdi.png';
+    newBox.appendChild(yunseong);
   }
 }
 
