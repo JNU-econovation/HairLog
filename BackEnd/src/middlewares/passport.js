@@ -69,9 +69,14 @@ const isNotLoggedIn = (req, res, next) => {
 
 const checkPassword = async (req, res, next) => {
   const { userPassword } = req.body;
-  const hash = await bcrypt.hash(userPassword, 12);
-  let check = User.findOne({where : {[Op.and] : [{UserId : req.user.id}, {userPassword : hash}]}})
-
+  let dbUser = await User.findOne({where : {id : req.user.id}})
+  console.log(userPassword)
+  console.log(dbUser.userPassword)
+  const check = await bcrypt.compare(userPassword, dbUser.userPassword);
+  if(check) {
+    return res.send({code : 200})
+  }
+  return res.send({code : 404})
 }
 
 module.exports = { join , authenticate, isLoggedIn, isNotLoggedIn, checkPassword}
