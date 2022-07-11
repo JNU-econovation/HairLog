@@ -1,3 +1,13 @@
+// onclick 변경
+const one = document.querySelector(".one");
+function goHome(){
+  location.href='/record'
+}
+one.addEventListener("click", goHome);
+
+
+
+
 
 // 처음 => 최신순 정렬
 
