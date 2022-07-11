@@ -62,8 +62,8 @@ if(process.env.NODE_ENV==='production'){
   app.use(hpp());
   app.use(csp({
     directives: {
-      defaultSrc: ["https://hairlogapi.herokuapp.com/", "*"],
-      scriptSrc: ["https://hairlogapi.herokuapp.com/"],
+      defaultSrc: ["https://hairlogapi.herokuapp.com/"],
+      scriptSrc: ["https://hairlogapi.herokuapp.com/", "*"],
       imgSrc: ["https://hairlogapi.herokuapp.com/", '*'],
     }
   }))
