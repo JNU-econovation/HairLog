@@ -64,7 +64,7 @@ if(process.env.NODE_ENV==='production'){
     directives: {
       defaultSrc: ["https://hairlogapi.herokuapp.com/"],
       scriptSrc: ["https://hairlogapi.herokuapp.com/"],
-      imgSrc: ["https://hairlogapi.herokuapp.com/", 'https://res.cloudinary.com/jongjun/image/upload/*'],
+      imgSrc: ["https://hairlogapi.herokuapp.com/", '*'],
     }
   }))
 } else {
