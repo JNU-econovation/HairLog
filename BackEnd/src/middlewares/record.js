@@ -118,6 +118,10 @@ const Get = {
         
     },
     
+    result : async function(req, res) {
+        classifyCategory.eachResult(req,res)
+    }
+    
 }
 
 

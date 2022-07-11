@@ -41,8 +41,11 @@ router.get('/swagger/designer/', sign.checkApiKey, passport.isLoggedIn, designer
 router.get('/favDesigner/', passport.isLoggedIn, designerCtrl.Get.favDesignerList)
 router.get('/swagger/favDesigner/', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Get.favDesignerList)
 
-router.get('/result', passport.isLoggedIn, recordCtrl.Get.instance);
-router.get('/swagger/result', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Get.instance);
+router.get('/instance', passport.isLoggedIn, recordCtrl.Get.instance);
+router.get('/swagger/instance', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Get.instance);
+
+router.get('/result', passport.isLoggedIn, recordCtrl.Get.result);
+router.get('/swagger/result', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Get.result);
 
 router.get('/privacy/user', passport.isLoggedIn, privacyCrtl.Get.user)
 router.get('/swagger/privacy/user', sign.checkApiKey, passport.isLoggedIn, privacyCrtl.Get.user)
