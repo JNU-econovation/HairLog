@@ -1,3 +1,10 @@
+const goRegister = document.querySelector(".goRegister");
+function movePage() {
+  location.href = 'http://localhost:3000/register_1';
+}
+goRegister.addEventListener("click", movePage);
+
+
 const loginForm = document.querySelector("#loginForm");
 
 

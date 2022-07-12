@@ -9,14 +9,20 @@ one.addEventListener("click", goHome);
 
 
 
-// 처음 => 최신순 정렬
+// // 이미지 test
+// const img = document.createElement('img');
+// img.src = '../imgs/ch_blue.png';
+// img.classList.add("imgTest");
+// const imgTest = document.querySelector('.imgTest');
+// imgTest.appendChild(img);
+
 
 
 
 // ID에 맞는 사진 불러오는 함수
 function idToImg(arr, Id) {
   for(let i=0;i<arr.length;i++){
-    if(arr[i].id === Id){
+    if(arr[i].RecordId === Id){
       return arr[i].img1;
     }
   }
@@ -25,6 +31,7 @@ function idToImg(arr, Id) {
 //객체 전달받아서 화면에 띄우는 함수(최신순,컷,펌,염색)
 function renderBox(exDatas) {
   const boxes = document.querySelector(".boxes");
+
 
   for(let i=0;i<exDatas.result.record.count;i++){      //for문 돌면서 box 만들고 안에 내용 채우기
     const temp = exDatas.result.record.rows[i];        //temp = 각 기록 하나를 가리킴
@@ -43,10 +50,18 @@ function renderBox(exDatas) {
       myURL = exDatas.result.img.rows.img1;
     }
     else {
-      myURL = idToImg(exDatas.result.img.rows , boxID);   
+      myURL = idToImg(exDatas.result.img.rows , boxID); 
     }
-    newBox.style.backgroundImage = `url(${myURL})`;
-    newBox.style.backgroundSize ="350px";
+
+    const img = document.createElement('img');
+    img.src = myURL;
+    img.crossOrigin = "anonymous";
+    img.classList.add("boxIMG");
+    newBox.appendChild(img);
+
+
+    // newBox.style.backgroundImage = `url(${myURL})`;
+    // newBox.style.backgroundSize ="350px";
 
     const newX = document.createElement('h1');     // x 표시 만들기
     newX.innerText = "✖";
@@ -105,7 +120,12 @@ function renderDesignerBox(exDatas) {
       else {
         myURL = idToImg(exDatas.result.img[i].rows , boxID);
       }
-      newBox.style.backgroundImage = `url(${myURL})`;
+
+      const img = document.createElement('img');
+      img.src = myURL;
+      img.classList.add("boxIMG");
+      newBox.appendChild(img);
+      
 
       
 

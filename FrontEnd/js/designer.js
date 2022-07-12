@@ -1,3 +1,7 @@
+
+
+
+
 // 입력값 초기화 함수
 function resetInput() {
   document.querySelector("#inputDesignerName").value = '';
@@ -10,10 +14,7 @@ const editBTN = document.querySelector("#edit");
 
 function showPopup(num, ID) {
 	const popup = document.querySelector('#popup');
-  popup.classList.remove('hide');
-
-
-  
+  popup.classList.remove('hide');  
   if(num===1){   // 추가
     editBTN.classList.add("hidden");
     addBTN.classList.remove("hidden");
@@ -25,6 +26,11 @@ function showPopup(num, ID) {
   }
 
 }
+
+
+// 페이지 이동
+const wow = document.querySelector(".WOW");
+wow.addEventListener("click", event => showPopup(1) );
 
 // 디자이너 삭제 함수
 function deleteDesigner(id) {
@@ -83,6 +89,13 @@ function closePopup(isSave) {
     // console.log("취소")
   }
 }
+
+const back = document.querySelector(".back");
+back.addEventListener("click", event => closePopup(0));
+
+const add = document.querySelector("#add");
+add.addEventListener("click", event => closePopup(1));
+
 
 // 디자이너 수정
 let editID=0;

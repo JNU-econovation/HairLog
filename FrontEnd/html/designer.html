@@ -15,7 +15,7 @@
       <div class="upBar">
         <h1 class="test">Hair Log</h1>
         <p class="p">디자이너 목록</p>
-        <img src="../imgs/plus.png" onclick="showPopup(1)">    <!-- 추가 버튼 -->
+        <img src="../imgs/plus.png" class="WOW">    <!-- 추가 버튼 -->
         <p class="p1"></p>
       </div>
 
@@ -46,7 +46,9 @@
 
 
 
-        <div class="one" onclick="location.href='https://hairlogapi.herokuapp.com/'">
+
+        <div class="one">
+
           <img src="../imgs/home.png">
         </div>
         
@@ -55,7 +57,7 @@
           <p>디자이너 목록</p>
         </div>
 
-        <div class="three"  onclick="location.href='../html/mypage.html'">
+        <div class="three">
           <img src="../imgs/mypage.png">
           <p>마이페이지</p> 
         </div>
@@ -69,8 +71,8 @@
     <!-- 띄워질 팝업창 -->
     <div id="popup" class="hide">
       <div class="popContent">
-        <button class="back" onclick="closePopup(0)">⬅</button>
-        <button id="add" class="hidden complete" onclick="closePopup(1)">완료</button>
+        <button class="back">⬅</button>
+        <button id="add" class="hidden complete">완료</button>
         <button id="edit" class="hidden complete">수정</button>
 
         <div class="clear"></div>
@@ -93,7 +95,7 @@
 
 
 
-
+    <script src="../js/navbar.js"></script>
     <script src="../js/designer.js"></script>
   </body>
 </html>

@@ -1,4 +1,6 @@
 
+
+
 // 유저별 디자이너 보여주기
 const designer_A = document.querySelector(".A");
 const designer_B = document.querySelector(".B");
@@ -19,9 +21,7 @@ fetch('http://localhost:3000/api/favDesigner')
     for(let i=0;i<Datas.result.length;i++){
       designerList[i].innerHTML = Datas.result[i].designerName;
       console.log(designerList[i].innerHTML);
-    }
-
-    
+    }    
   });
 
 
@@ -311,7 +311,7 @@ function clickBTN() {
   fetch(url, {
 
     // headers: {                   
-    //   'Content-Type': 'multipart/form-data'     
+    //   'Content-Type': 'multipart/form-data'           // 사진 보내는
     // },
 
     method: 'POST',
@@ -319,8 +319,16 @@ function clickBTN() {
   }) 
     .then((response) => response.text())
     .then((result) => { 
-      console.log(result); 
       
+      Datas = JSON.parse(result);
+      // console.log(result);
+      console.log(Datas); 
+      
+      if(Datas.code===200){
+        location.href = '/';
+      }
+
+
     });
 
 
