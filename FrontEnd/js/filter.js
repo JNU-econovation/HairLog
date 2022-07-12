@@ -1,13 +1,3 @@
-// onclick 변경
-const one = document.querySelector(".one");
-function goHome(){
-  location.href='/record'
-}
-one.addEventListener("click", goHome);
-
-
-
-
 
 // // 이미지 test
 // const img = document.createElement('img');
@@ -63,15 +53,16 @@ function renderBox(exDatas) {
     // newBox.style.backgroundImage = `url(${myURL})`;
     // newBox.style.backgroundSize ="350px";
 
-    const newX = document.createElement('h1');     // x 표시 만들기
-    newX.innerText = "✖";
-    newBox.appendChild(newX);
+    // const newX = document.createElement('h1');     // x 표시 만들기
+    // newX.innerText = "✖";
+    // newBox.appendChild(newX);
 
     let rcDate = temp.recordDate.replaceAll('-','.').slice(2);
     const newDate = document.createElement('p');
     newDate.innerText = rcDate;
     newBox.appendChild(newDate);
-
+    
+    
   }
 }
 
@@ -123,6 +114,7 @@ function renderDesignerBox(exDatas) {
 
       const img = document.createElement('img');
       img.src = myURL;
+      img.crossOrigin = "anonymous";
       img.classList.add("boxIMG");
       newBox.appendChild(img);
       
@@ -132,9 +124,9 @@ function renderDesignerBox(exDatas) {
       newBox.style.backgroundImage = `url(${myURL})`;
       newBox.style.backgroundSize ="350px";
 
-      const newX = document.createElement('h1');     // x 표시 만들기
-      newX.innerText = "✖";
-      newBox.appendChild(newX);
+      // const newX = document.createElement('h1');     // x 표시 만들기
+      // newX.innerText = "✖";
+      // newBox.appendChild(newX);
 
       let rcDate = temp.recordDate.replaceAll('-','.').slice(2);
       const newDate = document.createElement('p');
@@ -148,11 +140,11 @@ function renderDesignerBox(exDatas) {
 
 
 
-const latestURL = 'https://hairlogapi.herokuapp.com/api/main/latest';
-const cutURL = 'https://hairlogapi.herokuapp.com/api/main/cut';
-const permURL = 'https://hairlogapi.herokuapp.com/api/main/perm';
-const dyeingURL = 'https://hairlogapi.herokuapp.com/api/main/dyeing';
-const designerURL = 'https://hairlogapi.herokuapp.com/api/main/designer';
+const latestURL = 'http://localhost:3000/api/main/latest';
+const cutURL = 'http://localhost:3000/api/main/cut';
+const permURL = 'http://localhost:3000/api/main/perm';
+const dyeingURL = 'http://localhost:3000/api/main/dyeing';
+const designerURL = 'http://localhost:3000/api/main/designer';
 
 // 화면에 띄우는 함수
 function goFetch(url){
@@ -167,6 +159,7 @@ function goFetch(url){
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
+    // console.log(result);
     console.log(Datas); 
 
     if(Datas.code === 200){
