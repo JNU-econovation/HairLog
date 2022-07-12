@@ -1,3 +1,9 @@
+// test
+const img = document.createElement('img');
+img.src = '../imgs/ch_blue.png';
+img.classList.add("imgTest");
+const imgTest = document.querySelector('.imgTest');
+imgTest.appendChild(img);
 
 
 // 화면에 시각화 함수
@@ -39,6 +45,8 @@ function showPopup() {
 	const popup = document.querySelector('#popup');
   popup.classList.remove('hide');
 }
+const editBtn = document.querySelector(".editBtn");
+editBtn.addEventListener("click", showPopup);
 
 // 팝업 닫기
 function closePopup(num) {
@@ -48,17 +56,42 @@ function closePopup(num) {
 
   if(num){
     // console.log("저장");
-    const inputPW = document.querySelector("#inputPW").value;
-    console.log(inputPW);
+    const userPassword = document.querySelector("#inputPW").value;
+
+    const PW = {userPassword};
+    console.log(PW);
 
     // inputPW를 서버로 보내서 일치하는지 확인하고 일치하면 editProfile.html로 로드, 불일치하면 아래에 비밀번호가 틀립니다! 띄우기
+    
+    fetch('http://localhost:3000/api/checkPassword', {
+      headers: {
+        'Content-Type': 'application/json'     
+      },
+      method: 'POST',
+      body: JSON.stringify(PW),     //객체 -> JSON
+    }) 
+      .then((response) => response.text())
+      .then((result) => { 
+        Datas = JSON.parse(result);
+        console.log(Datas.code);
+        // console.log(result);
 
+        if(Datas.code===200){
+          location.href = 'http://localhost:3000/editProfile';
+        }
+  
+       });
 
   }
   else{
     console.log("취소");
   }
 }
+const back = document.querySelector(".back");
+back.addEventListener("click", event => closePopup(0));
+
+const complete = document.querySelector(".complete");
+complete.addEventListener("click", event => closePopup(1));
 
 
 

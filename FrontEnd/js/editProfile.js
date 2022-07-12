@@ -1,4 +1,9 @@
-
+// 
+const back = document.querySelector(".back");
+function goBack() {
+  history.back();
+}
+back.addEventListener("click", goBack);
 
 
 // 현재 정보 시각화 함수 

@@ -4,12 +4,18 @@ function showPopup() {
 	const popup = document.querySelector('#popup');
   popup.classList.remove('hide');
 }
+const addDesigner = document.querySelector(".addDesigner");
+addDesigner.addEventListener("click", showPopup);
+
+
 
 // 나중에 팝업 취소하고 닫기, 저장하고 닫기 두개로 나누기
 function closePopup() {
 	const popup = document.querySelector('#popup');
   popup.classList.add('hide');
 }
+
+
 
 //기존 디자이너 클릭
 const designerA = document.querySelector(".A");

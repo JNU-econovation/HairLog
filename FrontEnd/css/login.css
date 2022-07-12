@@ -91,7 +91,7 @@ button:hover {
 }
 
 /* 회원가입 링크 */
-.link p {
+.linkP, .goRegister {
   float: left;
   font-size: 30px;
   padding-left: 20px;
@@ -106,7 +106,7 @@ button:hover {
   margin-top: 60px;
 }
 
-a {
+.goRegister {
   text-decoration: none;
   color: #57B85F;
   font-family: Montserrat_Bold;

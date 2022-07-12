@@ -93,7 +93,15 @@ function signBtnClick() {
     body: JSON.stringify(SignUp),     //객체 -> JSON
   }) 
     .then((response) => response.text())
-    .then((result) => { console.log(result); });
+    .then((result) => { 
+      Datas = JSON.parse(result);
+      console.log(Datas);
+      // console.log(result);
+
+      // location.href = '../html/after_register.html';
+      location.href = 'http://localhost:3000/after_register';
+
+     });
 
     sessionStorage.clear();
 
