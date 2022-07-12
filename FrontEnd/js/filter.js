@@ -1,3 +1,13 @@
+// onclick 변경
+const one = document.querySelector(".one");
+function goHome(){
+  location.href='/record'
+}
+one.addEventListener("click", goHome);
+
+
+
+
 
 // // 이미지 test
 // const img = document.createElement('img');
@@ -61,8 +71,7 @@ function renderBox(exDatas) {
     const newDate = document.createElement('p');
     newDate.innerText = rcDate;
     newBox.appendChild(newDate);
-    
-    
+
   }
 }
 
@@ -139,11 +148,11 @@ function renderDesignerBox(exDatas) {
 
 
 
-const latestURL = 'http://localhost:3000/api/main/latest';
-const cutURL = 'http://localhost:3000/api/main/cut';
-const permURL = 'http://localhost:3000/api/main/perm';
-const dyeingURL = 'http://localhost:3000/api/main/dyeing';
-const designerURL = 'http://localhost:3000/api/main/designer';
+const latestURL = 'https://hairlogapi.herokuapp.com/api/main/latest';
+const cutURL = 'https://hairlogapi.herokuapp.com/api/main/cut';
+const permURL = 'https://hairlogapi.herokuapp.com/api/main/perm';
+const dyeingURL = 'https://hairlogapi.herokuapp.com/api/main/dyeing';
+const designerURL = 'https://hairlogapi.herokuapp.com/api/main/designer';
 
 // 화면에 띄우는 함수
 function goFetch(url){
@@ -158,7 +167,6 @@ function goFetch(url){
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    // console.log(result);
     console.log(Datas); 
 
     if(Datas.code === 200){

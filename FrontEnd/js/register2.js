@@ -85,7 +85,7 @@ function signBtnClick() {
 
   // 서버로 따로 보내는 버전
   
-  fetch('http://localhost:3000/api/join', {
+  fetch('https://hairlogapi.herokuapp.com/api/join', {
     headers: {
       'Content-Type': 'application/json'     
     },
