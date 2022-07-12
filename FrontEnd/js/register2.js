@@ -99,7 +99,7 @@ function signBtnClick() {
       // console.log(result);
 
       // location.href = '../html/after_register.html';
-      location.href = 'http://localhost:3000/after_register';
+      location.href = 'https://hairlogapi.herokuapp.com/after_register';
 
      });
 

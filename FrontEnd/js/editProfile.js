@@ -22,7 +22,7 @@ function showProfile(exDatas) {
 let userEmail, userSex, userPassword;
 let userPW;
 
-fetch('http://localhost:3000/api/privacy/user')  
+fetch('https://hairlogapi.herokuapp.com/api/privacy/user')  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
@@ -55,7 +55,7 @@ function goEdit() {
   let editData = mkEdit();
   console.log(editData);
 
-  fetch('http://localhost:3000/api/privacyUpdate/user', {        // 서버로 보내고 결과 출력
+  fetch('https://hairlogapi.herokuapp.com/api/privacyUpdate/user', {        // 서버로 보내고 결과 출력
   headers: {
     'Content-Type': 'application/json'       
   },

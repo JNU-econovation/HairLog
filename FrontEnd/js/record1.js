@@ -9,7 +9,7 @@ const designer_List = [designer_A, designer_B, designer_C];
 
 let Datas;
 
-fetch('http://localhost:3000/api/favDesigner') 
+fetch('https://hairlogapi.herokuapp.com/api/favDesigner') 
 
 // fetch('https://hairlogapi.herokuapp.com/api/main/designer') 
 

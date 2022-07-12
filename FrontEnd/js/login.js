@@ -1,6 +1,6 @@
 const goRegister = document.querySelector(".goRegister");
 function movePage() {
-  location.href = 'http://localhost:3000/register_1';
+  location.href = 'https://hairlogapi.herokuapp.com/register_1';
 }
 goRegister.addEventListener("click", movePage);
 
