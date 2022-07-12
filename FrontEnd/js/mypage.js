@@ -63,7 +63,7 @@ function closePopup(num) {
 
     // inputPW를 서버로 보내서 일치하는지 확인하고 일치하면 editProfile.html로 로드, 불일치하면 아래에 비밀번호가 틀립니다! 띄우기
     
-    fetch('http://localhost:3000/api/checkPassword', {
+    fetch('https://hairlogapi.herokuapp.com/api/checkPassword', {
       headers: {
         'Content-Type': 'application/json'     
       },
@@ -77,7 +77,7 @@ function closePopup(num) {
         // console.log(result);
 
         if(Datas.code===200){
-          location.href = 'http://localhost:3000/editProfile';
+          location.href = 'https://hairlogapi.herokuapp.com/editProfile';
         }
   
        });
@@ -95,7 +95,7 @@ complete.addEventListener("click", event => closePopup(1));
 
 
 
-fetch('http://localhost:3000/api/result')  
+fetch('https://hairlogapi.herokuapp.com/api/result')  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
