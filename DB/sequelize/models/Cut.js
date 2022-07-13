@@ -1,6 +1,6 @@
-const { DataTypes, Sequelize } = require('sequelize');
+import { DataTypes, Sequelize } from 'sequelize';
 
-module.exports = class Cut extends Sequelize.Model {
+export default class Cut extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
       cutName: {

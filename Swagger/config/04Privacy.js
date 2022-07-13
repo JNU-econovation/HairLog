@@ -24,13 +24,16 @@
 *  /api/swagger/checkPassword :
 *    post:
 *      tags: [Privacy]
-*      summary: 비밀번호 수정 요청
+*      summary: 비밀번호 확인 요청
 *      requestBody:
-*        required : true
 *        content:
-*          application/json:
+*          multipart/form-data:
 *            schema:
-*              $ref : '#/components/schemas/User'
+*              type: object
+*              properties:
+*                userPassword:
+*                  type: string
+*                  example: 3
 *      responses:
 *        '201' :
 *          description : 비밀번호 수정 성공

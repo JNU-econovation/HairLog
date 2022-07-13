@@ -1,17 +1,19 @@
-var Multer = require("./index.js");
+import Multer from "./index.js";
 
-multerObj = new Multer();
+let multerObj = new Multer();
 
 
 // exports module
-exports.single = (fieldName) => {
+let single = function single(fieldName) {
     return multerObj.single(fieldName);
 }
 
-exports.array = (fieldName, count) => {
+let array = function array(fieldName, count) {
     return multerObj.array(fieldName, count);
 }
 
-exports.fields = (array) => {
+let fields = function fields(array) {
     return multerObj.fields(array);
 }
+
+export default {single, array, fields}

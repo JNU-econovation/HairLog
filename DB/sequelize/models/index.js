@@ -1,23 +1,24 @@
-const Sequelize = require('sequelize'),
-      User = require('./User'),
-      Record = require('./Record'),
-      Image = require('./Image'),
-      CloudImage = require('./CloudImage'),
-      Designer = require('./Designer'),
-      Cut = require('./Cut'),
-      Perm = require('./Perm'),
-      Dyeing = require('./Dyeing');
+import Sequelize from 'sequelize';
+import User from './User.js';
+import Record from './Record.js';
+import Image from './Image.js';
+import CloudImage from './CloudImage.js';
+import Designer from './Designer.js';
+import Cut from './Cut.js';
+import Perm from './Perm.js';
+import Dyeing from './Dyeing.js';
 
 
 const env = process.env.NODE_ENV || 'development';
-const config = require('../config/config.js')[env];
+import sequelizeConfig from '../config/config.js' ;
+
 
 // connecting to a database
 const sequelize = new Sequelize(
-  config.database, 
-  config.username, 
-  config.password, 
-  config
+  sequelizeConfig[env].database, 
+  sequelizeConfig[env].username, 
+  sequelizeConfig[env].password, 
+  sequelizeConfig[env]
 );
 
 // add db object
@@ -59,4 +60,4 @@ Dyeing.associate(db);
 
 
 
-module.exports = db;
+export default db;

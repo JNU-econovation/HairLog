@@ -1,9 +1,9 @@
-const passport = require('passport'),
-    local = require('./localStrategy');
+import passport from 'passport';
+import local from './localStrategy.js';
 
-const User = require('../../DB/sequelize/models/User');
+import User from '../../DB/sequelize/models/User.js';
 
-module.exports = () => {
+export default () => {
 
     local();
     

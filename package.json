@@ -41,5 +41,6 @@
     "swagger-ui-express": "^4.4.0",
     "winston": "^3.8.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "type": "module"
 }

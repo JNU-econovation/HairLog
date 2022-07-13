@@ -1,14 +1,14 @@
-const User = require('../../../DB/sequelize/models/User'),
-      Designer = require('../../../DB/sequelize/models/Designer'),
-      Image = require('../../../DB/sequelize/models/Image'),
-      Cut = require('../../../DB/sequelize/models/Cut'),
-      Perm = require('../../../DB/sequelize/models/Perm'),
-      Dyeing = require('../../../DB/sequelize/models/Dyeing');
+import User from '../../../DB/sequelize/models/User.js';
+import Designer from '../../../DB/sequelize/models/Designer.js';
+import Image from '../../../DB/sequelize/models/Image.js';
+import Cut from '../../../DB/sequelize/models/Cut.js';
+import Perm from '../../../DB/sequelize/models/Perm.js';
+import Dyeing from '../../../DB/sequelize/models/Dyeing.js';
 
-const { Op } = require("sequelize");
+import { Op } from "sequelize";
 
 
-const show = require('@jongjun/console')
+import show from '@jongjun/console';
 
 const Post = {
     
@@ -78,4 +78,4 @@ const Delete = {
     },
 
 }
-module.exports = {Post, Get, Update, Delete};
+export default {Post, Get, Update, Delete};

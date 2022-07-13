@@ -1,34 +1,39 @@
 // npm  
-const createError = require('http-errors'),
-    express = require('express'),
-    nunjucks = require('nunjucks'),
-    path = require('path'),
-    morgan = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    session = require('express-session'),
-    mysqlStore = require('express-mysql-session')(session),
-    bodyParser = require('body-parser'),
-    passport = require('passport'),
-    helmet = require('helmet'),
-    cors = require('cors'),
-    hpp = require('hpp');
+import createError from 'http-errors';
+import express from 'express';
+import nunjucks from 'nunjucks';
+import path from 'path';
+import morgan from 'morgan';
+import { fileURLToPath } from 'url';
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import expressMySqlSession from 'express-mysql-session'
+  let mysqlStore = expressMySqlSession(session)
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import helmet from 'helmet';
+import cors from 'cors';
+import hpp from 'hpp';
+import csp from 'helmet-csp';
 
-
-const logger = require('./BackEnd/logger/logger.js');
+import logger from './BackEnd/logger/logger.js';
 
 
 // router
-const indexRouter = require('./BackEnd/src/routes/index'),
-    usersRouter = require('./BackEnd/src/routes/users'),
-    apiRouter = require('./BackEnd/src/routes/api'),
-    apiDocsRouter = require('./BackEnd/src/routes/api-docs');
+import indexRouter from './BackEnd/src/routes/index.js';
+import usersRouter from './BackEnd/src/routes/users.js';
+import apiRouter from './BackEnd/src/routes/api.js';
+import apiDocsRouter from './BackEnd/src/routes/api-docs.js';
 
 
 // add config 
-const dotenv = require('dotenv'),
-    sequelize = require('./DB/sequelize/models').sequelize,
-    passportConfig = require('./BackEnd/passport'),
-    cloudinary = require('./BackEnd/src/function/cloudinary/config');
+import dotenv from 'dotenv';
+import sequelizeIndex from './DB/sequelize/models/index.js';
+ const sequelize = sequelizeIndex.sequelize
+import passportConfig from './BackEnd/passport/index.js';
+import cloudinary from './BackEnd/src/function/cloudinary/config.js';
 
 // config
 dotenv.config();
@@ -46,25 +51,32 @@ app.set('httpPort', process.env.PORT || 3000);
 
 
 // view engine setup
-app.set('views', path.join(__dirname, '/BackEnd/views'));
-app.set('view engine', 'jade');
-// app.set('view engine', 'html');
-// nunjucks.configure(path.join(__dirname, '/FrontEnd/html'), {
-//   express: app,
-//   watch: true
-// });
+// app.set('views', path.join(__dirname, '/BackEnd/views'));
+// app.set('view engine', 'jade');
+app.set('view engine', 'html');
+nunjucks.configure(path.join(__dirname, '/FrontEnd/html'), {
+  express: app,
+  watch: true
+});
 
 // add middleware
 if(process.env.NODE_ENV==='production'){
   app.use(morgan('combined'));
   app.use(helmet());
   app.use(hpp());
+  app.use(csp({
+    directives: {
+      defaultSrc: ["https://hairlogapi.herokuapp.com/"],
+      scriptSrc: ["*"],
+      imgSrc: ["https://hairlogapi.herokuapp.com/", '*'],
+    }
+  }))
 } else {
   app.use(morgan('dev'));
 }
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '/BackEnd')));
+app.use(express.static(path.join(__dirname, '/FrontEnd')));
 app.use(session({
   resave : false,
   saveUninitialized : false,
@@ -133,4 +145,4 @@ app.listen(app.get('httpPort'), () => {
   console.log(app.get('httpPort'), '번 포트에서 대기중');
 });
 
-module.exports = app;
+export default app;

@@ -1,11 +1,9 @@
-const passport = require('passport');
-const bcrypt = require('bcrypt');
-const { Op } = require("sequelize");
+import passport from 'passport';
+import { hash as _hash, compare } from 'bcrypt';
+import { Op } from "sequelize";
 
 
-
-
-const User = require('../../../DB/sequelize/models/User');
+import User from '../../../DB/sequelize/models/User.js';
 
 
 const join = async (req, res, next) => {
@@ -15,7 +13,7 @@ const join = async (req, res, next) => {
       if (exUser) {
         return res.redirect('/existUser');
       }
-      const hash = await bcrypt.hash(userPassword, 12);
+      const hash = await _hash(userPassword, 12);
       let user = await User.create({
         userEmail,
         userPassword : hash,
@@ -31,7 +29,7 @@ const join = async (req, res, next) => {
   }
 
 const authenticate = (req, res, next) => {
-    passport.authenticate('local', (authError, user) => {
+  passport.authenticate('local', (authError, user) => {
       if (authError) {
         console.error(authError);
         return next(authError);
@@ -54,7 +52,7 @@ const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
       next();
   } else {
-      res.send({code : 404 , msg : '로그인 필요'});
+    return res.redirect("/before_login")
   }
 };
 
@@ -63,20 +61,20 @@ const isNotLoggedIn = (req, res, next) => {
       next();
   } else {
       const message = encodeURIComponent('로그인한 상태입니다.');
-      res.redirect('/mainPage');
+      res.redirect('/');
   }
 };
 
 const checkPassword = async (req, res, next) => {
   const { userPassword } = req.body;
-  let dbUser = await User.findOne({where : {id : req.user.id}})
+  let dbUser = await findOne({where : {id : req.user.id}})
   console.log(userPassword)
   console.log(dbUser.userPassword)
-  const check = await bcrypt.compare(userPassword, dbUser.userPassword);
+  const check = await compare(userPassword, dbUser.userPassword);
   if(check) {
     return res.send({code : 200})
   }
   return res.send({code : 404})
 }
 
-module.exports = { join , authenticate, isLoggedIn, isNotLoggedIn, checkPassword}
+export default { join , authenticate, isLoggedIn, isNotLoggedIn, checkPassword}

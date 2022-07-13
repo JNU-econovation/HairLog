@@ -1,10 +1,10 @@
-const User = require('../../../DB/sequelize/models/User'),
-      Designer = require('../../../DB/sequelize/models/Designer'),
-      Record = require('../../../DB/sequelize/models/Record'),
-      Image = require('../../../DB/sequelize/models/Image'),
-      Cut = require('../../../DB/sequelize/models/Cut'),
-      Perm = require('../../../DB/sequelize/models/Perm'),
-      Dyeing = require('../../../DB/sequelize/models/Dyeing');
+import User from '../../../DB/sequelize/models/User.js';
+import Designer from '../../../DB/sequelize/models/Designer.js';
+import Record from '../../../DB/sequelize/models/Record.js';
+import Image from '../../../DB/sequelize/models/Image.js';
+import Cut from '../../../DB/sequelize/models/Cut.js';
+import Perm from '../../../DB/sequelize/models/Perm.js';
+import Dyeing from '../../../DB/sequelize/models/Dyeing.js';
 
 
 const isDesigner = async function (req, category, userInstance) {
@@ -23,8 +23,8 @@ const isNotDesigner = async function  (req, category, userInstance) {
 }
 
 const getDesigner = async function (record) {
-    let designer = await Promise.all(record.map(res => Designer.findOne({where : {id :res.DesignerId}, raw : true})))
+    let designer = await Promise.all(record.map(res => findOne({where : {id :res.DesignerId}, raw : true})))
     return designer
 }
 
-module.exports = { isDesigner, isNotDesigner, getDesigner,}
+export default { isDesigner, isNotDesigner, getDesigner,}

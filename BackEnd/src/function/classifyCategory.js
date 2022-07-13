@@ -1,14 +1,14 @@
-const User = require('../../../DB/sequelize/models/User'),
-      Designer = require('../../../DB/sequelize/models/Designer'),
-      Record = require('../../../DB/sequelize/models/Record'),
-      Image = require('../../../DB/sequelize/models/Image'),
-      Cut = require('../../../DB/sequelize/models/Cut'),
-      Perm = require('../../../DB/sequelize/models/Perm'),
-      Dyeing = require('../../../DB/sequelize/models/Dyeing');
-const { Op } = require("sequelize");
+import User from '../../../DB/sequelize/models/User.js';
+import Designer from '../../../DB/sequelize/models/Designer.js';
+import Record from '../../../DB/sequelize/models/Record.js';
+import Image from '../../../DB/sequelize/models/Image.js';
+import Cut from '../../../DB/sequelize/models/Cut.js';
+import Perm from '../../../DB/sequelize/models/Perm.js';
+import Dyeing from '../../../DB/sequelize/models/Dyeing.js';
+import { Op } from "sequelize";
 
-const show = require('@jongjun/console')
-const ifDesigner = require("../function/ifDesigner")
+import show from '@jongjun/console';
+import ifDesigner from "../function/ifDesigner.js";
 
 
 
@@ -131,4 +131,4 @@ const getImg = async function(recordInstance, recordCount) {
     
 }
    
-module.exports = { latest, designer, category, instanceResult, eachResult}
+export default { latest, designer, category, instanceResult, eachResult}

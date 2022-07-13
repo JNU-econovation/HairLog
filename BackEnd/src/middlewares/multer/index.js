@@ -1,6 +1,6 @@
-const multer  = require('multer'),
-    path = require('path'),
-    fs = require('fs');
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
 
 class MulterClass {
 
@@ -41,7 +41,7 @@ class MulterClass {
 }
 
     
-module.exports = MulterClass;
+export default MulterClass;
 
 
 
