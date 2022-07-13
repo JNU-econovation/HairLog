@@ -114,10 +114,10 @@ function makeUrl (apiUrl) {
 }
 
 const latestURL = makeUrl('/api/main/latest');
-const cutURL = makeUrl('/api/main/cut');
-const permURL = makeUrl('/api/main/perm');
-const dyeingURL = makeUrl('/api/main/dyeing');
-const designerURL = makeUrl('/api/main/designer');
+const cutURL = makeUrl('api/main/cut');
+const permURL = makeUrl('api/main/perm');
+const dyeingURL = makeUrl('api/main/dyeing');
+const designerURL = makeUrl('api/main/designer');
 
 // 화면에 띄우는 함수
 function goFetch(url){

@@ -54,7 +54,7 @@ const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
       next();
   } else {
-      res.send({code : 404 , msg : '로그인 필요'});
+    return res.redirect("/before_login")
   }
 };
 
@@ -63,7 +63,7 @@ const isNotLoggedIn = (req, res, next) => {
       next();
   } else {
       const message = encodeURIComponent('로그인한 상태입니다.');
-      res.redirect('/mainPage');
+      res.redirect('/');
   }
 };
 
