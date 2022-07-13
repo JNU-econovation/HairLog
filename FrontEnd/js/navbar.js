@@ -1,10 +1,16 @@
 function makeUrl (apiUrl) {
-  var base ="https://hairlogapi.herokuapp.com/"
-  return base + apiUrl
+  if(apiUrl != undefined){
+    var base ="https://hairlogapi.herokuapp.com/"
+    return base + apiUrl
+  } else {
+    var base ="https://hairlogapi.herokuapp.com/"
+    return base
+  }
+
 }
 
 var recordUrl = makeUrl("record")  
-var Url = makeUrl()  
+var Url =makeUrl() 
 var designerUrl = makeUrl("designer")  
 var mypageUrl = makeUrl("mypage")  
 

@@ -1,7 +1,4 @@
-function makeUrl (apiUrl) {
-  var base ="https://hairlogapi.herokuapp.com/"
-  return base + apiUrl
-}
+var makeUrl = require("./makeUrl").makeUrl
 
 var userUrl = makeUrl("api/privacy/user")   
 var checkPasswordUrl = makeUrl("api/checkPassword")   
