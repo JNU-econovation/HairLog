@@ -1,4 +1,4 @@
-var makeUrl = require("./makeUrl.js")
+import makeUrl from "./makeUrl.js";
 
 var userUrl = makeUrl("api/privacy/user")   
 var checkPasswordUrl = makeUrl("api/checkPassword")   

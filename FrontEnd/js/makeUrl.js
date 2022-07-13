@@ -1,4 +1,4 @@
-module.exports = function makeUrl (apiUrl) {
+export default function makeUrl (apiUrl) {
     if(apiUrl != undefined){
       var base ="https://hairlogapi.herokuapp.com/"
       return base + apiUrl
