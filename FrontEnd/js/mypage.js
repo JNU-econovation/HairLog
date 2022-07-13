@@ -5,7 +5,6 @@ function makeUrl (apiUrl) {
 
 var userUrl = makeUrl("api/privacy/user")   
 var checkPasswordUrl = makeUrl("api/checkPassword")   
-var resultUrl = makeUrl("api/result")   
 var editProfileUrl = makeUrl("editProfile")   
 
 // test
@@ -97,11 +96,3 @@ back.addEventListener("click", event => closePopup(0));
 const complete = document.querySelector(".complete");
 complete.addEventListener("click", event => closePopup(1));
 
-
-
-fetch(resultUrl)  
-    .then((response) => response.text())
-    .then((result) => { 
-      Datas = JSON.parse(result);
-      console.log(Datas); 
-    });

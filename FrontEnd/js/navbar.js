@@ -4,7 +4,7 @@ function makeUrl (apiUrl) {
 }
 
 var recordUrl = makeUrl("record")  
-var Url = makeUrl("")  
+var Url = makeUrl()  
 var designerUrl = makeUrl("designer")  
 var mypageUrl = makeUrl("mypage")  
 
