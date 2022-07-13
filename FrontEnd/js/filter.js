@@ -1,14 +1,3 @@
-
-// // 이미지 test
-// const img = document.createElement('img');
-// img.src = '../imgs/ch_blue.png';
-// img.classList.add("imgTest");
-// const imgTest = document.querySelector('.imgTest');
-// imgTest.appendChild(img);
-
-
-
-
 // ID에 맞는 사진 불러오는 함수
 function idToImg(arr, Id) {
   for(let i=0;i<arr.length;i++){
@@ -49,14 +38,6 @@ function renderBox(exDatas) {
     img.classList.add("boxIMG");
     newBox.appendChild(img);
 
-
-    // newBox.style.backgroundImage = `url(${myURL})`;
-    // newBox.style.backgroundSize ="350px";
-
-    // const newX = document.createElement('h1');     // x 표시 만들기
-    // newX.innerText = "✖";
-    // newBox.appendChild(newX);
-
     let rcDate = temp.recordDate.replaceAll('-','.').slice(2);
     const newDate = document.createElement('p');
     newDate.innerText = rcDate;
@@ -70,8 +51,6 @@ function renderBox(exDatas) {
 // 디자이너 화면에 띄우는 함수
 function renderDesignerBox(exDatas) {
   const boxes = document.querySelector(".boxes");
-  // console.log(exDatas.result.designerList.count);
-  // console.log(exDatas.result.img[0]);
 
   for(let i=0;i<exDatas.result.designerList.count;i++) {                    // 디자이너 이름 p에 저장
     let name = exDatas.result.designerList.rows[i].designerName;
@@ -86,12 +65,10 @@ function renderDesignerBox(exDatas) {
     boxes.appendChild(newBigBox);
 
     
-    // 여기
     const designerTemp = exDatas.result.recordByDesigner[i];    
 
     for(let j=0;j<designerTemp.count;j++){
       const temp = designerTemp.rows[j];
-      // console.log(temp);
 
       const newBox = document.createElement('div');   // 사각형 만들고 html에 넣기
       newBox.classList.add("box");
@@ -102,7 +79,6 @@ function renderDesignerBox(exDatas) {
       boxes.appendChild(newBox);
       
       // 배경이미지 넣기
-      // console.log(exDatas.result.recordByDesigner[i].count, boxID, i);
 
       let myURL;
       if(exDatas.result.recordByDesigner[i].count===1){     // 이미지가 기록 개수가 하나일 때
@@ -118,15 +94,8 @@ function renderDesignerBox(exDatas) {
       img.classList.add("boxIMG");
       newBox.appendChild(img);
       
-
-      
-
       newBox.style.backgroundImage = `url(${myURL})`;
       newBox.style.backgroundSize ="350px";
-
-      // const newX = document.createElement('h1');     // x 표시 만들기
-      // newX.innerText = "✖";
-      // newBox.appendChild(newX);
 
       let rcDate = temp.recordDate.replaceAll('-','.').slice(2);
       const newDate = document.createElement('p');
@@ -139,12 +108,16 @@ function renderDesignerBox(exDatas) {
 }
 
 
+function makeUrl (apiUrl) {
+  var base ="https://hairlogapi.herokuapp.com/"
+  return base + apiUrl
+}
 
-const latestURL = 'https://hairlogapi.herokuapp.com/api/main/latest';
-const cutURL = 'https://hairlogapi.herokuapp.com/api/main/cut';
-const permURL = 'https://hairlogapi.herokuapp.com/api/main/perm';
-const dyeingURL = 'https://hairlogapi.herokuapp.com/api/main/dyeing';
-const designerURL = 'https://hairlogapi.herokuapp.com/api/main/designer';
+const latestURL = makeUrl('/api/main/latest');
+const cutURL = makeUrl('/api/main/cut');
+const permURL = makeUrl('/api/main/perm');
+const dyeingURL = makeUrl('/api/main/dyeing');
+const designerURL = makeUrl('/api/main/designer');
 
 // 화면에 띄우는 함수
 function goFetch(url){
@@ -250,7 +223,6 @@ function selectF5() {
   .then((result) => { 
     Datas = JSON.parse(result);
     console.log(Datas); 
-    // console.log(Datas.result.designerList.count);
 
     if(Datas.code === 200){
       renderDesignerBox(Datas);

@@ -1,6 +1,14 @@
+function makeUrl (apiUrl) {
+  var base ="https://hairlogapi.herokuapp.com/"
+  return base + apiUrl
+}
+
+var register_1Url = makeUrl("register_1")   
+var authenticateUrl = makeUrl("api/authenticate")   
+
 const goRegister = document.querySelector(".goRegister");
 function movePage() {
-  location.href = 'https://hairlogapi.herokuapp.com/register_1';
+  location.href = register_1Url;
 }
 goRegister.addEventListener("click", movePage);
 
@@ -27,10 +35,7 @@ async function getLogin(event) {           //async 써서 해라
 
 
 
-let Result = await fetch('https://hairlogapi.herokuapp.com/api/authenticate', {
-
-// let Result = await fetch('https://hairlogapi.herokuapp.com/api/authenticate', {
-
+let Result = await fetch(authenticateUrl, {
 
     headers: {
       'Content-Type': 'application/json'         //content-type으로 보내야 서버 body에 들어감
@@ -40,7 +45,6 @@ let Result = await fetch('https://hairlogapi.herokuapp.com/api/authenticate', {
     
   }) 
     .then((response) => response.text())
-    // .then((result) => console.log(result));
     .then((result) =>{ 
       return JSON.parse(result);
     });

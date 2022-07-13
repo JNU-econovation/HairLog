@@ -1,3 +1,11 @@
+function makeUrl (apiUrl) {
+  var base ="https://hairlogapi.herokuapp.com/"
+  return base + apiUrl
+}
+
+var userUrl = makeUrl("api/privacy/user")   
+var userUpdateUrl = makeUrl("api/privacyUpdate/user")   
+
 // 
 const back = document.querySelector(".back");
 function goBack() {
@@ -22,12 +30,10 @@ function showProfile(exDatas) {
 let userEmail, userSex, userPassword;
 let userPW;
 
-fetch('https://hairlogapi.herokuapp.com/api/privacy/user')  
+fetch(userUrl)  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
-      // console.log(result);
-      // console.log(Datas); 
 
       if(Datas.code===200){
         showProfile(Datas);
@@ -45,7 +51,6 @@ function mkEdit() {
   userPassword = document.querySelector("#newPW").value;
 
   let result = {userEmail,userPassword,userName,userSex,userCycle};
-  // console.log(result);
 
   return result;
 }
@@ -55,7 +60,7 @@ function goEdit() {
   let editData = mkEdit();
   console.log(editData);
 
-  fetch('https://hairlogapi.herokuapp.com/api/privacyUpdate/user', {        // 서버로 보내고 결과 출력
+  fetch(userUpdateUrl, {        // 서버로 보내고 결과 출력
   headers: {
     'Content-Type': 'application/json'       
   },
@@ -65,9 +70,6 @@ function goEdit() {
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    // console.log(result);
-    console.log("수정완료",Datas); 
-
   });
 
 }

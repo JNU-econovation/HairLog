@@ -1,3 +1,13 @@
+function makeUrl (apiUrl) {
+  var base ="https://hairlogapi.herokuapp.com/"
+  return base + apiUrl
+}
+
+var userUrl = makeUrl("api/privacy/user")   
+var checkPasswordUrl = makeUrl("api/checkPassword")   
+var resultUrl = makeUrl("api/result")   
+var editProfileUrl = makeUrl("editProfile")   
+
 // test
 const img = document.createElement('img');
 img.src = '../imgs/ch_blue.png';
@@ -8,8 +18,6 @@ imgTest.appendChild(img);
 
 // 화면에 시각화 함수
 function showUser(exDatas) {
-  // console.log(exDatas);
-
   const userName = document.querySelector(".pBox");
   userName.innerHTML = `${exDatas.result.user.userName}님`;
 
@@ -22,13 +30,11 @@ function showUser(exDatas) {
 
 
 // 마이페이지 보여주기 
-fetch('https://hairlogapi.herokuapp.com/api/privacy/user')  
+fetch(userUrl)  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
-      // console.log(result);
       console.log(Datas); 
-
       if(Datas.code===200){
         showUser(Datas);
       }
@@ -63,7 +69,7 @@ function closePopup(num) {
 
     // inputPW를 서버로 보내서 일치하는지 확인하고 일치하면 editProfile.html로 로드, 불일치하면 아래에 비밀번호가 틀립니다! 띄우기
     
-    fetch('https://hairlogapi.herokuapp.com/api/checkPassword', {
+    fetch(checkPasswordUrl, {
       headers: {
         'Content-Type': 'application/json'     
       },
@@ -74,10 +80,8 @@ function closePopup(num) {
       .then((result) => { 
         Datas = JSON.parse(result);
         console.log(Datas.code);
-        // console.log(result);
-
         if(Datas.code===200){
-          location.href = 'https://hairlogapi.herokuapp.com/editProfile';
+          location.href = editProfileUrl;
         }
   
        });
@@ -95,16 +99,9 @@ complete.addEventListener("click", event => closePopup(1));
 
 
 
-fetch('https://hairlogapi.herokuapp.com/api/result')  
+fetch(resultUrl)  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
-      // console.log(result);
       console.log(Datas); 
-
-      // if(Datas.code===200){
-      //   showUser(Datas);
-      // }
-
-
     });

@@ -1,4 +1,12 @@
+function makeUrl (apiUrl) {
+  var base ="https://hairlogapi.herokuapp.com/"
+  return base + apiUrl
+}
 
+var favDesignerUrl = makeUrl("api/favDesigner")  
+var cutUrl = makeUrl("api/record/cut")  
+var permUrl = makeUrl("api/record/perm")  
+var dyeingUrl = makeUrl("api/record/dyeing")  
 
 
 // 유저별 디자이너 보여주기
@@ -9,10 +17,7 @@ const designer_List = [designer_A, designer_B, designer_C];
 
 let Datas;
 
-fetch('https://hairlogapi.herokuapp.com/api/favDesigner') 
-
-// fetch('https://hairlogapi.herokuapp.com/api/main/designer') 
-
+fetch(favDesignerUrl) 
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
@@ -23,9 +28,6 @@ fetch('https://hairlogapi.herokuapp.com/api/favDesigner')
       console.log(designerList[i].innerHTML);
     }    
   });
-
-
-
 
 const record1 = document.querySelector(".record1");
 const record2 = document.querySelector(".record2");
@@ -90,16 +92,6 @@ function whoDesign() {
       }  
     }
   }
-
-
-
-
-
-  // for (let i=0;i<designerList.length;i++){
-  //   if(designerList[i].classList.contains("selected")){
-  //     designer = designerList[i].innerHTML;
-  //   }  
-  // }
 }
 
 // 컷 세부 입력값 가져오기 
@@ -123,11 +115,6 @@ function whatPerm() {
       permHurt = hurtList[i].value;
     }  
   }
-
-
-
-
-
 
 }
 
@@ -178,10 +165,7 @@ function imgPreview(event) {
     imgPlace.appendChild(myImg);      //이미지 넣고 style 주기
     myImg.classList.add("uploadIMG");  
     
-
     console.log(fileInput.files[0]);
-
-
 
   };
 
@@ -235,11 +219,7 @@ function clickBTN() {
   for(let i=0;i<hairList.length;i++){
     if(hairList[i].classList.contains("selected")){
       if(i===0){  //컷 선택
-
-
-        url='https://hairlogapi.herokuapp.com/api/record/cut';
-
-
+        url=cutUrl;
         whatCut();
         HairRecord = {
           // url:url,
@@ -253,7 +233,7 @@ function clickBTN() {
         }
       }
       else if(i===1) { //펌 선택
-        url='https://hairlogapi.herokuapp.com/api/record/perm';
+        url=permUrl;
         whatPerm();
         HairRecord = {
           // url:url,
@@ -268,7 +248,7 @@ function clickBTN() {
         }
       }
       else if(i===2) {  //염색 선택
-        url='https://hairlogapi.herokuapp.com/api/record/dyeing';
+        url=dyeingUrl;
         whatDying();
         HairRecord = {
           // url:url,
@@ -294,7 +274,6 @@ function clickBTN() {
 
   for (let key in HairRecord) {  // data 객체 안에 있는 모든 요소를 data 객체의 key value 형태로 적재
     formData.append(key, HairRecord[key]);
-
   }
   formData.append("Image",fileInput.files[0]);
 
@@ -309,26 +288,19 @@ function clickBTN() {
   }
 
   fetch(url, {
-
     // headers: {                   
     //   'Content-Type': 'multipart/form-data'           // 사진 보내는
     // },
-
     method: 'POST',
     body: formData,   
   }) 
     .then((response) => response.text())
     .then((result) => { 
-      
       Datas = JSON.parse(result);
-      // console.log(result);
       console.log(Datas); 
-      
       if(Datas.code===200){
         location.href = '/';
       }
-
-
     });
 
 

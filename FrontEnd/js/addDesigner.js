@@ -78,7 +78,6 @@ function addComplete() {
   const inputDesignerName = document.querySelector("#inputDesignerName").value;
   const inputDesignerPlace = document.querySelector("#inputDesignerPlace").value;
 
-  console.log(inputDesignerName, inputDesignerPlace);
   completeBTN.classList.add("addDirect")
 
   const plusName = document.querySelector(".D");

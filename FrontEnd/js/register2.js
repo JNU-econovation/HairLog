@@ -1,3 +1,12 @@
+function makeUrl (apiUrl) {
+  var base ="https://hairlogapi.herokuapp.com/"
+  return base + apiUrl
+}
+
+var after_registerUrl = makeUrl("after_register")  
+var joinUrl = makeUrl("api/join")  
+
+
 // 숫자만 추출 (13주 -> 13)
 function editTime(t) {
   const result = t.replace(/[^0-9]/g, "");
@@ -85,7 +94,7 @@ function signBtnClick() {
 
   // 서버로 따로 보내는 버전
   
-  fetch('https://hairlogapi.herokuapp.com/api/join', {
+  fetch(joinUrl, {
     headers: {
       'Content-Type': 'application/json'     
     },
@@ -96,11 +105,7 @@ function signBtnClick() {
     .then((result) => { 
       Datas = JSON.parse(result);
       console.log(Datas);
-      // console.log(result);
-
-      // location.href = '../html/after_register.html';
-      location.href = 'https://hairlogapi.herokuapp.com/after_register';
-
+      location.href = after_registerUrl;
      });
 
     sessionStorage.clear();
