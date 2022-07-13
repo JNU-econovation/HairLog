@@ -1,4 +1,4 @@
-var makeUrl = require("./makeUrl").makeUrl
+var makeUrl = require("./makeUrl.js")
 
 var userUrl = makeUrl("api/privacy/user")   
 var checkPasswordUrl = makeUrl("api/checkPassword")   
