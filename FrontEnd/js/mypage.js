@@ -1,5 +1,13 @@
-import makeUrl from "./makeUrl.js";
+function makeUrl (apiUrl) {
+  if(apiUrl != undefined){
+    var base ="https://hairlogapi.herokuapp.com/"
+    return base + apiUrl
+  } else {
+    var base ="https://hairlogapi.herokuapp.com"
+    return base
+  }
 
+}
 var userUrl = makeUrl("api/privacy/user")   
 var checkPasswordUrl = makeUrl("api/checkPassword")   
 var editProfileUrl = makeUrl("editProfile")   
