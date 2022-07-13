@@ -113,7 +113,7 @@ function makeUrl (apiUrl) {
   return base + apiUrl
 }
 
-const latestURL = makeUrl('/api/main/latest');
+const latestURL = makeUrl('api/main/latest');
 const cutURL = makeUrl('api/main/cut');
 const permURL = makeUrl('api/main/perm');
 const dyeingURL = makeUrl('api/main/dyeing');
