@@ -27,7 +27,7 @@ const latest = async function(req, res) {
 const instanceResult = async function(req, res, category) {
 
     let user = await User.findOne({wherer : {id : req.user.id}});
-    let record = await Record.findAndCountAll({raw : true, limit : 1, where : {UserId : req.user.id}, order : [['recordDate', 'DESC']]});
+    let record = await Record.findAndCountAll({raw : true, limit : 1, where : {UserId : req.user.id}, order : [['createdAt', 'DESC']]});
     let designer = await ifDesigner.getDesigner(record.rows);
     if(record.count != 0){
         let category = await classify(record.rows[0].id, record.rows[0].recordCategory)
