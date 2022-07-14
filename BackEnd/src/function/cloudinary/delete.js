@@ -1,4 +1,4 @@
-const cloudinary = require('cloudinary').v2
+import { v2 as cloudinary } from 'cloudinary'
 
 const deleteId = async function (id){
     
@@ -12,4 +12,4 @@ const deleteId = async function (id){
 }
 
 
-module.exports = { deleteId }
+export default { deleteId }

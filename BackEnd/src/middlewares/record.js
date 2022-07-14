@@ -1,20 +1,20 @@
-const User = require('../../../DB/sequelize/models/User'),
-      Designer = require('../../../DB/sequelize/models/Designer'),
-      Record = require('../../../DB/sequelize/models/Record'),
-      Image = require('../../../DB/sequelize/models/Image'),
-      CloudImage = require('../../../DB/sequelize/models/CloudImage'),
-      Cut = require('../../../DB/sequelize/models/Cut'),
-      Perm = require('../../../DB/sequelize/models/Perm'),
-      Dyeing = require('../../../DB/sequelize/models/Dyeing');
+import User from '../../../DB/sequelize/models/User.js';
+import Designer from '../../../DB/sequelize/models/Designer.js';
+import Record from '../../../DB/sequelize/models/Record.js';
+import Image from '../../../DB/sequelize/models/Image.js';
+import CloudImage from '../../../DB/sequelize/models/CloudImage.js';
+import Cut from '../../../DB/sequelize/models/Cut.js';
+import Perm from '../../../DB/sequelize/models/Perm.js';
+import Dyeing from '../../../DB/sequelize/models/Dyeing.js';
 
-const { Op } = require("sequelize");
+import { Op } from "sequelize";
 
-const ifDesigner = require('../function/ifDesigner'),
-      classifyCategory = require('../function/classifyCategory'),
-      cloudinaryDelete = require('../function/cloudinary/delete'),
-      imageFunction = require('../function/image');
+import ifDesigner from '../function/ifDesigner.js';
+import classifyCategory from '../function/classifyCategory.js';
+import cloudinary from '../function/cloudinary/delete.js';
+import image from '../function/image.js';
 
-const show = require('@jongjun/console')
+import show from '@jongjun/console';
 
 const Post = {
 
@@ -60,10 +60,10 @@ const Post = {
     },
 
     imgInstance : async function(req, recordInstance) {
-        let imgInformation = await imageFunction.urls(req.files)
+        let imgInformation = await image.urls(req.files)
         let {urls, public_id} = imgInformation
-        let urlQuery = await imageFunction.query(urls)
-        let idQuery = await imageFunction.query(public_id)
+        let urlQuery = await image.query(urls)
+        let idQuery = await image.query(public_id)
         let url = await recordInstance.createImage(urlQuery)
         let id = await recordInstance.createCloudImage(idQuery)
         let img = {url, id}
@@ -164,7 +164,7 @@ const Delete = {
         let idInfo = Object.entries(imagesId)
         let ids = idInfo.map(ids => ids[1])
         if(ids[0] != null) {
-            await Promise.all(ids.map(id => cloudinaryDelete.deleteId(id)))
+            await Promise.all(ids.map(id => cloudinary.deleteId(id)))
         }
     },
 
@@ -188,4 +188,4 @@ const Delete = {
 
 }
 
-module.exports = {Post, Get, Update, Delete};
+export default {Post, Get, Update, Delete};

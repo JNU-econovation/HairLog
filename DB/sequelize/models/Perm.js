@@ -1,6 +1,6 @@
-const { DataTypes, Sequelize } = require('sequelize');
+import { DataTypes, Sequelize } from 'sequelize';
 
-module.exports = class Perm extends Sequelize.Model {
+export default class Perm extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
       permName: {

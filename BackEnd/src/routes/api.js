@@ -1,71 +1,71 @@
-const express = require('express');
-const router = express.Router();
-const show = require("@jongjun/console");
-const cors = require("cors")
+import { Router } from 'express';
+const router = Router();
+import show from "@jongjun/console";
+import cors from "cors";
 
-const passport = require('../middlewares/passport'),
-    sign = require('../function/CheckAPIKey'),
-    multer = require('../middlewares/multer/multer'),
-    sharp = require('../middlewares/sharp'),
-    recordCtrl = require('../middlewares/record'),
-    designerCtrl = require('../middlewares/designer'),
-    privacyCrtl = require('../middlewares/privacy');
+import passport from '../middlewares/passport.js';
+import checkApiKey from '../function/CheckAPIKey.js';
+import multer from '../middlewares/multer/multer.js';
+import sharp from '../middlewares/sharp.js';
+import record from '../middlewares/record.js';
+import designer from '../middlewares/designer.js';
+import privacy from '../middlewares/privacy.js';
 
 
 //POST   
 router.post('/join', passport.join);
-router.post('/swagger/join', sign.checkApiKey, passport.join);
+router.post('/swagger/join', checkApiKey, passport.join);
 
 router.post('/authenticate', passport.authenticate);
-router.post('/swagger/authenticate', sign.checkApiKey, passport.authenticate);
+router.post('/swagger/authenticate', checkApiKey, passport.authenticate);
 
 router.post('/checkPassword', passport.checkPassword);
-router.post('/swagger/checkPassword', sign.checkApiKey, passport.checkPassword);
+router.post('/swagger/checkPassword', checkApiKey, passport.checkPassword);
 
-router.post('/designer', passport.isLoggedIn, designerCtrl.Post.designer)  
-router.post('/swagger/designer', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Post.designer)
+router.post('/designer', passport.isLoggedIn, designer.Post.designer)  
+router.post('/swagger/designer', checkApiKey, passport.isLoggedIn, designer.Post.designer)
 
-router.post('/record/:category', passport.isLoggedIn, multer.array("Image", 3), sharp.sharping, recordCtrl.Post.record)
-router.post('/swagger/record/:category', sign.checkApiKey, passport.isLoggedIn, multer.array("Image", 3), sharp.sharping, recordCtrl.Post.record)
+router.post('/record/:category', passport.isLoggedIn, multer.array("Image", 3), sharp.sharping, record.Post.record)
+router.post('/swagger/record/:category', checkApiKey, passport.isLoggedIn, multer.array("Image", 3), sharp.sharping, record.Post.record)
 
 //GET
-router.get('/main', passport.isLoggedIn, recordCtrl.Get.main)
-router.get('/swagger/main', passport.isLoggedIn, recordCtrl.Get.main) 
+router.get('/main', passport.isLoggedIn, record.Get.main)
+router.get('/swagger/main', passport.isLoggedIn, record.Get.main) 
 
-router.get('/main/:category', passport.isLoggedIn, recordCtrl.Get.classification)
-router.get('/swagger/main/:category', passport.isLoggedIn, recordCtrl.Get.classification)
+router.get('/main/:category', passport.isLoggedIn, record.Get.classification)
+router.get('/swagger/main/:category', passport.isLoggedIn, record.Get.classification)
 
-router.get('/designer/', passport.isLoggedIn, designerCtrl.Get.designer)
-router.get('/swagger/designer/', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Get.designer)
+router.get('/designer/', passport.isLoggedIn, designer.Get.designer)
+router.get('/swagger/designer/', checkApiKey, passport.isLoggedIn, designer.Get.designer)
 
-router.get('/favDesigner/', passport.isLoggedIn, designerCtrl.Get.favDesignerList)
-router.get('/swagger/favDesigner/', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Get.favDesignerList)
+router.get('/favDesigner/', passport.isLoggedIn, designer.Get.favDesignerList)
+router.get('/swagger/favDesigner/', checkApiKey, passport.isLoggedIn, designer.Get.favDesignerList)
 
-router.get('/instance', passport.isLoggedIn, recordCtrl.Get.instance);
-router.get('/swagger/instance', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Get.instance);
+router.get('/instance', passport.isLoggedIn, record.Get.instance);
+router.get('/swagger/instance', checkApiKey, passport.isLoggedIn, record.Get.instance);
 
-router.get('/result', passport.isLoggedIn, recordCtrl.Get.result);
-router.get('/swagger/result', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Get.result);
+router.get('/result', passport.isLoggedIn, record.Get.result);
+router.get('/swagger/result', checkApiKey, passport.isLoggedIn, record.Get.result);
 
-router.get('/privacy/user', passport.isLoggedIn, privacyCrtl.Get.user)
-router.get('/swagger/privacy/user', sign.checkApiKey, passport.isLoggedIn, privacyCrtl.Get.user)
+router.get('/privacy/user', passport.isLoggedIn, privacy.Get.user)
+router.get('/swagger/privacy/user', checkApiKey, passport.isLoggedIn, privacy.Get.user)
 
 // DELETE
-router.post('/recordDelete', passport.isLoggedIn, recordCtrl.Delete.record);
-router.post('/swagger/recordDelete', sign.checkApiKey, passport.isLoggedIn, recordCtrl.Delete.record);
+router.post('/recordDelete', passport.isLoggedIn, record.Delete.record);
+router.post('/swagger/recordDelete', checkApiKey, passport.isLoggedIn, record.Delete.record);
 
-router.post('/designerDelete', passport.isLoggedIn, designerCtrl.Delete.designer);
-router.post('/swagger/designerDelete', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Delete.designer);
+router.post('/designerDelete', passport.isLoggedIn, designer.Delete.designer);
+router.post('/swagger/designerDelete', checkApiKey, passport.isLoggedIn, designer.Delete.designer);
 
 // UPDATE
-router.post('/recordUpdate/:category', passport.isLoggedIn, multer.array("Image", 3), recordCtrl.Update.record);
-router.post('/swagger/recordUpdate/:category', sign.checkApiKey, passport.isLoggedIn, multer.array("Image", 3), recordCtrl.Update.record);
+router.post('/recordUpdate/:category', passport.isLoggedIn, multer.array("Image", 3), record.Update.record);
+router.post('/swagger/recordUpdate/:category', checkApiKey, passport.isLoggedIn, multer.array("Image", 3), record.Update.record);
 
-router.post('/designerUpdate', passport.isLoggedIn, designerCtrl.Update.designer);
-router.post('/swagger/designerUpdate', sign.checkApiKey, passport.isLoggedIn, designerCtrl.Update.designer);
+router.post('/designerUpdate', passport.isLoggedIn, designer.Update.designer);
+router.post('/swagger/designerUpdate', checkApiKey, passport.isLoggedIn, designer.Update.designer);
 
-router.post('/privacyUpdate/user', passport.isLoggedIn, privacyCrtl.Update.privacy)
-router.post('/swagger/privacyUpdate/user', sign.checkApiKey, passport.isLoggedIn, privacyCrtl.Update.privacy)
+router.post('/privacyUpdate/user', passport.isLoggedIn, privacy.Update.privacy)
+router.post('/swagger/privacyUpdate/user', checkApiKey, passport.isLoggedIn, privacy.Update.privacy)
 
 
-module.exports = router;
+export default router;

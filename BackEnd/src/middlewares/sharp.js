@@ -1,5 +1,5 @@
-const sharp = require('sharp')
-const fs = require('fs');
+import sharp from 'sharp';
+import fs from 'fs';
 
 const sharping = async function(req, res, next) {
 
@@ -22,4 +22,4 @@ const sharping = async function(req, res, next) {
 }
 
 
-module.exports = {sharping}
+export default {sharping}

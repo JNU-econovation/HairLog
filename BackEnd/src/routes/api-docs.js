@@ -1,10 +1,11 @@
-const express = require('express'),
-    router = express.Router();
+import { Router } from 'express';
+const router = Router();
+
 
     
-const Swagger = require('../../../Swagger/Swagger.js');
+import Swagger from '../../../Swagger/Swagger.js'
 
 router.use('/', Swagger.Ui.serve, Swagger.Ui.setup(Swagger.specs, { explorer : true}));
 
 
-module.exports = router;
+export default router;

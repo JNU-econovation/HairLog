@@ -1,11 +1,11 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
+import bcrypt from 'bcrypt';
 
-const User = require('../../DB/sequelize/models/User');
+import User from '../../DB/sequelize/models/User.js';
 
 
-module.exports = () => {
+export default () => {
   passport.use(new LocalStrategy(
   {
     usernameField: 'userEmail',

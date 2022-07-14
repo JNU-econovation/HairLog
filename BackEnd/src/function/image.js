@@ -1,4 +1,4 @@
-const cloudinary = require('./cloudinary/upload')
+import cloudinary from './cloudinary/upload.js'
 
 const urls = async function (files) {
     let temp = {}
@@ -25,4 +25,4 @@ const query = async function(urls) {
     return imgQeury
 }
 
-module.exports= {urls, query}
+export default {urls, query}

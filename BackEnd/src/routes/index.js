@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
-const passport = require('../middlewares/passport');
+import passport from '../middlewares/passport.js';
 
 router.get('/after_register', passport.isLoggedIn, function(req, res, next) {
   res.render('after_register');
@@ -40,4 +40,4 @@ router.get('/register_2', passport.isLoggedIn, function(req, res, next) {
   res.render('register_2');
 });
 
-module.exports = router;
+export default router;

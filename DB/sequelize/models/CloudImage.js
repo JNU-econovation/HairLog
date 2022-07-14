@@ -1,6 +1,6 @@
-const { DataTypes, Sequelize } = require('sequelize');
+import { DataTypes, Sequelize } from 'sequelize';
 
-module.exports = class CloudImage extends Sequelize.Model {
+export default class CloudImage extends Sequelize.Model {
 static init(sequelize) {
     return super.init({
     img1: {
