@@ -1,7 +1,5 @@
 import { Router } from 'express';
 const router = Router();
-import show from "@jongjun/console";
-import cors from "cors";
 
 import passport from '../middlewares/passport.js';
 import checkApiKey from '../function/CheckAPIKey.js';

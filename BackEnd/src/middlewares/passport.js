@@ -1,7 +1,5 @@
 import passport from 'passport';
-import { hash as _hash, compare } from 'bcrypt';
-import { Op } from "sequelize";
-
+import bcrypt from 'bcrypt';
 
 import User from '../../../DB/sequelize/models/User.js';
 
@@ -13,7 +11,7 @@ const join = async (req, res, next) => {
       if (exUser) {
         return res.redirect('/existUser');
       }
-      const hash = await _hash(userPassword, 12);
+      const hash = await bcrypt.hash(userPassword, 12);
       let user = await User.create({
         userEmail,
         userPassword : hash,
@@ -70,7 +68,7 @@ const checkPassword = async (req, res, next) => {
   let dbUser = await findOne({where : {id : req.user.id}})
   console.log(userPassword)
   console.log(dbUser.userPassword)
-  const check = await compare(userPassword, dbUser.userPassword);
+  const check = await bcrypt.compare(userPassword, dbUser.userPassword);
   if(check) {
     return res.send({code : 200})
   }

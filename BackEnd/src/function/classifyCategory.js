@@ -7,7 +7,6 @@ import Perm from '../../../DB/sequelize/models/Perm.js';
 import Dyeing from '../../../DB/sequelize/models/Dyeing.js';
 import { Op } from "sequelize";
 
-import show from '@jongjun/console';
 import ifDesigner from "../function/ifDesigner.js";
 
 

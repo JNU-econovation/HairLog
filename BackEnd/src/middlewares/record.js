@@ -7,14 +7,10 @@ import Cut from '../../../DB/sequelize/models/Cut.js';
 import Perm from '../../../DB/sequelize/models/Perm.js';
 import Dyeing from '../../../DB/sequelize/models/Dyeing.js';
 
-import { Op } from "sequelize";
-
-import ifDesigner from '../function/ifDesigner.js';
 import classifyCategory from '../function/classifyCategory.js';
 import cloudinary from '../function/cloudinary/delete.js';
 import image from '../function/image.js';
 
-import show from '@jongjun/console';
 
 const Post = {
 
