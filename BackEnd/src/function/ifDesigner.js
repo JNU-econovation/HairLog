@@ -17,7 +17,7 @@ const isNotDesigner = async function  (req, category, userInstance) {
 }
 
 const getDesigner = async function (record) {
-    let designer = await Promise.all(record.map(res => findOne({where : {id :res.DesignerId}, raw : true})))
+    let designer = await Promise.all(record.map(res => Designer.findOne({where : {id :res.DesignerId}, raw : true})))
     return designer
 }
 
