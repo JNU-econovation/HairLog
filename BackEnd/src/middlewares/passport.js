@@ -1,6 +1,5 @@
 import passport from 'passport';
 import { hash as _hash, compare } from 'bcrypt';
-import { Op } from "sequelize";
 
 
 import User from '../../../DB/sequelize/models/User.js';

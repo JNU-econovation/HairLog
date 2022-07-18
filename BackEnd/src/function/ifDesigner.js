@@ -1,10 +1,4 @@
-import User from '../../../DB/sequelize/models/User.js';
 import Designer from '../../../DB/sequelize/models/Designer.js';
-import Record from '../../../DB/sequelize/models/Record.js';
-import Image from '../../../DB/sequelize/models/Image.js';
-import Cut from '../../../DB/sequelize/models/Cut.js';
-import Perm from '../../../DB/sequelize/models/Perm.js';
-import Dyeing from '../../../DB/sequelize/models/Dyeing.js';
 
 
 const isDesigner = async function (req, category, userInstance) {

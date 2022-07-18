@@ -23,7 +23,6 @@ import logger from './BackEnd/logger/logger.js';
 
 // router
 import indexRouter from './BackEnd/src/routes/index.js';
-import usersRouter from './BackEnd/src/routes/users.js';
 import apiRouter from './BackEnd/src/routes/api.js';
 import apiDocsRouter from './BackEnd/src/routes/api-docs.js';
 
@@ -51,8 +50,6 @@ app.set('httpPort', process.env.PORT || 3000);
 
 
 // view engine setup
-// app.set('views', path.join(__dirname, '/BackEnd/views'));
-// app.set('view engine', 'jade');
 app.set('view engine', 'html');
 nunjucks.configure(path.join(__dirname, '/FrontEnd/html'), {
   express: app,
@@ -77,15 +74,6 @@ if(process.env.NODE_ENV==='production'){
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/FrontEnd')));
-app.use(session({
-  resave : false,
-  saveUninitialized : false,
-  secret : process.env.SESSION_SECRET,
-  cookie : {
-    httpOnly : true,
-    secure : false,
-  },
-}));
 app.use(cookieParser());
 
 const sessionOption = {
@@ -111,7 +99,6 @@ app.use(passport.session());
 // add router
 app.use(cors());
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 app.use('/api-docs', apiDocsRouter);
 

@@ -1,14 +1,9 @@
 import User from '../../../DB/sequelize/models/User.js';
 import Designer from '../../../DB/sequelize/models/Designer.js';
-import Image from '../../../DB/sequelize/models/Image.js';
-import Cut from '../../../DB/sequelize/models/Cut.js';
-import Perm from '../../../DB/sequelize/models/Perm.js';
-import Dyeing from '../../../DB/sequelize/models/Dyeing.js';
+
 
 import { Op } from "sequelize";
 
-
-import show from '@jongjun/console';
 
 const Post = {
     
