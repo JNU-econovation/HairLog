@@ -66,7 +66,7 @@ const isNotLoggedIn = (req, res, next) => {
 
 const checkPassword = async (req, res, next) => {
   const { userPassword } = req.body;
-  let dbUser = await findOne({where : {id : req.user.id}})
+  let dbUser = await User.findOne({where : {id : req.user.id}})
   console.log(userPassword)
   console.log(dbUser.userPassword)
   const check = await compare(userPassword, dbUser.userPassword);
