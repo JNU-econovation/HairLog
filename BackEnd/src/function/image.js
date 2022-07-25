@@ -1,5 +1,6 @@
 import cloudinary from './cloudinary/upload.js'
 
+// get urls and public_id from result of uploading Cloudinary result 
 const urls = async function (files) {
     let temp = {}
     let i = 0
@@ -15,6 +16,7 @@ const urls = async function (files) {
     return imgInformation
 }
 
+// make query to use insert url into DB
 const query = async function(urls) {
     let imgQeury = {}
     let i = 0;

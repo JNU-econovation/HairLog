@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 import User from '../../DB/sequelize/models/User.js';
 
-
+// config local strategy
 export default () => {
   passport.use(new LocalStrategy(
   {

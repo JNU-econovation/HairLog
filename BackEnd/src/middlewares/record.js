@@ -13,7 +13,10 @@ import image from '../function/image.js';
 
 
 const Post = {
-
+    
+    // record Post
+    // record can have designer
+    // record must belong to category, img
     record : async function(req, res) {
         let user = await User.findOne({where : {id : req.user.id}});
         let designer = await Post.designerInstance(req);
@@ -24,8 +27,9 @@ const Post = {
         return res.send({code : 200, result})
     },
 
+    // inner function
+    // make instance
     designerInstance : async function(req) {
-
         let { designerName }= req.body;
         if(designerName){
             let designer = await Designer.findOne({where : { designerName }})
@@ -66,8 +70,7 @@ const Post = {
         return img
     },
     
-    // inner function
-    
+    // switch category 
     recordCategory : async function(req, recordInstance) {
         let category = req.params.category;
         switch (category) 
@@ -92,15 +95,21 @@ const Post = {
 }
 
 const Get = {
-
+    
+    // main Get
+    // show latest record
     main : async function(req, res) {
         return classifyCategory.latest(req, res)
     },
 
+    // instance Get
+    // show record after submit
     instance : async function(req, res) {
         return classifyCategory.instanceResult(req, res)
     },
 
+    // classification Get
+    // show record by category
     classification : async function(req, res) {
         let category = req.params.category
         if( category == "latest") {
@@ -114,26 +123,28 @@ const Get = {
         
     },
     
+    // result Get
+    // show record by recordId
     result : async function(req, res) {
         classifyCategory.eachResult(req,res)
-    }
-    
+    },
 }
 
 
 const Update = {
 
+    // record Update
     record : async function(req, res) {
         let {RecordId} = req.body
         let category = req.params.category
         await Delete.recordDelete(category, RecordId)
         await Post.record(req, res)
-    }
-
+    },
 }
 
 const Delete = {
 
+    // record Delete
     record  : async function(req, res) {
         try {
             let {category, RecordId} = req.body
@@ -142,10 +153,12 @@ const Delete = {
         } catch(e) {
             res.send({code : 404, msg : e})
         }
-
     },
 
     // inner function
+    // delete all info related RecordId
+    // record, cloudIamage, image and recordCategory delete by sequelize
+    // cloudDelete delete info at cloudinary
     recordDelete : async function(category, RecordId){
         await Record.destroy({where : {id : RecordId}})
         await Delete.clouddDelete(RecordId);
@@ -155,7 +168,6 @@ const Delete = {
     },
 
     clouddDelete : async function(RecordId) {
-
         let imagesId = await CloudImage.findOne({attributes : ["img1", "img2", "img3"], where : {RecordId}, raw : true})
         let idInfo = Object.entries(imagesId)
         let ids = idInfo.map(ids => ids[1])
@@ -165,7 +177,6 @@ const Delete = {
     },
 
     recordCategory : async function(category, RecordId) {
-
         switch (category) 
         {
             case "cut" : 
@@ -181,7 +192,6 @@ const Delete = {
             throw new Error('올바른 목록을 선택해 주세요!');
         }
     },
-
 }
 
 export default {Post, Get, Update, Delete};

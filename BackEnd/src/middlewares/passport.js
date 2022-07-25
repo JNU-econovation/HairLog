@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 import User from '../../../DB/sequelize/models/User.js';
 
-
+// join by passport local
 const join = async (req, res, next) => {
     const { userEmail, userPassword, userName, userSex, userCycle } = req.body;
     try {
@@ -26,6 +26,7 @@ const join = async (req, res, next) => {
     }
   }
 
+// login by passport local
 const authenticate = (req, res, next) => {
   passport.authenticate('local', (authError, user) => {
       if (authError) {
@@ -46,6 +47,7 @@ const authenticate = (req, res, next) => {
     })(req, res, next);
 };
 
+// check isLoggedIn by passport local
 const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
       next();
@@ -54,6 +56,7 @@ const isLoggedIn = (req, res, next) => {
   }
 };
 
+// check isNotLoggedIn by passport local
 const isNotLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
       next();
@@ -63,11 +66,10 @@ const isNotLoggedIn = (req, res, next) => {
   }
 };
 
+// check password
 const checkPassword = async (req, res, next) => {
   const { userPassword } = req.body;
   let dbUser = await findOne({where : {id : req.user.id}})
-  console.log(userPassword)
-  console.log(dbUser.userPassword)
   const check = await bcrypt.compare(userPassword, dbUser.userPassword);
   if(check) {
     return res.send({code : 200})

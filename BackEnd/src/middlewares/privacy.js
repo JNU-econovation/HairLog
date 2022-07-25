@@ -8,7 +8,9 @@ const Post = {
 }
 
 const Get = {
-    
+  
+    // user Get
+    // get userInfo by userId and make recentDate & nextDate
     user : async function(req, res) {
       try {
         let user =  req.user;
@@ -28,12 +30,12 @@ const Get = {
       }
 
     },
-
 }
 
 
 const Update = {
 
+    // privacy Update
     privacy : async function(req, res,next) {
         const { userEmail, userPassword, userName, userSex, userCycle } = req.body;
         try {
@@ -55,8 +57,7 @@ const Update = {
           console.error(error);
           return next(error);
         }
-    }
-    
+    },
 }
 
 export default {Post, Get, Update};
