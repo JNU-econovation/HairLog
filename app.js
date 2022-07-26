@@ -48,6 +48,8 @@ const app = express();
 // port
 app.set('httpPort', process.env.PORT || 3000);
 
+
+// view engine setup
 app.set('view engine', 'html');
 nunjucks.configure(path.join(__dirname, '/FrontEnd/html'), {
   express: app,
@@ -72,15 +74,6 @@ if(process.env.NODE_ENV==='production'){
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/FrontEnd')));
-app.use(session({
-  resave : false,
-  saveUninitialized : false,
-  secret : process.env.SESSION_SECRET,
-  cookie : {
-    httpOnly : true,
-    secure : false,
-  },
-}));
 app.use(cookieParser());
 
 const sessionOption = {

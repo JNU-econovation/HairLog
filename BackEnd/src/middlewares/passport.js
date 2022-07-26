@@ -1,5 +1,7 @@
 import passport from 'passport';
+
 import bcrypt from 'bcrypt';
+op
 
 import User from '../../../DB/sequelize/models/User.js';
 
@@ -71,6 +73,7 @@ const checkPassword = async (req, res, next) => {
   const { userPassword } = req.body;
   let dbUser = await findOne({where : {id : req.user.id}})
   const check = await bcrypt.compare(userPassword, dbUser.userPassword);
+
   if(check) {
     return res.send({code : 200})
   }

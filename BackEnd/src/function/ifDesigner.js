@@ -1,5 +1,6 @@
 import Designer from '../../../DB/sequelize/models/Designer.js';
 
+
 // create record when designer is exist
 const isDesigner = async function (req, category, userInstance) {
     let {recordDate, recordCost, designerName, recordEtc, recordGrade} = req.body;
@@ -19,7 +20,7 @@ const isNotDesigner = async function  (req, category, userInstance) {
 
 // get Designer info
 const getDesigner = async function (record) {
-    let designer = await Promise.all(record.map(res => findOne({where : {id :res.DesignerId}, raw : true})))
+    let designer = await Promise.all(record.map(res => Designer.findOne({where : {id :res.DesignerId}, raw : true})))
     return designer
 }
 
