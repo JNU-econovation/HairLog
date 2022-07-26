@@ -27,12 +27,13 @@ fetch('http://localhost:3000/api/privacy/user')
     .then((result) => { 
       Datas = JSON.parse(result);
       // console.log(result);
-      // console.log(Datas); 
+      console.log("정보",Datas); 
 
       if(Datas.code===200){
         showProfile(Datas);
         userEmail = Datas.result.user.userEmail;
         userSex = Datas.result.user.userSex;
+
       }
     });
 
@@ -54,19 +55,21 @@ function mkEdit() {
 function goEdit() {
   let editData = mkEdit();
   console.log(editData);
+  location.href = 'http://localhost:3000/mypage';
 
   fetch('http://localhost:3000/api/privacyUpdate/user', {        // 서버로 보내고 결과 출력
-  headers: {
-    'Content-Type': 'application/json'       
-  },
-  method: 'POST',
-  body: JSON.stringify(editData), 
-  }) 
-  .then((response) => response.text())
-  .then((result) => { 
-    Datas = JSON.parse(result);
-    // console.log(result);
-    console.log("수정완료",Datas); 
+    headers: {
+      'Content-Type': 'application/json'       
+    },
+    method: 'POST',
+    body: JSON.stringify(editData), 
+    }) 
+    .then((response) => response.text())
+    .then((result) => { 
+      Datas = JSON.parse(result);
+      // console.log(result);
+      console.log("수정완료",Datas); 
+      location.href = 'http://localhost:3000/mypage';
 
   });
 

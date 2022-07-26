@@ -1,0 +1,88 @@
+/* 앞뒤 버튼 */
+
+.btns {
+  margin-top: 175px;
+}
+
+.edit {
+  border: none;
+  background-color: #EFFAF0;
+  border-radius: 10px;
+  margin-left: 10%;
+  font-size: 40px;
+  padding: 10px;
+  font-family: SeoulNamsanCed_ExtraBold;
+}
+
+.delete {
+  border: none;
+  background-color: #EFFAF0;
+  border-radius: 10px;
+  margin-right: 10%;
+  float: right;
+  font-size: 40px;
+  padding: 10px;
+  font-family: SeoulNamsanCed_ExtraBold;
+}
+
+/* 이미지 넣기 */
+.imgBox {
+  width: 400px;
+  height: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  /* border: 1px solid red; */
+}
+
+.myimg {
+  width: 400px;
+  height: 400px;
+}
+
+/* 만족도 별 표시 */
+.starBox {
+  width: 800px;
+  height: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  border-bottom: 5px solid #57B85F;
+}
+
+.star {
+  font-size: 50px;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: 1px solid red; */
+  width: 400px;
+  height: 67.2px;
+}
+
+/* 기록사항 표시 */
+.recordBox {
+  width: 700px;
+  height: 650px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  overflow: auto;
+  box-shadow: 0px 5px 5px 5px #bdbdbd;
+  border-radius: 10px;
+  padding-left: 40px;
+}
+
+.recordBox p {
+  font-size: 35px;
+  font-family: SeoulNamsanCed_Medium;
+
+}
+
+.extra {
+  color: #57B85F;
+}

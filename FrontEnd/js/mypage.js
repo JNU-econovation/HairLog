@@ -60,27 +60,28 @@ function closePopup(num) {
 
     const PW = {userPassword};
     console.log(PW);
+    location.href = 'http://localhost:3000/editProfile';
 
     // inputPW를 서버로 보내서 일치하는지 확인하고 일치하면 editProfile.html로 로드, 불일치하면 아래에 비밀번호가 틀립니다! 띄우기
     
-    fetch('http://localhost:3000/api/checkPassword', {
-      headers: {
-        'Content-Type': 'application/json'     
-      },
-      method: 'POST',
-      body: JSON.stringify(PW),     //객체 -> JSON
-    }) 
-      .then((response) => response.text())
-      .then((result) => { 
-        Datas = JSON.parse(result);
-        console.log(Datas.code);
-        // console.log(result);
+    // fetch('http://localhost:3000/api/checkPassword', {
+    //   headers: {
+    //     'Content-Type': 'application/json'     
+    //   },
+    //   method: 'POST',
+    //   body: JSON.stringify(PW),     //객체 -> JSON
+    //   }) 
+    //   .then((response) => response.text())
+    //   .then((result) => { 
+    //     Datas = JSON.parse(result);
+    //     console.log(Datas.code);
+    //     // console.log(result);
 
-        if(Datas.code===200){
-          location.href = 'http://localhost:3000/editProfile';
-        }
+    //     if(Datas.code===200){
+    //       location.href = 'http://localhost:3000/editProfile';
+    //     }
   
-       });
+    //    });
 
   }
   else{
@@ -95,16 +96,16 @@ complete.addEventListener("click", event => closePopup(1));
 
 
 
-fetch('http://localhost:3000/api/result')  
-    .then((response) => response.text())
-    .then((result) => { 
-      Datas = JSON.parse(result);
-      // console.log(result);
-      console.log(Datas); 
+// fetch('http://localhost:3000/api/result')  
+//     .then((response) => response.text())
+//     .then((result) => { 
+//       Datas = JSON.parse(result);
+//       // console.log(result);
+//       console.log(Datas); 
 
-      // if(Datas.code===200){
-      //   showUser(Datas);
-      // }
+//       // if(Datas.code===200){
+//       //   showUser(Datas);
+//       // }
 
 
-    });
+//     });

@@ -6,6 +6,13 @@
 // const imgTest = document.querySelector('.imgTest');
 // imgTest.appendChild(img);
 
+// 박스 선택하면 해당 아이디 출력하기
+const BOX = document.querySelector(".box")
+function clickBox(ID) {
+  console.log(ID);
+  location.href = `http://localhost:3000/recordResult?id=${ID}`;          // 쿼리스트링!!!!
+}
+
 
 
 
@@ -53,16 +60,16 @@ function renderBox(exDatas) {
     // newBox.style.backgroundImage = `url(${myURL})`;
     // newBox.style.backgroundSize ="350px";
 
-    const newX = document.createElement('h1');     // x 표시 만들기
-    newX.innerText = "✖";
-    newBox.appendChild(newX);
+    // const newX = document.createElement('h1');     // x 표시 만들기
+    // newX.innerText = "✖";
+    // newBox.appendChild(newX);
 
     let rcDate = temp.recordDate.replaceAll('-','.').slice(2);
     const newDate = document.createElement('p');
     newDate.innerText = rcDate;
     newBox.appendChild(newDate);
     
-    
+    newBox.addEventListener("click", event =>clickBox(boxID));
   }
 }
 
@@ -114,18 +121,19 @@ function renderDesignerBox(exDatas) {
 
       const img = document.createElement('img');
       img.src = myURL;
+      img.crossOrigin = "anonymous";
       img.classList.add("boxIMG");
       newBox.appendChild(img);
       
 
       
 
-      newBox.style.backgroundImage = `url(${myURL})`;
-      newBox.style.backgroundSize ="350px";
+      // newBox.style.backgroundImage = `url(${myURL})`;
+      // newBox.style.backgroundSize ="350px";
 
-      const newX = document.createElement('h1');     // x 표시 만들기
-      newX.innerText = "✖";
-      newBox.appendChild(newX);
+      // const newX = document.createElement('h1');     // x 표시 만들기
+      // newX.innerText = "✖";
+      // newBox.appendChild(newX);
 
       let rcDate = temp.recordDate.replaceAll('-','.').slice(2);
       const newDate = document.createElement('p');
@@ -265,3 +273,11 @@ filter_cut.addEventListener("click", selectF2);
 filter_perm.addEventListener("click", selectF3);
 filter_dying.addEventListener("click", selectF4);
 filter_designer.addEventListener("click", selectF5);
+
+
+
+
+
+
+
+

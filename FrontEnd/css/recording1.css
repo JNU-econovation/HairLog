@@ -188,3 +188,7 @@
 .dyingForm .ch3 {
   margin-bottom: 30px;
 }
+
+.bringFront{
+  z-index: 1;
+}
