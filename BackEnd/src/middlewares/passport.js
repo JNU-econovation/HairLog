@@ -1,7 +1,6 @@
 import passport from 'passport';
 
 import bcrypt from 'bcrypt';
-op
 
 import User from '../../../DB/sequelize/models/User.js';
 
