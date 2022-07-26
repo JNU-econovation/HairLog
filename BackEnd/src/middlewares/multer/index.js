@@ -19,6 +19,7 @@ class MulterClass {
                 },
                 filename(req, file, cb) {
                     const ext = path.extname(file.originalname);
+                    // add userId in filename
                     cb(null, req.user.id + "_" + path.basename(file.originalname, ext) + Date.now() + ext);
                 },
             }),
@@ -37,7 +38,6 @@ class MulterClass {
     fields (arrayField) {
         return this.upload.fields(arrayField)
     }
-     
 }
 
     

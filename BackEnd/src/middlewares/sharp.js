@@ -2,7 +2,6 @@ import sharp from 'sharp';
 import fs from 'fs';
 
 const sharping = async function(req, res, next) {
-
             return await Promise.all(
                 req.files.map(file => 
                 sharp(file.path)
@@ -18,7 +17,6 @@ const sharping = async function(req, res, next) {
             )).then(()=> {
                 return next()
             })
-
 }
 
 

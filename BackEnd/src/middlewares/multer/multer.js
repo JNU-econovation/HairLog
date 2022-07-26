@@ -1,5 +1,6 @@
 import Multer from "./index.js";
 
+// maek Multer obj
 let multerObj = new Multer();
 
 
