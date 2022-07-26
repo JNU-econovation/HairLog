@@ -8,7 +8,7 @@ const designer_C = document.querySelector(".C");
 const designer_List = [designer_A, designer_B, designer_C];
 
 let Datas;
-fetch('http://localhost:3000/api/favDesigner') 
+fetch('https://hairlogapi.herokuapp.com/api/favDesigner') 
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
@@ -224,24 +224,24 @@ function mkObject() {
     if(hairList[i].classList.contains("selected")){
       if(i===0){  //컷 선택
 
-        url='http://localhost:3000/api/record/cut';
-        editURL = 'http://localhost:3000/api/recordUpdate/cut';
+        url='https://hairlogapi.herokuapp.com/api/record/cut';
+        editURL = 'https://hairlogapi.herokuapp.com/api/recordUpdate/cut';
 
         whatCut();
         HairRecord = {recordDate,designerName,recordCost,cutName,cutLength,recordGrade,recordEtc};
 
       }
       else if(i===1) { //펌 선택
-        url='http://localhost:3000/api/record/perm';
-        editURL = 'http://localhost:3000/api/recordUpdate/perm';
+        url='https://hairlogapi.herokuapp.com/api/record/perm';
+        editURL = 'https://hairlogapi.herokuapp.com/api/recordUpdate/perm';
 
         whatPerm();
         HairRecord = {recordDate,designerName,recordCost,permName,permTime,permHurt,recordGrade,recordEtc};
 
       }
       else if(i===2) {  //염색 선택
-        url='http://localhost:3000/api/record/dyeing';
-        editURL = 'http://localhost:3000/api/recordUpdate/dyeing';
+        url='https://hairlogapi.herokuapp.com/api/record/dyeing';
+        editURL = 'https://hairlogapi.herokuapp.com/api/recordUpdate/dyeing';
 
         whatDying();
         HairRecord = { recordDate,designerName,recordCost,dyeingColor,dyeingDecolorization,dyeingTime,dyeingHurt,recordGrade,recordEtc};
@@ -293,7 +293,7 @@ function sendEditRecord() {     // 수정
       // console.log(Datas); 
       
       if(Datas.code===200){
-        location.href = 'http://localhost:3000/recordResult';
+        location.href = 'https://hairlogapi.herokuapp.com/recordResult';
       }
   
   
@@ -329,7 +329,7 @@ function sendRecord(addORedit) {        // 0이면 추가, 1이면 수정       
       // console.log(Datas); 
       
       if(Datas.code===200){
-        location.href = 'http://localhost:3000/recordResult';
+        location.href = 'https://hairlogapi.herokuapp.com/recordResult';
       }
 
 
@@ -338,7 +338,7 @@ function sendRecord(addORedit) {        // 0이면 추가, 1이면 수정       
 
 
 
-if(window.location.href==='http://localhost:3000/record'){       // 기록 추가
+if(window.location.href==='https://hairlogapi.herokuapp.com/record'){       // 기록 추가
   // console.log("추가");
   submitRecord.addEventListener("click", sendRecord);
 }
@@ -358,7 +358,7 @@ else{                                                            // 기록 수�
 
 // 수정 전 기록 채우는 함수
 function fill(ID){
-  fetch(`http://localhost:3000/api/result?id=${queryID}`)       // 쿼리스트링으로 요청 보내기
+  fetch(`https://hairlogapi.herokuapp.com/api/result?id=${queryID}`)       // 쿼리스트링으로 요청 보내기
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);

@@ -85,7 +85,7 @@ function signBtnClick() {
 
   // 서버로 따로 보내는 버전
   
-  fetch('http://localhost:3000/api/join', {
+  fetch('https://hairlogapi.herokuapp.com/api/join', {
     headers: {
       'Content-Type': 'application/json'     
     },
@@ -99,7 +99,7 @@ function signBtnClick() {
       // console.log(result);
 
       // location.href = '../html/after_register.html';
-      location.href = 'http://localhost:3000/after_register';
+      location.href = 'https://hairlogapi.herokuapp.com/after_register';
 
      });
 

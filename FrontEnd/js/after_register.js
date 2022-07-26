@@ -1,7 +1,7 @@
     // 이름 넣기
     const myname = document.querySelector(".name");
 
-    fetch('http://localhost:3000/api/privacy/user')  
+    fetch('https://hairlogapi.herokuapp.com/api/privacy/user')  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);

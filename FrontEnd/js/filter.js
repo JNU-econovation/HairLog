@@ -3,7 +3,7 @@
 const BOX = document.querySelector(".box")
 function clickBox(ID) {
   // console.log(ID);
-  location.href = `http://localhost:3000/recordResult?id=${ID}`;          // 쿼리스트링!!!!
+  location.href = `https://hairlogapi.herokuapp.com/recordResult?id=${ID}`;          // 쿼리스트링!!!!
 }
 
 
@@ -121,11 +121,11 @@ function renderDesignerBox(exDatas) {
 
 
 
-const latestURL = 'http://localhost:3000/api/main/latest';
-const cutURL = 'http://localhost:3000/api/main/cut';
-const permURL = 'http://localhost:3000/api/main/perm';
-const dyeingURL = 'http://localhost:3000/api/main/dyeing';
-const designerURL = 'http://localhost:3000/api/main/designer';
+const latestURL = 'https://hairlogapi.herokuapp.com/api/main/latest';
+const cutURL = 'https://hairlogapi.herokuapp.com/api/main/cut';
+const permURL = 'https://hairlogapi.herokuapp.com/api/main/perm';
+const dyeingURL = 'https://hairlogapi.herokuapp.com/api/main/dyeing';
+const designerURL = 'https://hairlogapi.herokuapp.com/api/main/designer';
 
 // 화면에 띄우는 함수
 function goFetch(url){

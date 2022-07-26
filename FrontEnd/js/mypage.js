@@ -22,7 +22,7 @@ function showUser(exDatas) {
 
 
 // 마이페이지 보여주기 
-fetch('http://localhost:3000/api/privacy/user')  
+fetch('https://hairlogapi.herokuapp.com/api/privacy/user')  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
@@ -60,7 +60,7 @@ function closePopup(num) {
 
     const PW = {userPassword};
     // console.log(PW);
-    location.href = 'http://localhost:3000/editProfile';
+    location.href = 'https://hairlogapi.herokuapp.com/editProfile';
 
   }
   else{
