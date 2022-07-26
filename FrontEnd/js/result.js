@@ -163,8 +163,8 @@ function recordAll(exDatas){
 }
 
 // 화면에 표시
-if(window.location.href==='http://localhost:3000/recordResult') { // 기록 후 넘어갈 페이지
-  fetch('http://localhost:3000/api/instance')  
+if(window.location.href==='https://hairlogapi.herokuapp.com/recordResult') { // 기록 후 넘어갈 페이지
+  fetch('https://hairlogapi.herokuapp.com/api/instance')  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
@@ -182,7 +182,7 @@ else{        // 클릭해서 넘어갈 페이지
   const queryID = Number(window.location.search.slice(4));
   // console.log(queryID);
 
-  fetch(`http://localhost:3000/api/result?id=${queryID}`)       // 쿼리스트링으로 요청 보내기
+  fetch(`https://hairlogapi.herokuapp.com/api/result?id=${queryID}`)       // 쿼리스트링으로 요청 보내기
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
@@ -206,7 +206,7 @@ function deleteRecord(){
   const deleteForm = {RecordId,category};
   // console.log(deleteForm);
 
-  fetch('http://localhost:3000/api/recordDelete', {
+  fetch('https://hairlogapi.herokuapp.com/api/recordDelete', {
     headers: {
       'Content-Type': 'application/json'     
     },
@@ -230,6 +230,6 @@ deleteBtn.addEventListener("click",deleteRecord);
 const editBtn = document.querySelector(".edit");
 
 function goEditPage() {
-  location.href = `http://localhost:3000/record?id=${RecordId}`;   
+  location.href = `https://hairlogapi.herokuapp.com/record?id=${RecordId}`;   
 }
 editBtn.addEventListener("click", goEditPage);

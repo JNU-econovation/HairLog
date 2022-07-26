@@ -1,31 +1,15 @@
-function makeUrl (apiUrl) {
-  if(apiUrl != undefined){
-    var base ="https://hairlogapi.herokuapp.com/"
-    return base + apiUrl
-  } else {
-    var base ="https://hairlogapi.herokuapp.com/"
-    return base
-  }
-
-}
-
-var recordUrl = makeUrl("record")  
-var Url =makeUrl() 
-var designerUrl = makeUrl("designer")  
-var mypageUrl = makeUrl("mypage")  
-
 const Home  = document.querySelector(".one");
 
 if(Home.classList.contains("check")){
   const Plus = document.querySelector("#Plus");
   function goPlus() {
-    location.href=recordUrl;
+    location.href='https://hairlogapi.herokuapp.com/record';
   }
   Plus.addEventListener("click", goPlus);
 }
 else{
   function goHome() {
-    location.href=Url;
+    location.href='https://hairlogapi.herokuapp.com/';
   }
   Home.addEventListener("click", goHome);
 }
@@ -33,13 +17,13 @@ else{
 
 const Designer = document.querySelector(".two");
 function goDesigner() {
-  location.href=designerUrl;
+  location.href='https://hairlogapi.herokuapp.com/designer';
 }
 Designer.addEventListener("click", goDesigner);
 
 const myPage = document.querySelector(".three");
 function gomyPage() {
-  location.href=mypageUrl;
+  location.href='https://hairlogapi.herokuapp.com/mypage';
 }
 myPage.addEventListener("click", gomyPage);
 
