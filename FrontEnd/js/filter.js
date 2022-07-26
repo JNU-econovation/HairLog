@@ -1,13 +1,11 @@
 
+
 // 박스 선택하면 해당 아이디 출력하기
 const BOX = document.querySelector(".box")
 function clickBox(ID) {
   // console.log(ID);
   location.href = `http://localhost:3000/recordResult?id=${ID}`;          // 쿼리스트링!!!!
 }
-
-
-
 
 // ID에 맞는 사진 불러오는 함수
 function idToImg(arr, Id) {
@@ -62,8 +60,6 @@ function renderBox(exDatas) {
 // 디자이너 화면에 띄우는 함수
 function renderDesignerBox(exDatas) {
   const boxes = document.querySelector(".boxes");
-  // console.log(exDatas.result.designerList.count);
-  // console.log(exDatas.result.img[0]);
 
   for(let i=0;i<exDatas.result.designerList.count;i++) {                    // 디자이너 이름 p에 저장
     let name = exDatas.result.designerList.rows[i].designerName;
@@ -78,12 +74,10 @@ function renderDesignerBox(exDatas) {
     boxes.appendChild(newBigBox);
 
     
-    // 여기
     const designerTemp = exDatas.result.recordByDesigner[i];    
 
     for(let j=0;j<designerTemp.count;j++){
       const temp = designerTemp.rows[j];
-      // console.log(temp);
 
       const newBox = document.createElement('div');   // 사각형 만들고 html에 넣기
       newBox.classList.add("box");
@@ -93,6 +87,7 @@ function renderDesignerBox(exDatas) {
 
       boxes.appendChild(newBox);
       
+
 
       let myURL;
       if(exDatas.result.recordByDesigner[i].count===1){     // 이미지가 기록 개수가 하나일 때
@@ -109,6 +104,13 @@ function renderDesignerBox(exDatas) {
       newBox.appendChild(img);
 
 
+
+
+      
+      newBox.style.backgroundImage = `url(${myURL})`;
+      newBox.style.backgroundSize ="350px";
+
+
       let rcDate = temp.recordDate.replaceAll('-','.').slice(2);
       const newDate = document.createElement('p');
       newDate.innerText = rcDate;
@@ -120,12 +122,16 @@ function renderDesignerBox(exDatas) {
 }
 
 
+function makeUrl (apiUrl) {
+  var base ="https://hairlogapi.herokuapp.com/"
+  return base + apiUrl
+}
 
-const latestURL = 'http://localhost:3000/api/main/latest';
-const cutURL = 'http://localhost:3000/api/main/cut';
-const permURL = 'http://localhost:3000/api/main/perm';
-const dyeingURL = 'http://localhost:3000/api/main/dyeing';
-const designerURL = 'http://localhost:3000/api/main/designer';
+const latestURL = makeUrl('api/main/latest');
+const cutURL = makeUrl('api/main/cut');
+const permURL = makeUrl('api/main/perm');
+const dyeingURL = makeUrl('api/main/dyeing');
+const designerURL = makeUrl('api/main/designer');
 
 // 화면에 띄우는 함수
 function goFetch(url){
@@ -224,8 +230,7 @@ function selectF5() {
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    // console.log(Datas); 
-    // console.log(Datas.result.designerList.count);
+
 
     if(Datas.code === 200){
       renderDesignerBox(Datas);

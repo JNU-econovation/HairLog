@@ -1,14 +1,14 @@
     // 이름 넣기
-    const myname = document.querySelector(".name");
+    const name = document.querySelector(".name");
 
     fetch('http://localhost:3000/api/privacy/user')  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
       // console.log(result);
-      // console.log(Datas); 
+      console.log(Datas); 
 
-      myname.innerHTML = `${Datas.result.user.userName}님, 환영합니다!`;
+      name.innerHTML = `${Datas.result.user.userName}님, 환영합니다!`;
 
     });
 

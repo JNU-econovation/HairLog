@@ -1,3 +1,14 @@
+const name = document.querySelector(".name");
+
+function makeUrl (apiUrl) {
+  var base ="https://hairlogapi.herokuapp.com/"
+  return base + apiUrl
+}
+
+var designerUrl = makeUrl("api/designer")
+var designerDeleteUrl = makeUrl("api/designerDelete")
+var designerUpdateUrl = makeUrl("api/designerUpdate")
+
 
 
 
@@ -37,7 +48,7 @@ function deleteDesigner(id) {
   const DesignerId = Number(id.slice(1));
   const ID = {DesignerId};
 
-  fetch('http://localhost:3000/api/designerDelete', {        // 서버로 보내고 결과 출력
+  fetch(designerDeleteUrl, {        // 서버로 보내고 결과 출력
   headers: {
     'Content-Type': 'application/json'       
   },
@@ -47,7 +58,7 @@ function deleteDesigner(id) {
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    // console.log("삭제완료",Datas); 
+
     showDesigners();
   });
 }
@@ -58,15 +69,13 @@ function closePopup(isSave) {
   if(isSave){    // 저장 하고 닫기
     const popup = document.querySelector('#popup');
     popup.classList.add('hide');
-    // console.log("추가");
     
     const designerName = document.querySelector("#inputDesignerName").value;
     const designerSalon = document.querySelector("#inputDesignerPlace").value;
     const fav = false;
     const designerData = { designerName, designerSalon, fav };          // 전송할 객체
-    // console.log(designerData);
 
-    fetch('http://localhost:3000/api/designer', {        // 서버로 보내고 결과 출력
+    fetch(designerUrl, {        // 서버로 보내고 결과 출력
       headers: {
         'Content-Type': 'application/json'       
       },
@@ -76,8 +85,7 @@ function closePopup(isSave) {
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
-      // console.log(result);
-      // console.log("추가완료",Datas); 
+
       showDesigners();
       resetInput();
     });
@@ -86,7 +94,6 @@ function closePopup(isSave) {
   else{       // 저장 안하고 닫기
     const popup = document.querySelector('#popup');
     popup.classList.add('hide');
-    // console.log("취소")
   }
 }
 
@@ -105,12 +112,10 @@ let dArray = [];
 function editAll(id) {
   const popup = document.querySelector('#popup');     // 팝업창 삭제
   popup.classList.add('hide');
-  // console.log("수정");
 
 
 
   let DesignerId = id;
-  // console.log(DesignerId);
   let designerName,designerSalon,designerFav;
 
   designerName = document.querySelector("#inputDesignerName").value;
@@ -126,7 +131,7 @@ function editAll(id) {
 
   const editData = {DesignerId,designerName,designerSalon,designerFav};  // 보낼 객체
 
-  fetch('http://localhost:3000/api/designerUpdate', {        // 서버로 보내고 결과 출력
+  fetch(designerUpdateUrl, {        // 서버로 보내고 결과 출력
   headers: {
     'Content-Type': 'application/json'       
   },
@@ -136,8 +141,7 @@ function editAll(id) {
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    // console.log(result);
-    // console.log("수정완료",Datas); 
+
     showDesigners();
     resetInput();
   });
@@ -149,7 +153,6 @@ function editFav(id) {
   const popup = document.querySelector('#popup');
   popup.classList.add('hide');
   const DesignerId = Number(id.slice(1));
-  // console.log(DesignerId);
 
   let temp,designerName,designerSalon,designerFav;
 
@@ -170,7 +173,7 @@ function editFav(id) {
 
   const editData = {DesignerId,designerName,designerSalon,designerFav};  // 보낼 객체
 
-  fetch('http://localhost:3000/api/designerUpdate', {        // 서버로 보내고 결과 출력
+  fetch(designerUpdateUrl, {        // 서버로 보내고 결과 출력
   headers: {
     'Content-Type': 'application/json'       
   },
@@ -180,8 +183,7 @@ function editFav(id) {
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    // console.log(result);
-    // console.log("수정완료",Datas); 
+
     showDesigners();
     resetInput();
   });
@@ -192,7 +194,6 @@ function editFav(id) {
 
 // 배열 전달 받아서 box 만드는 함수
 function mkBoxes(exDatas) {
-  // console.log(exDatas.designerList);
 
   const Boxes = document.querySelector(".boxes");
   Boxes.innerHTML = "";   //초기화
@@ -244,17 +245,15 @@ function mkBoxes(exDatas) {
 
     
   }
-  // console.log(dArray);
 }
 
 // 디자이너 전달받아서 목록 시각화 함수
 function showDesigners() {
-  fetch('http://localhost:3000/api/designer')  
+  fetch(designerUrl)  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
-      // console.log(result);
-      // console.log("로딩완료",Datas); 
+
 
       if(Datas.code===200){
         mkBoxes(Datas);
