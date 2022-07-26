@@ -16,7 +16,7 @@ function nextPage() {
 
 
 
-  console.log(SignUp);
+  // console.log(SignUp);
 
 
 

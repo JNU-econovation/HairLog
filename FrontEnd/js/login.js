@@ -18,12 +18,10 @@ async function getLogin(event) {           //async 써서 해라
     userPassword: PD,
   }
 
-  console.log(Login);
-  console.log(typeof(Login));
+  // console.log(Login);
+  // console.log(typeof(Login));
 
-  // 서버로 보내.........!!!!!!!!!!! 성공
 
-  //await 써라
 
 
 let Result = await fetch('http://localhost:3000/api/authenticate', {
@@ -41,7 +39,7 @@ let Result = await fetch('http://localhost:3000/api/authenticate', {
       return JSON.parse(result);
     });
 
-  console.log(Result)
+  // console.log(Result)
 
   if(Result.code === 404) {       //로그인 실패
 

@@ -27,7 +27,7 @@ fetch('http://localhost:3000/api/privacy/user')
     .then((result) => { 
       Datas = JSON.parse(result);
       // console.log(result);
-      console.log(Datas); 
+      // console.log(Datas); 
 
       if(Datas.code===200){
         showUser(Datas);
@@ -59,33 +59,12 @@ function closePopup(num) {
     const userPassword = document.querySelector("#inputPW").value;
 
     const PW = {userPassword};
-    console.log(PW);
+    // console.log(PW);
     location.href = 'http://localhost:3000/editProfile';
-
-    // inputPW를 서버로 보내서 일치하는지 확인하고 일치하면 editProfile.html로 로드, 불일치하면 아래에 비밀번호가 틀립니다! 띄우기
-    
-    // fetch('http://localhost:3000/api/checkPassword', {
-    //   headers: {
-    //     'Content-Type': 'application/json'     
-    //   },
-    //   method: 'POST',
-    //   body: JSON.stringify(PW),     //객체 -> JSON
-    //   }) 
-    //   .then((response) => response.text())
-    //   .then((result) => { 
-    //     Datas = JSON.parse(result);
-    //     console.log(Datas.code);
-    //     // console.log(result);
-
-    //     if(Datas.code===200){
-    //       location.href = 'http://localhost:3000/editProfile';
-    //     }
-  
-    //    });
 
   }
   else{
-    console.log("취소");
+    // console.log("취소");
   }
 }
 const back = document.querySelector(".back");
@@ -93,19 +72,3 @@ back.addEventListener("click", event => closePopup(0));
 
 const complete = document.querySelector(".complete");
 complete.addEventListener("click", event => closePopup(1));
-
-
-
-// fetch('http://localhost:3000/api/result')  
-//     .then((response) => response.text())
-//     .then((result) => { 
-//       Datas = JSON.parse(result);
-//       // console.log(result);
-//       console.log(Datas); 
-
-//       // if(Datas.code===200){
-//       //   showUser(Datas);
-//       // }
-
-
-//     });

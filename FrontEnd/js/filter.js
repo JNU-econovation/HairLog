@@ -1,15 +1,8 @@
 
-// // 이미지 test
-// const img = document.createElement('img');
-// img.src = '../imgs/ch_blue.png';
-// img.classList.add("imgTest");
-// const imgTest = document.querySelector('.imgTest');
-// imgTest.appendChild(img);
-
 // 박스 선택하면 해당 아이디 출력하기
 const BOX = document.querySelector(".box")
 function clickBox(ID) {
-  console.log(ID);
+  // console.log(ID);
   location.href = `http://localhost:3000/recordResult?id=${ID}`;          // 쿼리스트링!!!!
 }
 
@@ -56,14 +49,6 @@ function renderBox(exDatas) {
     img.classList.add("boxIMG");
     newBox.appendChild(img);
 
-
-    // newBox.style.backgroundImage = `url(${myURL})`;
-    // newBox.style.backgroundSize ="350px";
-
-    // const newX = document.createElement('h1');     // x 표시 만들기
-    // newX.innerText = "✖";
-    // newBox.appendChild(newX);
-
     let rcDate = temp.recordDate.replaceAll('-','.').slice(2);
     const newDate = document.createElement('p');
     newDate.innerText = rcDate;
@@ -108,8 +93,6 @@ function renderDesignerBox(exDatas) {
 
       boxes.appendChild(newBox);
       
-      // 배경이미지 넣기
-      // console.log(exDatas.result.recordByDesigner[i].count, boxID, i);
 
       let myURL;
       if(exDatas.result.recordByDesigner[i].count===1){     // 이미지가 기록 개수가 하나일 때
@@ -124,16 +107,7 @@ function renderDesignerBox(exDatas) {
       img.crossOrigin = "anonymous";
       img.classList.add("boxIMG");
       newBox.appendChild(img);
-      
 
-      
-
-      // newBox.style.backgroundImage = `url(${myURL})`;
-      // newBox.style.backgroundSize ="350px";
-
-      // const newX = document.createElement('h1');     // x 표시 만들기
-      // newX.innerText = "✖";
-      // newBox.appendChild(newX);
 
       let rcDate = temp.recordDate.replaceAll('-','.').slice(2);
       const newDate = document.createElement('p');
@@ -167,7 +141,7 @@ function goFetch(url){
   .then((result) => { 
     Datas = JSON.parse(result);
     // console.log(result);
-    console.log(Datas); 
+    // console.log(Datas); 
 
     if(Datas.code === 200){
       renderBox(Datas);
@@ -204,7 +178,6 @@ function onclick(item) {
 function selectF1() {
   onclick(filter_date); 
   
-  // 최신순으로 화면 렌더링
   goFetch(latestURL);
 
 }
@@ -213,7 +186,6 @@ function selectF1() {
 function selectF2() {
   onclick(filter_cut);
 
-  // 컷 화면 렌더링
   let Datas;
 
   goFetch(cutURL);
@@ -224,7 +196,6 @@ function selectF2() {
 function selectF3() {
   onclick(filter_perm);
 
-  // 펌 화면 렌더링
   goFetch(permURL);
 }
 
@@ -232,7 +203,6 @@ function selectF3() {
 function selectF4() {
   onclick(filter_dying);
 
-  // 염색 화면 렌더링
   goFetch(dyeingURL);
 }
 
@@ -242,8 +212,6 @@ function selectF4() {
 function selectF5() {
   onclick(filter_designer);
 
-  // 디자이너 화면 렌더링
-  // goFetch(designerURL);
 
   // 화면 초기화
   const Reset = document.querySelector(".boxes");
@@ -256,7 +224,7 @@ function selectF5() {
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    console.log(Datas); 
+    // console.log(Datas); 
     // console.log(Datas.result.designerList.count);
 
     if(Datas.code === 200){

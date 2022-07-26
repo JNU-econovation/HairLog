@@ -12,7 +12,7 @@ fetch('http://localhost:3000/api/favDesigner')
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    console.log(Datas); 
+    // console.log(Datas); 
 
     for(let i=0;i<Datas.result.length;i++){
       designerList[i].innerHTML = Datas.result[i].designerName;
@@ -88,14 +88,6 @@ function whoDesign() {
   }
 
 
-
-
-
-  // for (let i=0;i<designerList.length;i++){
-  //   if(designerList[i].classList.contains("selected")){
-  //     designer = designerList[i].innerHTML;
-  //   }  
-  // }
 }
 
 // 컷 세부 입력값 가져오기 
@@ -140,7 +132,7 @@ function whatDying() {
       dyeingHurt = hurtList[i].value;
     }  
   }
-  console.log(dyeingColor, dyeingDecolorization,dyeingTime, dyeingHurt);
+  // console.log(dyeingColor, dyeingDecolorization,dyeingTime, dyeingHurt);
 }
 
 
@@ -172,7 +164,7 @@ function imgPreview(event) {
     myImg.classList.add("uploadIMG");  
     
 
-    console.log(fileInput.files[0]);
+    // console.log(fileInput.files[0]);
 
 
 
@@ -266,9 +258,9 @@ function sendEditRecord() {     // 수정
 
   // URL = editURL;
   let RecordId = Number(window.location.search.slice(4));
-  console.log(RecordId);
+  // console.log(RecordId);
   HairRecord['RecordId'] = RecordId;
-  console.log("수정",HairRecord);
+  // console.log("수정",HairRecord);
 
   for (let key in HairRecord) {  // data 객체 안에 있는 모든 요소를 data 객체의 key value 형태로 적재
     editFormData.append(key, HairRecord[key]);
@@ -280,21 +272,16 @@ function sendEditRecord() {     // 수정
 
   //formData key 값 확인
   for (let key of formData.keys()) {
-    console.log("키",key);
+    // console.log("키",key);
   }
   //formData value값 확인
   for (let value of formData.values()) {
-    console.log("값",value);
+    // console.log("값",value);
   }
 
 
 
-  fetch(editURL, {
-
-    // headers: {                   
-    //   'Content-Type': 'multipart/form-data'           // 사진 보내는
-    // },
-  
+  fetch(editURL, {  
     method: 'POST',
     body: editFormData,   
   }) 
@@ -303,7 +290,7 @@ function sendEditRecord() {     // 수정
       
       Datas = JSON.parse(result);
       // console.log(result);
-      console.log(Datas); 
+      // console.log(Datas); 
       
       if(Datas.code===200){
         location.href = 'http://localhost:3000/recordResult';
@@ -319,7 +306,7 @@ function sendRecord(addORedit) {        // 0이면 추가, 1이면 수정       
   let HairRecord = mkObject();
 
 
-  console.log("객체",HairRecord);
+  // console.log("객체",HairRecord);
 
   // form 서버로 전송
   for (let key in HairRecord) {  // data 객체 안에 있는 모든 요소를 data 객체의 key value 형태로 적재
@@ -329,22 +316,8 @@ function sendRecord(addORedit) {        // 0이면 추가, 1이면 수정       
   formData.append("Image",fileInput.files[0]);
 
 
-  // //formData key 값 확인
-  // for (let key of formData.keys()) {
-  //   console.log(key);
-  // }
-  // //formData value값 확인
-  // for (let value of formData.values()) {
-  //   console.log(value);
-  // }
-
   let URL, HREF;
   fetch(url, {
-
-    // headers: {                   
-    //   'Content-Type': 'multipart/form-data'           // 사진 보내는
-    // },
-
     method: 'POST',
     body: formData,   
   }) 
@@ -353,7 +326,7 @@ function sendRecord(addORedit) {        // 0이면 추가, 1이면 수정       
       
       Datas = JSON.parse(result);
       // console.log(result);
-      console.log(Datas); 
+      // console.log(Datas); 
       
       if(Datas.code===200){
         location.href = 'http://localhost:3000/recordResult';
@@ -361,23 +334,18 @@ function sendRecord(addORedit) {        // 0이면 추가, 1이면 수정       
 
 
     });
-
-
-
 }
-
-
 
 
 
 if(window.location.href==='http://localhost:3000/record'){       // 기록 추가
-  console.log("추가");
+  // console.log("추가");
   submitRecord.addEventListener("click", sendRecord);
 }
 else{                                                            // 기록 수정
-  console.log("수정");
+  // console.log("수정");
   queryID = Number(window.location.search.slice(4));
-  console.log(queryID);
+  // console.log(queryID);
 
   // 수정 전 기록 채우기
   fill(queryID);
@@ -403,7 +371,7 @@ function fill(ID){
 }
 
 function fillRecord(exDatas){
-  console.log("결과",exDatas);
+  // console.log("결과",exDatas);
   
   // record1
   const rDate = document.querySelector("#date");    // 날짜 채우기

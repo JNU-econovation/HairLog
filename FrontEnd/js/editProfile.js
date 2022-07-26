@@ -1,4 +1,4 @@
-// 
+
 const back = document.querySelector(".back");
 function goBack() {
   history.back();
@@ -8,7 +8,7 @@ back.addEventListener("click", goBack);
 
 // 현재 정보 시각화 함수 
 function showProfile(exDatas) {
-  console.log(exDatas);
+  // console.log(exDatas);
 
   const nameHolder = document.querySelector("#uName");
   nameHolder.value = exDatas.result.user.userName;             
@@ -27,7 +27,7 @@ fetch('http://localhost:3000/api/privacy/user')
     .then((result) => { 
       Datas = JSON.parse(result);
       // console.log(result);
-      console.log("정보",Datas); 
+      // console.log("정보",Datas); 
 
       if(Datas.code===200){
         showProfile(Datas);
@@ -54,7 +54,7 @@ function mkEdit() {
 // 서버로 수정 요청 보내기
 function goEdit() {
   let editData = mkEdit();
-  console.log(editData);
+  // console.log(editData);
   location.href = 'http://localhost:3000/mypage';
 
   fetch('http://localhost:3000/api/privacyUpdate/user', {        // 서버로 보내고 결과 출력
@@ -68,7 +68,7 @@ function goEdit() {
     .then((result) => { 
       Datas = JSON.parse(result);
       // console.log(result);
-      console.log("수정완료",Datas); 
+      // console.log("수정완료",Datas); 
       location.href = 'http://localhost:3000/mypage';
 
   });

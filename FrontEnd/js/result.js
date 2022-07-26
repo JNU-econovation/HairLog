@@ -5,9 +5,6 @@ let RecordId, category;
 
 // 사진 넣기
 function seeIMG(exDatas){
-  // console.log(exDatas);
-  // console.log(exDatas.result.img.rows.img1);
-
   const newBox = document.querySelector(".imgBox");
   const img = document.createElement('img');
   img.src = exDatas.result.img.rows.img1;

@@ -39,20 +39,14 @@ function onclick(item) {
 
 function clickA() {
   onclick(designerA); 
-  //디자이너A 선택
-
 }
 
 function clickB() {
   onclick(designerB); 
-  //디자이너B 선택
-
 }
 
 function clickC() {
   onclick(designerC); 
-  //디자이너C 선택
-
 }
 
 function clickD() {
@@ -60,7 +54,7 @@ function clickD() {
     onclick(designerD); 
   }
   else {
-    console.log("값이 비었습니다");
+    // console.log("값이 비었습니다");
   }
   
 
@@ -78,7 +72,7 @@ function addComplete() {
   const inputDesignerName = document.querySelector("#inputDesignerName").value;
   const inputDesignerPlace = document.querySelector("#inputDesignerPlace").value;
 
-  console.log(inputDesignerName, inputDesignerPlace);
+  // console.log(inputDesignerName, inputDesignerPlace);
   completeBTN.classList.add("addDirect")
 
   const plusName = document.querySelector(".D");

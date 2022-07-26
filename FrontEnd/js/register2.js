@@ -42,7 +42,7 @@ let email = sessionStorage.getItem("userEmail");
 let password = sessionStorage.getItem("userPassword");
 let Name = sessionStorage.getItem("userName");
 
-console.log(sessionStorage.getItem("userEmail"));
+// console.log(sessionStorage.getItem("userEmail"));
 
 //성별 선택값 저장
 let Sex;
@@ -53,7 +53,7 @@ function handleSex(e) {
   const selectedSex = document.querySelector("#selectSex");
   Sex = selectedSex.options[selectedSex.selectedIndex].value;   //f, m, unknown
 
-  console.log(Sex);
+  // console.log(Sex);
 }
 
 
@@ -81,7 +81,7 @@ function signBtnClick() {
       userCycle: editTime(temp),
     }
   }
-  console.log(SignUp);
+  // console.log(SignUp);
 
   // 서버로 따로 보내는 버전
   
@@ -95,7 +95,7 @@ function signBtnClick() {
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
-      console.log(Datas);
+      // console.log(Datas);
       // console.log(result);
 
       // location.href = '../html/after_register.html';
