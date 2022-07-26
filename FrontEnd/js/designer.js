@@ -58,6 +58,7 @@ function deleteDesigner(id) {
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
+
     showDesigners();
   });
 }
@@ -84,7 +85,7 @@ function closePopup(isSave) {
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
-      console.log("추가완료",Datas); 
+
       showDesigners();
       resetInput();
     });
@@ -140,7 +141,7 @@ function editAll(id) {
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    console.log("수정완료",Datas); 
+
     showDesigners();
     resetInput();
   });
@@ -182,7 +183,7 @@ function editFav(id) {
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    console.log("수정완료",Datas); 
+
     showDesigners();
     resetInput();
   });
@@ -252,7 +253,7 @@ function showDesigners() {
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
-      console.log("로딩완료",Datas); 
+
 
       if(Datas.code===200){
         mkBoxes(Datas);

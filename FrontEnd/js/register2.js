@@ -1,12 +1,3 @@
-function makeUrl (apiUrl) {
-  var base ="https://hairlogapi.herokuapp.com/"
-  return base + apiUrl
-}
-
-var after_registerUrl = makeUrl("after_register")  
-var joinUrl = makeUrl("api/join")  
-
-
 // 숫자만 추출 (13주 -> 13)
 function editTime(t) {
   const result = t.replace(/[^0-9]/g, "");
@@ -51,7 +42,7 @@ let email = sessionStorage.getItem("userEmail");
 let password = sessionStorage.getItem("userPassword");
 let Name = sessionStorage.getItem("userName");
 
-console.log(sessionStorage.getItem("userEmail"));
+// console.log(sessionStorage.getItem("userEmail"));
 
 //성별 선택값 저장
 let Sex;
@@ -62,7 +53,7 @@ function handleSex(e) {
   const selectedSex = document.querySelector("#selectSex");
   Sex = selectedSex.options[selectedSex.selectedIndex].value;   //f, m, unknown
 
-  console.log(Sex);
+  // console.log(Sex);
 }
 
 
@@ -90,11 +81,11 @@ function signBtnClick() {
       userCycle: editTime(temp),
     }
   }
-  console.log(SignUp);
+  // console.log(SignUp);
 
   // 서버로 따로 보내는 버전
   
-  fetch(joinUrl, {
+  fetch('http://localhost:3000/api/join', {
     headers: {
       'Content-Type': 'application/json'     
     },
@@ -104,8 +95,12 @@ function signBtnClick() {
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
-      console.log(Datas);
-      location.href = after_registerUrl;
+      // console.log(Datas);
+      // console.log(result);
+
+      // location.href = '../html/after_register.html';
+      location.href = 'http://localhost:3000/after_register';
+
      });
 
     sessionStorage.clear();

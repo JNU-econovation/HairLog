@@ -27,6 +27,7 @@
   border-radius: 50%;
   box-shadow: 0px -10px 10px 1px #c7c7c7;
   z-index: 2;
+  position: fixed;
 }
 
 .one {
@@ -37,6 +38,7 @@
   margin-left: 414px;
   border-radius: 50%;
   z-index: 2;
+  position: fixed;
 }
 
 .two {
@@ -47,6 +49,7 @@
   margin-top: 100px;
   margin-left: 100px;
   z-index: 2;
+  position: fixed;
 }
 
 .three {
@@ -56,6 +59,7 @@
   margin-left: 678px;
   margin-top: 100px;
   z-index: 2;
+  position: fixed;
 }
 
 .parent {
@@ -78,6 +82,7 @@
   border-radius: 50px;
   border-bottom: none;
   box-shadow: 10px 10px 10px 15px #c7c7c7;
+  position: fixed;
 }
 
 .one img {
@@ -85,6 +90,7 @@
   height: 70px;
   margin-top: 40px;
   margin-left: 40px;
+  position: fixed;
 
 }
 
@@ -99,5 +105,6 @@
   font-size: 33px;
   font-family: NotoSansKR_Medium;
   color: #737373;
+  
 }
 

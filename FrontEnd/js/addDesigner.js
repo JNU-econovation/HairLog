@@ -39,20 +39,14 @@ function onclick(item) {
 
 function clickA() {
   onclick(designerA); 
-  //디자이너A 선택
-
 }
 
 function clickB() {
   onclick(designerB); 
-  //디자이너B 선택
-
 }
 
 function clickC() {
   onclick(designerC); 
-  //디자이너C 선택
-
 }
 
 function clickD() {
@@ -60,7 +54,7 @@ function clickD() {
     onclick(designerD); 
   }
   else {
-    console.log("값이 비었습니다");
+    // console.log("값이 비었습니다");
   }
   
 
@@ -77,6 +71,7 @@ const completeBTN = document.querySelector(".complete");
 function addComplete() {
   const inputDesignerName = document.querySelector("#inputDesignerName").value;
   const inputDesignerPlace = document.querySelector("#inputDesignerPlace").value;
+
 
   completeBTN.classList.add("addDirect")
 

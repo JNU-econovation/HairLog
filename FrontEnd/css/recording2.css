@@ -48,6 +48,12 @@
   position:relative;
 }
 
+.rcIMG {
+  width: 650px;
+  height: 650px;
+  border-radius: 50px;
+}
+
 .imgAdd {
   width: 100px;
   border-radius: 30px;

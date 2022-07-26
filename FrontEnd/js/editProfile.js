@@ -1,12 +1,4 @@
-function makeUrl (apiUrl) {
-  var base ="https://hairlogapi.herokuapp.com/"
-  return base + apiUrl
-}
 
-var userUrl = makeUrl("api/privacy/user")   
-var userUpdateUrl = makeUrl("api/privacyUpdate/user")   
-
-// 
 const back = document.querySelector(".back");
 function goBack() {
   history.back();
@@ -16,7 +8,7 @@ back.addEventListener("click", goBack);
 
 // 현재 정보 시각화 함수 
 function showProfile(exDatas) {
-  console.log(exDatas);
+  // console.log(exDatas);
 
   const nameHolder = document.querySelector("#uName");
   nameHolder.value = exDatas.result.user.userName;             
@@ -30,15 +22,18 @@ function showProfile(exDatas) {
 let userEmail, userSex, userPassword;
 let userPW;
 
-fetch(userUrl)  
+fetch('http://localhost:3000/api/privacy/user')  
     .then((response) => response.text())
     .then((result) => { 
       Datas = JSON.parse(result);
+      // console.log(result);
+      // console.log("정보",Datas); 
 
       if(Datas.code===200){
         showProfile(Datas);
         userEmail = Datas.result.user.userEmail;
         userSex = Datas.result.user.userSex;
+
       }
     });
 
@@ -51,6 +46,7 @@ function mkEdit() {
   userPassword = document.querySelector("#newPW").value;
 
   let result = {userEmail,userPassword,userName,userSex,userCycle};
+  // console.log(result);
 
   return result;
 }
@@ -58,18 +54,23 @@ function mkEdit() {
 // 서버로 수정 요청 보내기
 function goEdit() {
   let editData = mkEdit();
-  console.log(editData);
+  // console.log(editData);
+  location.href = 'http://localhost:3000/mypage';
 
-  fetch(userUpdateUrl, {        // 서버로 보내고 결과 출력
-  headers: {
-    'Content-Type': 'application/json'       
-  },
-  method: 'POST',
-  body: JSON.stringify(editData), 
-  }) 
-  .then((response) => response.text())
-  .then((result) => { 
-    Datas = JSON.parse(result);
+  fetch('http://localhost:3000/api/privacyUpdate/user', {        // 서버로 보내고 결과 출력
+    headers: {
+      'Content-Type': 'application/json'       
+    },
+    method: 'POST',
+    body: JSON.stringify(editData), 
+    }) 
+    .then((response) => response.text())
+    .then((result) => { 
+      Datas = JSON.parse(result);
+      // console.log(result);
+      // console.log("수정완료",Datas); 
+      location.href = 'http://localhost:3000/mypage';
+
   });
 
 }

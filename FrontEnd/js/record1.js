@@ -1,12 +1,4 @@
-function makeUrl (apiUrl) {
-  var base ="https://hairlogapi.herokuapp.com/"
-  return base + apiUrl
-}
 
-var favDesignerUrl = makeUrl("api/favDesigner")  
-var cutUrl = makeUrl("api/record/cut")  
-var permUrl = makeUrl("api/record/perm")  
-var dyeingUrl = makeUrl("api/record/dyeing")  
 
 
 // 유저별 디자이너 보여주기
@@ -16,18 +8,20 @@ const designer_C = document.querySelector(".C");
 const designer_List = [designer_A, designer_B, designer_C];
 
 let Datas;
-
-fetch(favDesignerUrl) 
+fetch('http://localhost:3000/api/favDesigner') 
   .then((response) => response.text())
   .then((result) => { 
     Datas = JSON.parse(result);
-    console.log(Datas); 
+    // console.log(Datas); 
 
     for(let i=0;i<Datas.result.length;i++){
       designerList[i].innerHTML = Datas.result[i].designerName;
-      console.log(designerList[i].innerHTML);
+      // console.log(designerList[i].innerHTML);
     }    
   });
+
+
+
 
 const record1 = document.querySelector(".record1");
 const record2 = document.querySelector(".record2");
@@ -70,10 +64,10 @@ backToRecord3.addEventListener("click",showRecord2);
 
 // 입력값 객체로 저장해서 보내자
 
-let date, designer, cost;
-let cutKind, cutLength;
-let permKind, permTime, permHurt;
-let dyingColor, dyingDecolor, dyingTime, dyingHurt;
+let recordDate, designerName, recordCost;
+let cutName, cutLength;
+let permName, permTime, permHurt;
+let dyeingColor, dyeingDecolorization, dyeingTime, dyeingHurt;
 let recordEtc;
 
 // 디자이너 선택값 가져오기
@@ -83,58 +77,62 @@ function whoDesign() {
   const directName = document.querySelector(".D");    //직접 입력한 디자이너 이름
 
   if(directName.classList.contains("selected")){      // 선호 디자이너 중 선택
-    designer = directName.innerHTML;
+    designerName = directName.innerHTML;
   }
   else {                                               // 직접 입력한 디자이너 선택
     for (let i=0;i<designer_List.length;i++){
       if(designer_List[i].classList.contains("selected")){
-        designer = designer_List[i].innerHTML;
+        designerName = designer_List[i].innerHTML;
       }  
     }
   }
+
+
 }
 
 // 컷 세부 입력값 가져오기 
 function whatCut() {
-  cutKind = document.querySelector("#cutKind").value;
+  cutName = document.querySelector("#cutKind").value;
   cutLength = document.querySelector("#cutLength").value;
 }
 
 // 펌 세부 입력값 가져오기
+const phurt1 = document.querySelector(".cutHurt1");
+const phurt2 = document.querySelector(".cutHurt2");
+const phurt3 = document.querySelector(".cutHurt3");  
+const phurtList = [phurt1, phurt2, phurt3];
+
 function whatPerm() {
-  permKind = document.querySelector("#permKind").value;
+  permName = document.querySelector("#permKind").value;
   permTime = document.querySelector("#permTime").value;
 
-  const hurt1 = document.querySelector(".cutHurt1");
-  const hurt2 = document.querySelector(".cutHurt2");
-  const hurt3 = document.querySelector(".cutHurt3");  
-  const hurtList = [hurt1, hurt2, hurt3];
 
-  for (let i=0;i<hurtList.length;i++){
-    if(hurtList[i].classList.contains("selected")){
-      permHurt = hurtList[i].value;
+  for (let i=0;i<phurtList.length;i++){
+    if(phurtList[i].classList.contains("selected")){
+      permHurt = phurtList[i].value;
     }  
   }
 
 }
 
 // 염색 세부 입력값 가져오기
-function whatDying() {
-  dyingColor = document.querySelector("#dyingColor").value;
-  dyingDecolor = document.querySelector("#dyingDecolor").value;
-  dyingTime = document.querySelector("#dyingTime").value;
+const hurt1 = document.querySelector(".dyingHurt1");
+const hurt2 = document.querySelector(".dyingHurt2");
+const hurt3 = document.querySelector(".dyingHurt3");  
+const hurtList = [hurt1, hurt2, hurt3];
 
-  const hurt1 = document.querySelector(".dyingHurt1");
-  const hurt2 = document.querySelector(".dyingHurt2");
-  const hurt3 = document.querySelector(".dyingHurt3");  
-  const hurtList = [hurt1, hurt2, hurt3];
+function whatDying() {
+  dyeingColor = document.querySelector("#dyingColor").value;
+  dyeingDecolorization = document.querySelector("#dyingDecolor").value;
+  dyeingTime = document.querySelector("#dyingTime").value;
+
 
   for (let i=0;i<hurtList.length;i++){
     if(hurtList[i].classList.contains("selected")){
-      dyingHurt = hurtList[i].value;
+      dyeingHurt = hurtList[i].value;
     }  
   }
-  console.log(dyingColor, dyingDecolor,dyingTime, dyingHurt);
+  // console.log(dyeingColor, dyeingDecolorization,dyeingTime, dyeingHurt);
 }
 
 
@@ -146,8 +144,8 @@ upload.addEventListener('click', () => realUpload.click());
 
 
 let HairRecord;  // 임시저장 객체
-const formData = new FormData();        //전송할 객체 
-
+const formData = new FormData();        //전송할 객체 (추가)
+const editFormData = new FormData();    // 수정
 
 // 이미지 업로드 -> 화면에 미리보기 기능
 const imgPlace = document.querySelector(".preview");      //이미지 들어갈 장소
@@ -165,7 +163,10 @@ function imgPreview(event) {
     imgPlace.appendChild(myImg);      //이미지 넣고 style 주기
     myImg.classList.add("uploadIMG");  
     
-    console.log(fileInput.files[0]);
+
+    // console.log(fileInput.files[0]);
+
+
 
   };
 
@@ -195,115 +196,261 @@ function extraInput() {
 
 const submitRecord = document.querySelector("#submitRecord");
 
-function clickBTN() {
+let queryID;
+let url, editURL;
+
+// 객체 만드는 함수(추가, 수정)
+function mkObject() {
   // 날짜 불러오기
-  date = document.querySelector("#date").value;
+  recordDate = document.querySelector("#date").value;
 
   // 디자이너 불러오기
   whoDesign();
 
   // 비용 불러오기
-  cost = document.querySelector("#cost").value;
+  recordCost = document.querySelector("#cost").value;
 
   // 컷,펌,염색 세부 양식 불러오기
   const hairCut = document.querySelector(".cut");
   const hairPerm = document.querySelector(".perm");
   const hairDying = document.querySelector(".dying");
   const hairList = [hairCut,hairPerm,hairDying];
-  const satisfact = document.querySelector(".bar").value;
+  const recordGrade = document.querySelector(".bar").value;
 
   // 추가 기록 불러오기
   extraInput();
-  let url;
 
   for(let i=0;i<hairList.length;i++){
     if(hairList[i].classList.contains("selected")){
       if(i===0){  //컷 선택
-        url=cutUrl;
+
+        url='http://localhost:3000/api/record/cut';
+        editURL = 'http://localhost:3000/api/recordUpdate/cut';
+
         whatCut();
-        HairRecord = {
-          // url:url,
-          recordDate: date,
-          designerName: designer,
-          recordCost: cost,
-          cutName: cutKind,
-          cutLength: cutLength,
-          recordGrade: satisfact,
-          recordEtc: recordEtc,
-        }
+        HairRecord = {recordDate,designerName,recordCost,cutName,cutLength,recordGrade,recordEtc};
+
       }
       else if(i===1) { //펌 선택
-        url=permUrl;
+        url='http://localhost:3000/api/record/perm';
+        editURL = 'http://localhost:3000/api/recordUpdate/perm';
+
         whatPerm();
-        HairRecord = {
-          // url:url,
-          recordDate: date,
-          designerName: designer,
-          recordCost: cost,
-          permName: permKind,
-          permTime: permTime,
-          permHurt: permHurt,
-          recordGrade: satisfact,
-          recordEtc: recordEtc,
-        }
+        HairRecord = {recordDate,designerName,recordCost,permName,permTime,permHurt,recordGrade,recordEtc};
+
       }
       else if(i===2) {  //염색 선택
-        url=dyeingUrl;
+        url='http://localhost:3000/api/record/dyeing';
+        editURL = 'http://localhost:3000/api/recordUpdate/dyeing';
+
         whatDying();
-        HairRecord = {
-          // url:url,
-          recordDate: date,
-          designerName: designer,
-          recordCost: cost,
-          dyeingColor: dyingColor,
-          dyeingDecolorization: dyingDecolor,
-          dyeingTime: dyingTime,
-          dyeingHurt: dyingHurt,
-          recordGrade: satisfact,
-          recordEtc: recordEtc,
-        }
+        HairRecord = { recordDate,designerName,recordCost,dyeingColor,dyeingDecolorization,dyeingTime,dyeingHurt,recordGrade,recordEtc};
+
       }
     }
   }
 
-  console.log(HairRecord);
+  return HairRecord;
+}
 
+function sendEditRecord() {     // 수정
+  let HairRecord = mkObject();
 
-  // form 서버로 전송
-
+  // URL = editURL;
+  let RecordId = Number(window.location.search.slice(4));
+  // console.log(RecordId);
+  HairRecord['RecordId'] = RecordId;
+  // console.log("수정",HairRecord);
 
   for (let key in HairRecord) {  // data 객체 안에 있는 모든 요소를 data 객체의 key value 형태로 적재
-    formData.append(key, HairRecord[key]);
+    editFormData.append(key, HairRecord[key]);
+  
   }
-  formData.append("Image",fileInput.files[0]);
+  editFormData.append("Image",fileInput.files[0]);
+  // console.log("수정",editFormData);
 
 
   //formData key 값 확인
   for (let key of formData.keys()) {
-    console.log(key);
+    // console.log("키",key);
   }
   //formData value값 확인
   for (let value of formData.values()) {
-    console.log(value);
+    // console.log("값",value);
   }
 
+
+
+  fetch(editURL, {  
+    method: 'POST',
+    body: editFormData,   
+  }) 
+    .then((response) => response.text())
+    .then((result) => { 
+      
+      Datas = JSON.parse(result);
+      // console.log(result);
+      // console.log(Datas); 
+      
+      if(Datas.code===200){
+        location.href = 'http://localhost:3000/recordResult';
+      }
+  
+  
+    });
+}
+
+
+
+function sendRecord(addORedit) {        // 0이면 추가, 1이면 수정       // 추가
+  let HairRecord = mkObject();
+
+
+  // console.log("객체",HairRecord);
+
+  // form 서버로 전송
+  for (let key in HairRecord) {  // data 객체 안에 있는 모든 요소를 data 객체의 key value 형태로 적재
+    formData.append(key, HairRecord[key]);
+
+  }
+  formData.append("Image",fileInput.files[0]);
+
+
+  let URL, HREF;
   fetch(url, {
-    // headers: {                   
-    //   'Content-Type': 'multipart/form-data'           // 사진 보내는
-    // },
     method: 'POST',
     body: formData,   
   }) 
     .then((response) => response.text())
     .then((result) => { 
+      
       Datas = JSON.parse(result);
-      console.log(Datas); 
+      // console.log(result);
+      // console.log(Datas); 
+      
       if(Datas.code===200){
-        location.href = '/';
+        location.href = 'http://localhost:3000/recordResult';
       }
-    });
 
+
+    });
+}
+
+
+
+if(window.location.href==='http://localhost:3000/record'){       // 기록 추가
+  // console.log("추가");
+  submitRecord.addEventListener("click", sendRecord);
+}
+else{                                                            // 기록 수정
+  // console.log("수정");
+  queryID = Number(window.location.search.slice(4));
+  // console.log(queryID);
+
+  // 수정 전 기록 채우기
+  fill(queryID);
+
+  // 수정 값 객체 만들기
+  submitRecord.addEventListener("click", sendEditRecord );
+}
+
+
+
+// 수정 전 기록 채우는 함수
+function fill(ID){
+  fetch(`http://localhost:3000/api/result?id=${queryID}`)       // 쿼리스트링으로 요청 보내기
+    .then((response) => response.text())
+    .then((result) => { 
+      Datas = JSON.parse(result);
+      // console.log(result);
+      // console.log("결과",Datas);
+      
+      fillRecord(Datas);
+    });
 
 }
 
-submitRecord.addEventListener("click", clickBTN);
+function fillRecord(exDatas){
+  // console.log("결과",exDatas);
+  
+  // record1
+  const rDate = document.querySelector("#date");    // 날짜 채우기
+  rDate.value = exDatas.result.record.rows[0].recordDate;
+
+  for(let i=0;i<designer_List.length;i++){              // 디자이너 선택하기
+    designer_List[i].classList.remove("selected");
+    if(designer_List[i].innerHTML===exDatas.result.designer[0].designerName){
+      designer_List[i].classList.add("selected");
+      // console.log(designer_List[i].innerHTML);
+    }
+  }
+
+  const rCost = document.querySelector("#cost");          // 비용 채우기
+  rCost.value = exDatas.result.record.rows[0].recordCost;
+
+  const hairCut = document.querySelector(".cut");         // 시술 종류 선택하기
+  const hairPerm = document.querySelector(".perm");
+  const hairDying = document.querySelector(".dying");
+  const hairList = [hairCut, hairPerm, hairDying];
+
+  const temp = ["cut","perm","dyeing"];
+  const index = temp.indexOf(exDatas.result.record.rows[0].recordCategory);
+
+  hairList[index].classList.add("selected");
+
+  if(index===0){       // 컷일때 
+    const cutKind = document.querySelector("#cutKind");   // 컷 이름
+    cutKind.value = exDatas.result.category.cutName;
+
+    const cutLength = document.querySelector("#cutLength");   // 컷 길이
+    cutLength.value = exDatas.result.category.cutLength;
+
+  }
+  else if(index===1)  {    // 펌일때
+    const permKind = document.querySelector("#permKind");   // 펌 이름
+    permKind.value = exDatas.result.category.permName;
+
+    const permTime = document.querySelector("#permTime");   // 시간
+    permTime.value = exDatas.result.category.permTime;
+
+    const permHurt = exDatas.result.category.permHurt;  // 상함 정도
+    phurtList[permHurt-1].classList.add("selected");
+
+  }
+  else if(index===2){     // 염색일때
+    const dyingColor = document.querySelector('#dyingColor');   //색
+    dyingColor.value = exDatas.result.category.dyeingColor;
+
+    const dyingDecolor = document.querySelector("#dyingDecolor");  // 탈색
+    dyingDecolor.value = exDatas.result.category.dyeingDecolorization;
+
+    const dyingTime = document.querySelector("#dyingTime");    // 시간
+    dyingTime.value = exDatas.result.category.dyeingTime;
+
+    const dyeingHurt = exDatas.result.category.dyeingHurt;  // 상함 정도
+    hurtList[dyeingHurt-1].classList.add("selected");
+  }
+
+  // record2
+    const rcIMG = document.querySelector(".preview");         // 사진 보여주기
+    const img = document.createElement('img');
+    img.src = exDatas.result.img.rows.img1;
+    img.crossOrigin = "anonymous";
+    img.classList.add("rcIMG");
+    rcIMG.appendChild(img);
+
+  const plusBTN = document.querySelector(".imgAdd");      // 추가 버튼 앞으로 가져오기
+  plusBTN.classList.add("bringFront");
+
+  const staisfy = document.querySelector(".bar");
+  staisfy.value = exDatas.result.record.rows[0].recordGrade;
+
+  const extraRecord = document.querySelector("#inputbox");
+  let text =  exDatas.result.record.rows[0].recordEtc;
+  text = text.replace("<p>", "");
+  text = text.replace("</p>", "");
+  text = text.replaceAll("<br />", "\n");
+
+  extraRecord.value = text;
+
+}
