@@ -56,18 +56,19 @@ nunjucks.configure(path.join(__dirname, '/FrontEnd/html'), {
   watch: true
 });
 
+
 // add middleware
 if(process.env.NODE_ENV==='production'){
   app.use(morgan('combined'));
-  app.use(helmet());
-  app.use(hpp());
-  app.use(csp({
-    directives: {
-      defaultSrc: ["https://hairlogapi.herokuapp.com/"],
-      scriptSrc: ["*"],
-      imgSrc: ["https://hairlogapi.herokuapp.com/", '*'],
-    }
-  }))
+  // app.use(helmet());
+  // app.use(hpp());
+  // app.use(csp({
+  //   directives: {
+  //     defaultSrc: ["https://hairlogapi.herokuapp.com/"],
+  //     scriptSrc: ["*"],
+  //     imgSrc: ["https://hairlogapi.herokuapp.com/", '*'],
+  //   }
+  // }))
 } else {
   app.use(morgan('dev'));
 }

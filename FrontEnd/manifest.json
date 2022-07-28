@@ -1,0 +1,23 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "fullscreen",
+  "name": "Hairlog",
+  "icons": [
+    {
+    "src": "HairlogIcon512x512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  },
+  {
+    "src": "HairlogIcon192x192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }
+],
+  "orientation": "any",
+  "scope": "../",
+  "short_name": "Hairlog",
+  "start_url": "/",
+  "theme_color": "#ffffff"
+}

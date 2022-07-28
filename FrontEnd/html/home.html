@@ -6,6 +6,12 @@
     <link href="../css/fonts.css" rel="stylesheet" />
     <link href="../css/navbar.css" rel="stylesheet"/>
     <link href="../css/home.css" rel="stylesheet"/>
+    <link rel="manifest" href="manifest.json" />
+    <script type="module">
+      import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+      const el = document.createElement('pwa-update');
+      document.body.appendChild(el);
+   </script>
   </head>
 
   <body>
@@ -56,6 +62,7 @@
       </div>
     </div>
 
+    <script src="../js/serviceWorker.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/filter.js"></script>
   </body>

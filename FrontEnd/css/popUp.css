@@ -40,7 +40,7 @@
   border: none;
   background-color: white;
   color: #9C9C9C;
-  margin-left: 10%;
+  margin-left: 5%;
   margin-top: 20px;
   font-size: 40px;
   margin-bottom: 30px;
@@ -61,7 +61,7 @@
 .inputDesigner p, .inputPlace p, .inputPW p {
   font-size: 45px;
   font-family: SeoulNamsanCed_Bold;
-  margin-left: 10%;
+  margin-left: 5%;
   float: left;
   margin-top: 20px;
 }

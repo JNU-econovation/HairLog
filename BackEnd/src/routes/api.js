@@ -44,7 +44,7 @@ router.post('/designerDelete', passport.isLoggedIn, designer.Delete.designer);
 // UPDATE
 router.post('/recordUpdate/:category', passport.isLoggedIn, multer.array("Image", 3), record.Update.record);
 
-router.post('/designerUpdate', passport.isLoggedIn, designer.Update.designer);
+router.post('/designerUpdate', passport.isLoggedIn,designer.Update.designer);
 
 router.post('/privacyUpdate/user', passport.isLoggedIn, privacy.Update.privacy);
 
@@ -64,9 +64,9 @@ router.post('/swagger/record/:category', checkApiKey, passport.isLoggedIn, multe
 
 
 // GET
-router.get('/swagger/main', passport.isLoggedIn, record.Get.main);
+router.get('/swagger/main', checkApiKey, passport.isLoggedIn, record.Get.main);
 
-router.get('/swagger/main/:category', passport.isLoggedIn, record.Get.classification);
+router.get('/swagger/main/:category', checkApiKey, passport.isLoggedIn, record.Get.classification);
 
 router.get('/swagger/designer/', checkApiKey, passport.isLoggedIn, designer.Get.designer);
 
